@@ -51,6 +51,7 @@ def create_api(tokenizer, model):
             chat_request.bond,
             first_reply=len(chat_request.messages) == 1,
             time_of_day=chat_request.time_of_day,
+            crisis=chat_request.crisis,
         )
         messages = [{"role": "system", "content": system_prompt}, *chat_request.messages]
         log(
@@ -58,6 +59,7 @@ def create_api(tokenizer, model):
             request_id=request_id,
             messages=len(chat_request.messages),
             bond=BOND_LEVELS[chat_request.bond]["name"],
+            crisis=chat_request.crisis,
             text=preview(chat_request.messages[-1]["content"]),
         )
 

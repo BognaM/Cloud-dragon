@@ -1,0 +1,58 @@
+/* The crisis card shown in the chat after a message that may be about suicide
+   or self-harm: calm, but clearly different from the dragon's replies. */
+
+.crisis-card {
+  max-width: min(92%, 560px);
+  margin: 0 auto 16px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  /* Solid, so it stays readable over clouds. */
+  background:
+    linear-gradient(var(--assistant), var(--assistant)),
+    var(--sky) border-box;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.crisis-card h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+
+.crisis-card p {
+  margin: 0 0 10px;
+}
+
+.crisis-card ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.crisis-card li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Big, easy-to-tap numbers. */
+.crisis-card .crisis-call {
+  flex: none;
+  min-width: 56px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 16px;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+}
+
+.crisis-card li span a {
+  color: var(--accent);
+}

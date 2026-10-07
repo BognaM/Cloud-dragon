@@ -43,6 +43,7 @@ export const el = {
   sendButton: byId("sendButton"),
   toast: byId("toast"),
   helpDialog: byId("helpDialog"),
+  crisisCardTemplate: byId("crisisCardTemplate"),
   researchDialog: byId("researchDialog"),
   researchBody: byId("researchBody"),
 };

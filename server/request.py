@@ -2,7 +2,8 @@
 
 Input: {"messages": [{"role": "user", "content": "Hello"}],
         "bond": 0-3, "user_name": "...", "dragon_name": "...",
-        "time_of_day": "dawn" | "day" | "dusk" | "night"}
+        "time_of_day": "dawn" | "day" | "dusk" | "night",
+        "crisis": true | false}  (true when the page spotted possible crisis language)
 
 These demo checks are not complete input validation or prompt-injection protection.
 """
@@ -23,6 +24,7 @@ class ChatRequest:
     user_name: str
     dragon_name: str
     time_of_day: str | None
+    crisis: bool
 
 
 def clean_name(value):
@@ -67,4 +69,5 @@ def parse_chat_request(data):
         user_name=clean_name(data.get("user_name")),
         dragon_name=clean_name(data.get("dragon_name")) or DEFAULT_DRAGON_NAME,
         time_of_day=clean_time_of_day(data.get("time_of_day")),
+        crisis=data.get("crisis") is True,
     )

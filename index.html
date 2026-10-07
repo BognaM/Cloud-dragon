@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="styles/research.css" />
   <link rel="stylesheet" href="styles/chat.css" />
   <link rel="stylesheet" href="styles/thinking.css" />
+  <link rel="stylesheet" href="styles/crisis-card.css" />
   <link rel="stylesheet" href="styles/composer.css" />
   <link rel="stylesheet" href="styles/toast.css" />
   <link rel="stylesheet" href="styles/file-notice.css" />
@@ -302,6 +303,33 @@
 
     <div id="researchBody" class="research-text"></div>
   </dialog>
+
+  <!-- Shown in the chat right after a message that may be about suicide or
+       self-harm, whatever the dragon replies (see js/crisis-detect.js). -->
+  <template id="crisisCardTemplate">
+    <aside class="crisis-card" role="alert">
+      <h3>You don't have to go through this alone</h3>
+      <p>
+        If you're thinking about ending your life or hurting yourself, please talk to a person
+        now. These lines are free and open day and night:
+      </p>
+      <ul>
+        <li>
+          <a class="crisis-call" href="tel:143">143</a>
+          <span>Die Dargebotene Hand · La Main Tendue · Telefono Amico. Anonymous. Prefer
+          writing? Chat at <a href="https://www.143.ch" target="_blank" rel="noopener">143.ch</a></span>
+        </li>
+        <li>
+          <a class="crisis-call" href="tel:147">147</a>
+          <span>Pro Juventute, for children and young people</span>
+        </li>
+        <li>
+          <a class="crisis-call" href="tel:144">144</a>
+          <span>Emergency, if you're in danger right now</span>
+        </li>
+      </ul>
+    </aside>
+  </template>
 
   <div id="toast" class="toast" role="status"></div>
 

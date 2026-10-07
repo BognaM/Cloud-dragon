@@ -9,6 +9,9 @@ import { showThinking } from "./thinking.js";
 import { clearInput, setBusy } from "./composer.js";
 import { setStatus } from "./status.js";
 import { recordBondDay } from "./bonding.js";
+import { addCrisisCard, recentCrisis } from "./crisis-card.js";
+import { crisisLanguage } from "./crisis-detect.js";
+import { careReply } from "./care-replies.js";
 
 function chatPayload() {
   return {
@@ -17,17 +20,35 @@ function chatPayload() {
     user_name: state.bond?.userName || "",
     dragon_name: dragonName(),
     time_of_day: skyPhase(),
+    // Asks the dragon to follow its extra safety rule (server/safety.py).
+    crisis: recentCrisis(state.conversation),
   };
+}
+
+// A message that may be about suicide or self-harm gets the crisis card and a
+// pre-written, careful reply right away, instead of a reply from the model.
+function replyWithCare(language) {
+  addCrisisCard();
+  const reply = careReply(language);
+  state.conversation.push({ role: "assistant", content: reply });
+  saveConversation();
+  addMessage("assistant", reply);
 }
 
 export async function sendMessage(text) {
   state.conversation.push({ role: "user", content: text });
   saveConversation();
   addMessage("user", text);
-
   clearInput();
-  setBusy(true);
   setStatus("");
+
+  const language = crisisLanguage(text);
+  if (language) {
+    replyWithCare(language);
+    return;
+  }
+
+  setBusy(true);
 
   const stopThinking = showThinking(dragonName());
   let bubble = null;

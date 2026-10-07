@@ -28,6 +28,7 @@ server/              the chat API (runs on Modal)
   config.py          model and generation settings
   persona.py         who the dragon is (START HERE)
   bond_levels.py     how the dragon talks at each bond level
+  safety.py          safety rules for conversations about suicide and self-harm
   prompt.py          builds the system prompt from persona + bond + user
   request.py         reads and checks what the page sends
   model.py           loads Qwen
@@ -46,6 +47,7 @@ styles/              one stylesheet per part of the page
   bond.css · hero.css · chat.css · thinking.css · composer.css · toast.css
   file-notice.css    the message shown if index.html is opened directly
   research.css       the research summary page
+  crisis-card.css    the crisis card in the chat
   help.css           help text: welcome-screen accordion, note under the message box, Help & info window
 js/                  page logic, one small module per job
   main.js            starts the page and wires up the buttons
@@ -64,6 +66,9 @@ js/                  page logic, one small module per job
   thinking.js        shows the thinking dragon and its label, and hides them
   commands.js        test commands like /evening
   help.js            copies the help text into the Help & info window and opens/closes it
+  crisis-detect.js   spots possible suicide/self-harm messages (EN, DE, FR, IT)
+  crisis-card.js     shows the crisis card with 143/147/144 in the chat
+  care-replies.js    pre-written replies used instead of the model for those messages
   research.js        opens the research summary in a pop-up (loads research.html)
   dialogs.js         shared close behavior for the pop-up windows
   research-page.js   gives research.html the same sky as the app
@@ -169,3 +174,17 @@ modal app logs ember-chat
 The first request after 5 idle minutes cold-starts the GPU container, which takes about 20 seconds.
 The endpoint is public with open CORS and has no auth or rate limiting. Stop the app
 (`modal app stop ember-chat`) when you're not using it, and `modal deploy app.py` to bring it back.
+
+## Crisis safety
+
+When a message may be about suicide or self-harm (phrases in English, German,
+French and Italian, in `js/crisis-detect.js`), the page shows a crisis card with
+143 / 147 / 144 and answers with a pre-written, careful reply in that language
+(`js/care-replies.js`) instead of asking the model, which can't be trusted with
+this. Later messages in that chat reach the model with an extra safety rule
+(`server/safety.py`). After changing the phrases, run:
+
+```bash
+node tests/crisis-detect.test.mjs
+```
+

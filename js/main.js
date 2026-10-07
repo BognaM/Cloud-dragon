@@ -15,6 +15,7 @@ import { sendMessage } from "./chat.js";
 import { isCommand, runCommand } from "./commands.js";
 import { initHelp } from "./help.js";
 import { initResearch } from "./research.js";
+import { addCrisisCardIfNeeded } from "./crisis-card.js";
 
 const SKY_CHECK_MS = 60 * 1000;
 
@@ -41,7 +42,10 @@ function start() {
     showBondingForm();
   } else if (state.conversation.length) {
     // Restore a saved chat. The welcome screen (and the dragon) only appear for new chats.
-    state.conversation.forEach((message) => addMessage(message.role, message.content));
+    state.conversation.forEach((message) => {
+      addMessage(message.role, message.content);
+      if (message.role === "user") addCrisisCardIfNeeded(message.content);
+    });
   } else {
     renderWelcome();
   }
