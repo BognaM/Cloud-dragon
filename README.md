@@ -3,7 +3,7 @@
 A chatbot web app with a cloud dragon you bond with, built from
 [nightowl2626/dragon-llm](https://github.com/nightowl2626/dragon-llm).
 
-- **Qwen3-0.6B** (weights from Hugging Face) runs on a **Modal A10 GPU**.
+- **Qwen3-4B** (weights from Hugging Face) runs on a **Modal A10 GPU**.
 - Replies **stream** to the browser word by word (Server-Sent Events). While the
   dragon is thinking, a small 3D version of it flies in, loops around its pearl and
   flies out, just above the message box, next to a "Nimbus is thinking…" label.

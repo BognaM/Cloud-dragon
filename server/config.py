@@ -2,8 +2,8 @@
 
 # TRY IT: another compatible Hugging Face causal model. Larger models need
 # more GPU memory and may expect different chat templates.
-MODEL_ID = "Qwen/Qwen3-0.6B"
-MODEL_DIR = "/models/qwen3-0.6b"
+MODEL_ID = "Qwen/Qwen3-4B"
+MODEL_DIR = "/models/qwen3-4b"
 
 # Reply length and variety.
 MAX_NEW_TOKENS = 400  # reply budget in tokens, not words
