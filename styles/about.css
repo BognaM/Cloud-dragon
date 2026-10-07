@@ -67,8 +67,7 @@
   margin-bottom: 14px;
 }
 
-/* Swiss crisis lines and the canton picker. */
-.about-ai .crisis-lines ul,
+/* Swiss crisis lines. */
 .about-ai ul.crisis-lines {
   margin: 6px 0 10px;
   padding-left: 18px;
@@ -81,29 +80,6 @@
 .about-ai .crisis-lines a[href^="tel:"] {
   font-weight: 700;
   white-space: nowrap;
-}
-
-.about-ai .crisis-region {
-  display: grid;
-  gap: 5px;
-  margin-top: 6px;
-  font-weight: 650;
-}
-
-.about-ai .crisis-region select {
-  width: 100%;
-  min-height: 40px;
-  padding: 8px 10px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: var(--glass);
-  color: var(--text);
-  /* 16px prevents iOS Safari from zooming the page on focus. */
-  font-size: 16px;
-}
-
-.about-ai #crisisRegionLines {
-  margin-top: 8px;
 }
 
 .about-ai .crisis-source {

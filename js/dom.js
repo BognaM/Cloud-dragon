@@ -33,8 +33,6 @@ export const el = {
   welcomeTitle: byId("welcomeTitle"),
   welcomeText: byId("welcomeText"),
   suggestions: document.querySelectorAll(".suggestion"),
-  crisisRegion: byId("crisisRegion"),
-  crisisRegionLines: byId("crisisRegionLines"),
 
   // Composer
   thinkingSky: byId("thinkingSky"),
