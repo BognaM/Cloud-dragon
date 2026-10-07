@@ -63,7 +63,7 @@ js/                  page logic, one small module per job
   chat.js            sends a message, streams the reply
   thinking.js        shows the thinking dragon and its label, and hides them
   commands.js        test commands like /evening
-  help.js            fills in the help text and opens/closes the Help & info window
+  help.js            copies the help text into the Help & info window and opens/closes it
   research-page.js   gives research.html the same sky as the app
 dragon/              the 3D dragons
   main.js            the big welcome-screen dragon: setup and cleanup (ENABLE_DRAGON switch)

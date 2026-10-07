@@ -1,7 +1,7 @@
 /* Help about talking to an AI dragon, shown in three places: an accordion on
-   the welcome screen, a short note under the message box, and the Help & info
-   window that note opens during the chat. The text itself is in
-   <template id="helpContent"> and styled under .help-body. */
+   the welcome screen (which holds the text), a short note under the message
+   box, and the Help & info window that note opens during the chat (a copy of
+   the text). The text is styled under .help-body. */
 
 /* ---------- Welcome screen accordion ---------- */
 

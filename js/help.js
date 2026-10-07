@@ -1,15 +1,14 @@
-// The help text about talking to an AI dragon is written once, in
-// <template id="helpContent">. This copies it into the accordion on the welcome
-// screen and into the Help & info window, which the "Help & info" link under
-// the message box opens during the chat.
+// The help text about talking to an AI dragon lives in the welcome-screen
+// accordion (#helpContent), so it shows even without scripts. This copies it
+// into the Help & info window, which the "Help & info" link under the message
+// box opens during the chat.
 
 import { el } from "./dom.js";
 
-function fillHelpText() {
-  const content = document.getElementById("helpContent").content;
-  document.querySelectorAll(".help-body").forEach((body) => {
-    body.replaceChildren(content.cloneNode(true));
-  });
+function fillWindow() {
+  const source = document.getElementById("helpContent");
+  const copy = [...source.childNodes].map((node) => node.cloneNode(true));
+  el.helpDialog.querySelector(".help-body").replaceChildren(...copy);
 }
 
 function connectWindow() {
@@ -25,7 +24,8 @@ function connectWindow() {
   });
 }
 
+// Runs before a saved chat is restored, which removes the welcome screen.
 export function initHelp() {
-  fillHelpText();
+  fillWindow();
   connectWindow();
 }
