@@ -43,6 +43,7 @@ styles/              one stylesheet per part of the page
   base.css · layout.css · sky.css · header.css · icon.css
   bond.css · hero.css · chat.css · thinking.css · composer.css · toast.css
   file-notice.css    the message shown if index.html is opened directly
+  about.css          the "About talking to an AI dragon" note on the welcome screen
 js/                  page logic, one small module per job
   main.js            starts the page and wires up the buttons
   config.js          backend URL, bond level days, storage keys
