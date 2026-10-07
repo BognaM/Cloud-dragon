@@ -44,6 +44,9 @@ site_image = (
     .add_local_dir(HERE / "styles", "/site/styles")
     .add_local_dir(HERE / "js", "/site/js")
     .add_local_dir(HERE / "dragon", "/site/dragon")
+    # Every container loads this file, which imports server.config above.
+    # Only /site is ever served, so the server code stays private.
+    .add_local_python_source("server")
 )
 
 app = modal.App("ember-chat")
