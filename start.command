@@ -32,4 +32,4 @@ done
 echo "Starting Cloud Dragon at http://localhost:$PORT"
 echo "Keep this window open while you use it. Close it or press Ctrl+C to stop."
 (sleep 1 && open "http://localhost:$PORT") &
-python3 -m http.server "$PORT" --bind 127.0.0.1
+python3 serve.py "$PORT"

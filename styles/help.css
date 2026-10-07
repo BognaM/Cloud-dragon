@@ -1,28 +1,63 @@
-/* Help & info: the window about using an AI companion for self-help, the
-   button on the welcome screen that opens it, and the short note under the
-   message box that's always visible while chatting. */
+/* Help about talking to an AI dragon, shown in three places: an accordion on
+   the welcome screen, a short note under the message box, and the Help & info
+   window that note opens during the chat. The text itself is in
+   <template id="helpContent"> and styled under .help-body. */
 
-/* ---------- Welcome screen button ---------- */
+/* ---------- Welcome screen accordion ---------- */
 
-.about-ai-open {
-  display: block;
-  width: 100%;
+.about-ai {
   max-width: 440px;
   margin: 28px auto 8px;
-  padding: 12px 14px;
   border-radius: 16px;
   border: 1px solid var(--border);
   background: var(--glass);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 650;
   text-align: left;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
 }
 
-.about-ai-open::before {
-  content: "ⓘ  ";
+.about-ai summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 650;
+  color: var(--muted);
+}
+
+.about-ai summary::-webkit-details-marker {
+  display: none;
+}
+
+.about-ai summary::before {
+  content: "ⓘ";
+}
+
+/* The arrow turns when the accordion opens. */
+.about-ai summary::after {
+  content: "›";
+  margin-left: auto;
+  font-size: 18px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.about-ai[open] summary {
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+}
+
+.about-ai[open] summary::after {
+  transform: rotate(90deg);
+}
+
+.about-ai .help-body {
+  padding: 0 14px 14px;
 }
 
 /* ---------- Note under the message box ---------- */
@@ -46,7 +81,7 @@
   color: var(--text);
 }
 
-/* ---------- The window ---------- */
+/* ---------- Help & info window ---------- */
 
 .help-dialog {
   width: min(460px, calc(100% - 32px));
@@ -100,57 +135,56 @@
   font-size: 14px;
 }
 
-.help-dialog p {
+/* ---------- The help text (in both the accordion and the window) ---------- */
+
+.help-body p {
   margin: 10px 0;
 }
 
-.help-dialog h3 {
+.help-body h3 {
   margin: 16px 0 4px;
-  font-size: 13.5px;
+  font-size: 1em;
 }
 
-.help-dialog ul {
+.help-body ul {
   margin: 0;
   padding-left: 18px;
 }
 
-.help-dialog a {
+.help-body a {
   color: var(--accent);
 }
 
-/* ---------- Crisis lines ---------- */
-
-/* The crisis note stands out a little, so it's easy to find. */
-.help-dialog .about-ai-urgent {
-  margin-top: 14px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: var(--glass);
-}
-
-.help-dialog ul.crisis-lines {
-  margin: 6px 0 10px;
-}
-
-.help-dialog .crisis-lines li {
-  margin-bottom: 4px;
-}
-
-.help-dialog a[href^="tel:"] {
+.help-body a[href^="tel:"] {
   font-weight: 700;
   white-space: nowrap;
 }
 
-.help-dialog .crisis-source {
+/* The crisis note stands out a little, so it's easy to find. */
+.help-body .about-ai-urgent {
+  margin-top: 14px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--assistant);
+}
+
+.help-body ul.crisis-lines {
+  margin: 6px 0 10px;
+}
+
+.help-body .crisis-lines li {
+  margin-bottom: 4px;
+}
+
+.help-body .crisis-source {
   margin-bottom: 0;
   font-size: 12px;
   color: var(--muted);
 }
 
-/* ---------- Link to the research summary ---------- */
-
-.help-dialog .research-link {
+/* Link to the research summary page. */
+.help-body .research-link {
   display: block;
   margin-top: 16px;
   padding: 12px 14px;
@@ -163,6 +197,6 @@
   text-decoration: none;
 }
 
-.help-dialog .research-link:hover {
+.help-body .research-link:hover {
   border-color: var(--accent);
 }

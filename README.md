@@ -23,6 +23,7 @@ Each file does one job. Start with the file named in **Things to change** below.
 
 ```text
 app.py               Modal entry point: image, GPU, `modal deploy app.py`
+serve.py             local web server used by start.command (always serves fresh files)
 server/              the chat API (runs on Modal)
   config.py          model and generation settings
   persona.py         who the dragon is (START HERE)
@@ -45,7 +46,7 @@ styles/              one stylesheet per part of the page
   bond.css · hero.css · chat.css · thinking.css · composer.css · toast.css
   file-notice.css    the message shown if index.html is opened directly
   research.css       the research summary page
-  help.css           the Help & info window, its welcome-screen button and the note under the message box
+  help.css           help text: welcome-screen accordion, note under the message box, Help & info window
 js/                  page logic, one small module per job
   main.js            starts the page and wires up the buttons
   config.js          backend URL, bond level days, storage keys
@@ -62,7 +63,7 @@ js/                  page logic, one small module per job
   chat.js            sends a message, streams the reply
   thinking.js        shows the thinking dragon and its label, and hides them
   commands.js        test commands like /evening
-  help.js            opens and closes the Help & info window
+  help.js            fills in the help text and opens/closes the Help & info window
   research-page.js   gives research.html the same sky as the app
 dragon/              the 3D dragons
   main.js            the big welcome-screen dragon: setup and cleanup (ENABLE_DRAGON switch)
@@ -107,7 +108,7 @@ directly, the page tells you to use `start.command` instead.)
 From a terminal, the same thing is:
 
 ```bash
-python3 -m http.server 8000
+python3 serve.py
 ```
 
 then open http://localhost:8000. You can also publish the folder with GitHub Pages,

@@ -170,10 +170,11 @@
           </div>
         </div>
 
-        <!-- Opens the Help & info window (see the <dialog> near the end of <body>). -->
-        <button class="about-ai-open" type="button" data-open-help>
-          About talking to an AI dragon
-        </button>
+        <!-- Opens in place. The same text is in the Help & info window during the chat. -->
+        <details class="about-ai">
+          <summary>About talking to an AI dragon</summary>
+          <div class="help-body"></div>
+        </details>
       </div>
     </section>
 
@@ -216,12 +217,9 @@
 
   <!-- Help & info: using an AI companion for self-help, crisis lines, privacy.
        Opens from the welcome screen and from the line under the message box. -->
-  <dialog id="helpDialog" class="help-dialog" aria-labelledby="helpTitle">
-    <div class="help-header">
-      <h2 id="helpTitle">About talking to an AI dragon</h2>
-      <button class="help-close" type="button" aria-label="Close" data-close-help>✕</button>
-    </div>
-
+  <!-- The help text, written once. js/help.js copies it into the welcome-screen
+       accordion and into the Help & info window. -->
+  <template id="helpContent">
     <p>
       Your cloud dragon is an <strong>AI, not a person or a therapist</strong>. It runs on a
       small language model, so it can misunderstand you, make things up, or give advice that
@@ -285,6 +283,15 @@
     <a class="research-link" href="research.html" target="_blank" rel="noopener">
       Learn more about AI in mental health →
     </a>
+  </template>
+
+  <dialog id="helpDialog" class="help-dialog" aria-labelledby="helpTitle">
+    <div class="help-header">
+      <h2 id="helpTitle">About talking to an AI dragon</h2>
+      <button class="help-close" type="button" aria-label="Close" data-close-help>✕</button>
+    </div>
+
+    <div class="help-body"></div>
   </dialog>
 
   <div id="toast" class="toast" role="status"></div>

@@ -77,5 +77,14 @@ def site():
     from fastapi.staticfiles import StaticFiles
 
     page = FastAPI()
+
+    # Browsers must check for newer files on every load, so a redeploy shows up
+    # with a normal refresh instead of stale, cached scripts.
+    @page.middleware("http")
+    async def always_fresh(request, call_next):
+        response = await call_next(request)
+        response.headers["Cache-Control"] = "no-cache"
+        return response
+
     page.mount("/", StaticFiles(directory="/site", html=True))
     return page
