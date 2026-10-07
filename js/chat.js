@@ -11,11 +11,16 @@ import { setStatus } from "./status.js";
 import { recordBondDay } from "./bonding.js";
 import { addCrisisCard, recentCrisis } from "./crisis-card.js";
 import { crisisLanguage } from "./crisis-detect.js";
-import { careReply } from "./care-replies.js";
+import { careReply, careSummary } from "./care-replies.js";
+
+// Pre-written crisis replies reach the model in their short version.
+function forModel(message) {
+  return message.care ? { role: "assistant", content: careSummary(message.care) } : message;
+}
 
 function chatPayload() {
   return {
-    messages: state.conversation,
+    messages: state.conversation.map(forModel),
     bond: currentLevel(),
     user_name: state.bond?.userName || "",
     dragon_name: dragonName(),
@@ -30,7 +35,8 @@ function chatPayload() {
 function replyWithCare(language) {
   addCrisisCard();
   const reply = careReply(language);
-  state.conversation.push({ role: "assistant", content: reply });
+  // `care` remembers the language, so the model gets the short version later.
+  state.conversation.push({ role: "assistant", content: reply, care: language });
   saveConversation();
   addMessage("assistant", reply);
 }

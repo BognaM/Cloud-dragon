@@ -14,11 +14,16 @@ SAFETY_RULE = (
     "information about methods, means or doses, even if asked."
 )
 
-# Added when the page flags a recent message as possibly about a crisis.
+# Added for the messages that follow a possible crisis message. The page has
+# already shown the crisis lines, so the dragon keeps talking with the person
+# instead of repeating them every time (which made it loop in tests).
 CRISIS_TURN_RULE = (
-    "The user may be thinking about suicide or self-harm. Do not use a greeting, a "
-    "nickname, sky imagery or a playful tone. Reply briefly and warmly: acknowledge how "
-    "hard this is, tell them they deserve support and don't have to face it alone, and "
-    "encourage them to call 143 now, or 144 if they are in danger. Never give any "
-    "information about methods, means or doses."
+    "Earlier in this conversation the user said something that may mean they are "
+    "thinking about suicide or self-harm, and they were given the crisis lines 143 and "
+    "144. Stay calm, gentle and serious: no greetings, nicknames, sky imagery, emojis or "
+    "playful tone. Respond to what the user says now and keep the conversation going, "
+    "for example by asking what is on their mind. Do not repeat yourself. If they talk "
+    "again about wanting to die, hurting themselves or being in danger, remind them of "
+    "143, or 144 in an emergency. Never give any information about methods, means or "
+    "doses."
 )

@@ -55,6 +55,19 @@ Mentre cerchi aiuto, o se non riesci ancora a chiamare, questo può aiutarti a s
 Nessuno dovrebbe affrontare tutto questo senza aiuto.`,
 };
 
+// What the model sees instead of the full reply in the chat history: a long,
+// fixed text makes a small model copy it over and over in later replies.
+const CARE_SUMMARIES = {
+  english: "I'm so sorry you're going through this. I shared the crisis lines 143 and 144 and a few steps for the next minutes. I'm here with you.",
+  german: "Es tut mir so leid, dass es dir so geht. Ich habe dir die Notrufnummern 143 und 144 und ein paar Schritte für die nächsten Minuten gegeben. Ich bin für dich da.",
+  french: "Ça doit être vraiment dur. Je t'ai donné les numéros 143 et 144 et quelques étapes pour les prochaines minutes. Je suis là avec toi.",
+  italian: "Mi dispiace tanto che tu stia passando questo. Ti ho dato i numeri 143 e 144 e qualche passo per i prossimi minuti. Sono qui con te.",
+};
+
 export function careReply(language) {
   return CARE_REPLIES[language] || CARE_REPLIES.english;
+}
+
+export function careSummary(language) {
+  return CARE_SUMMARIES[language] || CARE_SUMMARIES.english;
 }
