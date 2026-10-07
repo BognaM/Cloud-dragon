@@ -1,4 +1,15 @@
-/* The research summary page (research.html): one readable column over the sky. */
+/* The research summary ("AI and mental health: what the research says").
+   Its text is styled under .research-text, both in the pop-up window in the
+   app (.research-dialog) and on the standalone page (research.html, .research). */
+
+/* ---------- Pop-up window in the app ---------- */
+
+/* Wider than the Help & info window, for easier reading. */
+.research-dialog {
+  width: min(640px, calc(100% - 32px));
+}
+
+/* ---------- Standalone page frame ---------- */
 
 .research {
   position: relative;
@@ -13,8 +24,6 @@
     linear-gradient(var(--assistant), var(--assistant)),
     var(--sky) border-box;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.18);
-  font-size: 16px;
-  line-height: 1.6;
 }
 
 .research h1 {
@@ -22,65 +31,6 @@
   font-size: 28px;
   line-height: 1.2;
   letter-spacing: -0.02em;
-}
-
-.research .lede {
-  margin: 0 0 8px;
-  color: var(--muted);
-}
-
-.research section {
-  margin-top: 26px;
-}
-
-.research h2 {
-  margin: 0 0 8px;
-  font-size: 19px;
-}
-
-.research h3 {
-  margin: 16px 0 4px;
-  font-size: 14px;
-}
-
-.research p {
-  margin: 0;
-}
-
-.research ul {
-  margin: 0;
-  padding-left: 20px;
-}
-
-.research li + li {
-  margin-top: 6px;
-}
-
-.research a {
-  color: var(--accent);
-}
-
-.research a[href^="tel:"] {
-  font-weight: 700;
-}
-
-/* The two most useful parts stand out a little. */
-.research .in-short,
-.research .advice {
-  padding: 14px 16px;
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  background: var(--glass);
-}
-
-.research .sources {
-  font-size: 13.5px;
-  line-height: 1.5;
-  color: var(--muted);
-}
-
-.research .sources li + li {
-  margin-top: 4px;
 }
 
 .back-link {
@@ -103,4 +53,70 @@
   .research h1 {
     font-size: 24px;
   }
+}
+
+/* ---------- The text (window and page) ---------- */
+
+.research-text {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.research-text .lede {
+  margin: 12px 0 8px;
+  color: var(--muted);
+}
+
+.research-text section {
+  margin-top: 24px;
+}
+
+.research-text h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.research-text h3 {
+  margin: 16px 0 4px;
+  font-size: 14px;
+}
+
+.research-text p {
+  margin: 0;
+}
+
+.research-text ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.research-text li + li {
+  margin-top: 6px;
+}
+
+.research-text a {
+  color: var(--accent);
+}
+
+.research-text a[href^="tel:"] {
+  font-weight: 700;
+}
+
+/* The two most useful parts stand out a little. */
+.research-text .in-short,
+.research-text .advice {
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--glass);
+}
+
+.research-text .sources {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.research-text .sources li + li {
+  margin-top: 4px;
 }

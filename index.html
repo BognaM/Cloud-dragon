@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="styles/bond.css" />
   <link rel="stylesheet" href="styles/hero.css" />
   <link rel="stylesheet" href="styles/help.css" />
+  <link rel="stylesheet" href="styles/research.css" />
   <link rel="stylesheet" href="styles/chat.css" />
   <link rel="stylesheet" href="styles/thinking.css" />
   <link rel="stylesheet" href="styles/composer.css" />
@@ -234,8 +235,8 @@
               bond are saved only in this browser. Avoid sharing details you'd want to keep fully private.
             </p>
 
-            <!-- A plain-language research summary on its own page (opens in a new tab, so the chat stays put). -->
-            <a class="research-link" href="research.html" target="_blank" rel="noopener">
+            <!-- Opens the research summary in a pop-up window (the page itself is the fallback). -->
+            <a class="research-link" href="research.html" data-open-research>
               Learn more about AI in mental health →
             </a>
           </div>
@@ -285,10 +286,21 @@
   <dialog id="helpDialog" class="help-dialog" aria-labelledby="helpTitle">
     <div class="help-header">
       <h2 id="helpTitle">About talking to an AI dragon</h2>
-      <button class="help-close" type="button" aria-label="Close" data-close-help>✕</button>
+      <button class="help-close" type="button" aria-label="Close" data-close-dialog>✕</button>
     </div>
 
     <div class="help-body"></div>
+  </dialog>
+
+  <!-- AI and mental health: what the research says. The text is loaded from
+       research.html the first time it's opened (see js/research.js). -->
+  <dialog id="researchDialog" class="help-dialog research-dialog" aria-labelledby="researchTitle">
+    <div class="help-header">
+      <h2 id="researchTitle">AI and mental health: what the research says</h2>
+      <button class="help-close" type="button" aria-label="Close" data-close-dialog>✕</button>
+    </div>
+
+    <div id="researchBody" class="research-text"></div>
   </dialog>
 
   <div id="toast" class="toast" role="status"></div>

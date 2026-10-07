@@ -38,7 +38,7 @@ server/              the chat API (runs on Modal)
   logs.py            one-line log events
 
 index.html           the page's markup only
-research.html        "AI and mental health: what the research says" (linked from Help & info)
+research.html        "AI and mental health: what the research says" (shown in a pop-up; also works as a page)
 icon.svg             browser-tab icon
 styles/              one stylesheet per part of the page
   themes.css         colors for dawn, day, dusk and night
@@ -64,6 +64,8 @@ js/                  page logic, one small module per job
   thinking.js        shows the thinking dragon and its label, and hides them
   commands.js        test commands like /evening
   help.js            copies the help text into the Help & info window and opens/closes it
+  research.js        opens the research summary in a pop-up (loads research.html)
+  dialogs.js         shared close behavior for the pop-up windows
   research-page.js   gives research.html the same sky as the app
 dragon/              the 3D dragons
   main.js            the big welcome-screen dragon: setup and cleanup (ENABLE_DRAGON switch)
