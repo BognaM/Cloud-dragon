@@ -43,7 +43,7 @@ styles/              one stylesheet per part of the page
   base.css · layout.css · sky.css · header.css · icon.css
   bond.css · hero.css · chat.css · thinking.css · composer.css · toast.css
   file-notice.css    the message shown if index.html is opened directly
-  about.css          the "About talking to an AI dragon" note on the welcome screen
+  help.css           the Help & info window, its welcome-screen button and the note under the message box
 js/                  page logic, one small module per job
   main.js            starts the page and wires up the buttons
   config.js          backend URL, bond level days, storage keys
@@ -60,6 +60,7 @@ js/                  page logic, one small module per job
   chat.js            sends a message, streams the reply
   thinking.js        shows the thinking dragon and its label, and hides them
   commands.js        test commands like /evening
+  help.js            opens and closes the Help & info window
 dragon/              the 3D dragons
   main.js            the big welcome-screen dragon: setup and cleanup (ENABLE_DRAGON switch)
   thinking.js        the small dragon that flies in, loops and flies out while a reply is on its way

@@ -42,4 +42,5 @@ export const el = {
   input: byId("input"),
   sendButton: byId("sendButton"),
   toast: byId("toast"),
+  helpDialog: byId("helpDialog"),
 };

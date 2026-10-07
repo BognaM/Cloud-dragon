@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="styles/icon.css" />
   <link rel="stylesheet" href="styles/bond.css" />
   <link rel="stylesheet" href="styles/hero.css" />
-  <link rel="stylesheet" href="styles/about.css" />
+  <link rel="stylesheet" href="styles/help.css" />
   <link rel="stylesheet" href="styles/chat.css" />
   <link rel="stylesheet" href="styles/thinking.css" />
   <link rel="stylesheet" href="styles/composer.css" />
@@ -170,69 +170,10 @@
           </div>
         </div>
 
-        <!-- About using an AI companion for self-help and wellbeing. -->
-        <details class="about-ai">
-          <summary>About talking to an AI dragon</summary>
-
-          <p>
-            Your cloud dragon is an <strong>AI, not a person or a therapist</strong>. It runs on a
-            small language model, so it can misunderstand you, make things up, or give advice that
-            doesn't fit your situation. Double-check anything important.
-          </p>
-
-          <h3>It can help with</h3>
-          <ul>
-            <li>putting your thoughts into words, or journaling prompts</li>
-            <li>a pep talk, or planning a calmer day or evening</li>
-            <li>simple ideas for rest, focus and small routines</li>
-          </ul>
-
-          <h3>It can't replace</h3>
-          <ul>
-            <li>a doctor, therapist or counselor</li>
-            <li>diagnosis, or advice about medication</li>
-            <li>support in a crisis</li>
-          </ul>
-
-          <!-- Swiss crisis lines. -->
-          <div class="about-ai-urgent">
-            <p>
-              <strong>If you're in crisis or thinking about harming yourself,</strong> please reach
-              out to a person now. If you can, also talk to someone you trust. In Switzerland:
-            </p>
-            <ul class="crisis-lines">
-              <li><a href="tel:144">144</a> medical emergency, day and night</li>
-              <li>
-                <a href="tel:143">143</a> Die Dargebotene Hand · La Main Tendue · Telefono Amico:
-                someone to talk to, day and night, free and anonymous. Chat and email at
-                <a href="https://www.143.ch" target="_blank" rel="noopener">143.ch</a>
-              </li>
-              <li><a href="tel:0800143000">0800 143 000</a> the same in English, 6–11 pm</li>
-              <li>
-                <a href="tel:147">147</a> Pro Juventute, for children and young people, day and
-                night, free. Also WhatsApp, at
-                <a href="https://www.147.ch" target="_blank" rel="noopener">147.ch</a>
-              </li>
-            </ul>
-
-            <p>
-              Psychiatric emergency services in each canton:
-              <a href="https://mintra.psy.unibe.ch/assets/Psychiatrische_Notfaelle_Schweiz.pdf" target="_blank" rel="noopener">list by canton (PDF, UPD Bern)</a>.
-            </p>
-
-            <p class="crisis-source">
-              Outside Switzerland? Find a helpline at
-              <a href="https://findahelpline.com" target="_blank" rel="noopener">findahelpline.com</a>.
-            </p>
-          </div>
-
-          <h3>Your privacy</h3>
-          <p>
-            Your messages go to a cloud server to create the replies. The server doesn't keep a chat
-            history, though short previews of messages can appear in its logs. Your conversation and
-            bond are saved only in this browser. Avoid sharing details you'd want to keep fully private.
-          </p>
-        </details>
+        <!-- Opens the Help & info window (see the <dialog> near the end of <body>). -->
+        <button class="about-ai-open" type="button" data-open-help>
+          About talking to an AI dragon
+        </button>
       </div>
     </section>
 
@@ -264,9 +205,82 @@
             ➤
           </button>
         </div>
+        <p class="composer-note">
+          An AI, not a therapist. In a crisis, call <a href="tel:143">143</a> or
+          <a href="tel:144">144</a>.
+          <button class="link-button" type="button" data-open-help>Help &amp; info</button>
+        </p>
       </footer>
     </div>
   </main>
+
+  <!-- Help & info: using an AI companion for self-help, crisis lines, privacy.
+       Opens from the welcome screen and from the line under the message box. -->
+  <dialog id="helpDialog" class="help-dialog" aria-labelledby="helpTitle">
+    <div class="help-header">
+      <h2 id="helpTitle">About talking to an AI dragon</h2>
+      <button class="help-close" type="button" aria-label="Close" data-close-help>✕</button>
+    </div>
+
+    <p>
+      Your cloud dragon is an <strong>AI, not a person or a therapist</strong>. It runs on a
+      small language model, so it can misunderstand you, make things up, or give advice that
+      doesn't fit your situation. Double-check anything important.
+    </p>
+
+    <h3>It can help with</h3>
+    <ul>
+      <li>putting your thoughts into words, or journaling prompts</li>
+      <li>a pep talk, or planning a calmer day or evening</li>
+      <li>simple ideas for rest, focus and small routines</li>
+    </ul>
+
+    <h3>It can't replace</h3>
+    <ul>
+      <li>a doctor, therapist or counselor</li>
+      <li>diagnosis, or advice about medication</li>
+      <li>support in a crisis</li>
+    </ul>
+
+    <!-- Swiss crisis lines. -->
+    <div class="about-ai-urgent">
+      <p>
+        <strong>If you're in crisis or thinking about harming yourself,</strong> please reach
+        out to a person now. If you can, also talk to someone you trust. In Switzerland:
+      </p>
+      <ul class="crisis-lines">
+        <li><a href="tel:144">144</a> medical emergency, day and night</li>
+        <li>
+          <a href="tel:143">143</a> Die Dargebotene Hand · La Main Tendue · Telefono Amico:
+          someone to talk to, day and night, free and anonymous. Chat and email at
+          <a href="https://www.143.ch" target="_blank" rel="noopener">143.ch</a>
+        </li>
+        <li><a href="tel:0800143000">0800 143 000</a> the same in English, 6–11 pm</li>
+        <li>
+          <a href="tel:147">147</a> Pro Juventute, for children and young people, day and
+          night, free. Also WhatsApp, at
+          <a href="https://www.147.ch" target="_blank" rel="noopener">147.ch</a>
+        </li>
+      </ul>
+
+      <p>
+        Psychiatric emergency services in each canton:
+        <a href="https://mintra.psy.unibe.ch/assets/Psychiatrische_Notfaelle_Schweiz.pdf" target="_blank" rel="noopener">list by canton (PDF, UPD Bern)</a>.
+      </p>
+
+      <p class="crisis-source">
+        Outside Switzerland? Find a helpline at
+        <a href="https://findahelpline.com" target="_blank" rel="noopener">findahelpline.com</a>.
+      </p>
+    </div>
+
+    <h3>Your privacy</h3>
+    <p>
+      Your messages go to a cloud server to create the replies. The server doesn't keep a chat
+      history, though short previews of messages can appear in its logs. Your conversation and
+      bond are saved only in this browser. Avoid sharing details you'd want to keep fully private.
+    </p>
+  </dialog>
 
   <div id="toast" class="toast" role="status"></div>
 
