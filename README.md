@@ -60,6 +60,8 @@ js/                  page logic, one small module per job
   chat.js            sends a message, streams the reply
   thinking.js        shows the thinking dragon and its label, and hides them
   commands.js        test commands like /evening
+  crisis-lines.js    Swiss psychiatric emergency numbers by canton (with source)
+  crisis.js          the canton picker in the crisis note
 dragon/              the 3D dragons
   main.js            the big welcome-screen dragon: setup and cleanup (ENABLE_DRAGON switch)
   thinking.js        the small dragon that flies in, loops and flies out while a reply is on its way

@@ -13,6 +13,7 @@ import { addMessage } from "./messages.js";
 import { autoResize, clearInput } from "./composer.js";
 import { sendMessage } from "./chat.js";
 import { isCommand, runCommand } from "./commands.js";
+import { initCrisisLines } from "./crisis.js";
 
 const SKY_CHECK_MS = 60 * 1000;
 
@@ -28,6 +29,7 @@ function submit(text) {
 }
 
 function start() {
+  initCrisisLines();
   applySky();
   setInterval(applySky, SKY_CHECK_MS);
   renderStars();

@@ -194,13 +194,43 @@
             <li>support in a crisis</li>
           </ul>
 
-          <p class="about-ai-urgent">
-            <strong>If you're in crisis or thinking about harming yourself,</strong> please reach out
-            to a person now: call your local emergency number (112 in Europe), or find a free,
-            confidential helpline in your country at
-            <a href="https://findahelpline.com" target="_blank" rel="noopener">findahelpline.com</a>.
-            If you can, also talk to someone you trust.
-          </p>
+          <!-- Swiss crisis lines. Canton numbers live in js/crisis-lines.js (with their source). -->
+          <div class="about-ai-urgent">
+            <p>
+              <strong>If you're in crisis or thinking about harming yourself,</strong> please reach
+              out to a person now. If you can, also talk to someone you trust. In Switzerland:
+            </p>
+            <ul class="crisis-lines">
+              <li><a href="tel:144">144</a> medical emergency, day and night</li>
+              <li>
+                <a href="tel:143">143</a> Die Dargebotene Hand · La Main Tendue · Telefono Amico:
+                someone to talk to, day and night, free and anonymous. Chat and email at
+                <a href="https://www.143.ch" target="_blank" rel="noopener">143.ch</a>
+              </li>
+              <li><a href="tel:0800143000">0800 143 000</a> the same in English, 6–11 pm</li>
+              <li>
+                <a href="tel:147">147</a> Pro Juventute, for children and young people, day and
+                night, free. Also WhatsApp, at
+                <a href="https://www.147.ch" target="_blank" rel="noopener">147.ch</a>
+              </li>
+            </ul>
+
+            <label class="crisis-region">
+              Psychiatric emergency service in your canton
+              <select id="crisisRegion">
+                <option value="">Choose your canton…</option>
+              </select>
+            </label>
+            <div id="crisisRegionLines" class="crisis-lines" aria-live="polite"></div>
+
+            <p class="crisis-source">
+              Outside Switzerland? Find a helpline at
+              <a href="https://findahelpline.com" target="_blank" rel="noopener">findahelpline.com</a>.
+              Canton numbers from the
+              <a href="https://mintra.psy.unibe.ch/assets/Psychiatrische_Notfaelle_Schweiz.pdf" target="_blank" rel="noopener">UPD Bern list</a>,
+              checked October 2026.
+            </p>
+          </div>
 
           <h3>Your privacy</h3>
           <p>
