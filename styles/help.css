@@ -147,3 +147,22 @@
   font-size: 12px;
   color: var(--muted);
 }
+
+/* ---------- Link to the research summary ---------- */
+
+.help-dialog .research-link {
+  display: block;
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--glass);
+  color: var(--text);
+  font-weight: 650;
+  text-align: center;
+  text-decoration: none;
+}
+
+.help-dialog .research-link:hover {
+  border-color: var(--accent);
+}

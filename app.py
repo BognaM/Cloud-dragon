@@ -40,6 +40,7 @@ site_image = (
     .uv_pip_install("fastapi[standard]")
     .add_local_file(HERE / "index.html", "/site/index.html")
     .add_local_file(HERE / "icon.svg", "/site/icon.svg")
+    .add_local_file(HERE / "research.html", "/site/research.html")
     .add_local_dir(HERE / "styles", "/site/styles")
     .add_local_dir(HERE / "js", "/site/js")
     .add_local_dir(HERE / "dragon", "/site/dragon")

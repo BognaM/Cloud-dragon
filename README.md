@@ -37,12 +37,14 @@ server/              the chat API (runs on Modal)
   logs.py            one-line log events
 
 index.html           the page's markup only
+research.html        "AI and mental health: what the research says" (linked from Help & info)
 icon.svg             browser-tab icon
 styles/              one stylesheet per part of the page
   themes.css         colors for dawn, day, dusk and night
   base.css · layout.css · sky.css · header.css · icon.css
   bond.css · hero.css · chat.css · thinking.css · composer.css · toast.css
   file-notice.css    the message shown if index.html is opened directly
+  research.css       the research summary page
   help.css           the Help & info window, its welcome-screen button and the note under the message box
 js/                  page logic, one small module per job
   main.js            starts the page and wires up the buttons
@@ -61,6 +63,7 @@ js/                  page logic, one small module per job
   thinking.js        shows the thinking dragon and its label, and hides them
   commands.js        test commands like /evening
   help.js            opens and closes the Help & info window
+  research-page.js   gives research.html the same sky as the app
 dragon/              the 3D dragons
   main.js            the big welcome-screen dragon: setup and cleanup (ENABLE_DRAGON switch)
   thinking.js        the small dragon that flies in, loops and flies out while a reply is on its way
