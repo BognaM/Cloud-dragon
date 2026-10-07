@@ -1,0 +1,106 @@
+/* Colors for each time of day. The page sets <html data-sky="dawn|day|dusk|night">. */
+
+:root,
+:root[data-sky="day"] {
+  color-scheme: light;
+  --sky: linear-gradient(180deg, #6fb2ec 0%, #9fcff3 45%, #e3f2fb 100%);
+  --text: #17324d;
+  --muted: #46627e;
+  --glass: rgba(255, 255, 255, 0.42);
+  --border: rgba(30, 60, 100, 0.12);
+  --assistant: rgba(255, 255, 255, 0.72);
+  --user: rgba(205, 230, 255, 0.92);
+  --accent: #2f7fd0;
+  --on-accent: #ffffff;
+  --cloud: rgba(255, 255, 255, 0.9);
+  --orb: radial-gradient(circle, #fffbe6 0%, #ffe9a8 55%, rgba(255, 233, 168, 0) 72%);
+  --orb-x: 78%;
+  --orb-y: 9%;
+  --orb-size: 120px;
+  --pearl: #f7fbff;
+  --pearl-edge: #c9d8ef;
+  --icon-fill: #ffffff;
+  --icon-ink: #5f77a6;
+  --icon-horn: #d8b066;
+  --icon-pearl: #fff3c9;
+  --danger: #b3261e;
+  --halo: 0 1px 10px rgba(255, 255, 255, 0.8);
+}
+
+:root[data-sky="dawn"] {
+  color-scheme: light;
+  --sky: linear-gradient(180deg, #c9d4f0 0%, #f3d4cf 50%, #f8bfa6 100%);
+  --text: #2a2d45;
+  --muted: #5f6382;
+  --glass: rgba(255, 255, 255, 0.42);
+  --border: rgba(70, 60, 110, 0.13);
+  --assistant: rgba(255, 255, 255, 0.66);
+  --user: rgba(255, 224, 232, 0.92);
+  --accent: #cf5c84;
+  --on-accent: #ffffff;
+  --cloud: rgba(255, 238, 240, 0.85);
+  --orb: radial-gradient(circle, #fff4e8 0%, #ffc9a3 50%, rgba(255, 201, 163, 0) 72%);
+  --orb-x: 14%;
+  --orb-y: 70%;
+  --orb-size: 150px;
+  --pearl: #fff0f4;
+  --pearl-edge: #efc3d0;
+  --icon-fill: #fffafa;
+  --icon-ink: #8a6f9e;
+  --icon-horn: #dcae78;
+  --icon-pearl: #ffe2d2;
+  --danger: #b3261e;
+  --halo: 0 1px 10px rgba(255, 255, 255, 0.8);
+}
+
+:root[data-sky="dusk"] {
+  color-scheme: dark;
+  --sky: linear-gradient(180deg, #2b285a 0%, #6a4a8c 45%, #d9846a 85%, #f2a865 100%);
+  --text: #fff4ec;
+  --muted: #e3cfe0;
+  --glass: rgba(32, 22, 58, 0.4);
+  --border: rgba(255, 255, 255, 0.14);
+  --assistant: rgba(40, 28, 70, 0.6);
+  --user: rgba(122, 64, 112, 0.72);
+  --accent: #ffbf73;
+  --on-accent: #2a1d3a;
+  --cloud: rgba(255, 196, 186, 0.5);
+  --orb: radial-gradient(circle, #fff0d0 0%, #ffad66 50%, rgba(255, 173, 102, 0) 72%);
+  --orb-x: 86%;
+  --orb-y: 94%;
+  --orb-size: 190px;
+  --pearl: #ffe6c7;
+  --pearl-edge: #f5b77a;
+  --icon-fill: #fff3ea;
+  --icon-ink: #6b4d86;
+  --icon-horn: #f0c07e;
+  --icon-pearl: #ffd29a;
+  --danger: #ffb4a9;
+  --halo: 0 1px 10px rgba(30, 16, 50, 0.85);
+}
+
+:root[data-sky="night"] {
+  color-scheme: dark;
+  --sky: linear-gradient(180deg, #070b22 0%, #121a44 55%, #26306a 100%);
+  --text: #edf0ff;
+  --muted: #a3abd6;
+  --glass: rgba(10, 14, 40, 0.45);
+  --border: rgba(255, 255, 255, 0.1);
+  --assistant: rgba(255, 255, 255, 0.08);
+  --user: rgba(140, 160, 255, 0.22);
+  --accent: #c5d0ff;
+  --on-accent: #121a44;
+  --cloud: rgba(160, 175, 230, 0.16);
+  --orb: radial-gradient(circle, #fbfaf2 0%, #e9e7da 38%, rgba(233, 231, 218, 0.18) 46%, rgba(233, 231, 218, 0) 70%);
+  --orb-x: 80%;
+  --orb-y: 10%;
+  --orb-size: 110px;
+  --pearl: #e4e9ff;
+  --pearl-edge: #aab5ef;
+  --icon-fill: #eef1ff;
+  --icon-ink: #5d6aab;
+  --icon-horn: #cfd2f2;
+  --icon-pearl: #fffbe8;
+  --danger: #ffb4a9;
+  --halo: 0 1px 10px rgba(5, 8, 30, 0.85);
+}

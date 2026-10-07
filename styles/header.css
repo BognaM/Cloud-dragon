@@ -1,0 +1,75 @@
+/* Top bar: dragon icon, name, bond ring and New chat button. */
+
+.topbar {
+  padding:
+    calc(12px + env(safe-area-inset-top))
+    14px
+    10px;
+  border-bottom: 1px solid var(--border);
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  border-radius: 15px;
+  display: grid;
+  place-items: center;
+  background: var(--sky) border-box;
+  border: 1px solid var(--border);
+}
+
+.avatar svg {
+  width: 34px;
+  height: 34px;
+}
+
+.identity {
+  min-width: 0;
+  flex: 1;
+}
+
+.identity h1 {
+  font-size: 16px;
+  line-height: 1.2;
+  margin: 0;
+  font-weight: 720;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.identity p {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.new-chat {
+  min-height: 38px;
+  padding: 0 12px;
+  border-radius: 999px;
+  color: var(--text);
+  background: var(--assistant);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+@media (max-width: 420px) {
+  .new-chat .label { display: none; }
+}

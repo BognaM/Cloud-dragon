@@ -1,0 +1,25 @@
+/* Short pop-up messages, such as "You bonded with Nimbus". */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  top: calc(80px + env(safe-area-inset-top));
+  z-index: 30;
+  transform: translate(-50%, -12px);
+  max-width: calc(100% - 32px);
+  padding: 10px 16px;
+  border-radius: 999px;
+  color: var(--on-accent);
+  background: var(--accent);
+  font-size: 14px;
+  font-weight: 650;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}

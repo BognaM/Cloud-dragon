@@ -1,0 +1,122 @@
+/* The animated sky behind the app: gradient, sun or moon, stars and clouds. */
+
+.sky {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Each time of day has its own layer so changes fade instead of jumping. */
+.sky-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 2.5s ease;
+}
+
+.sky-layer.dawn { background: linear-gradient(180deg, #c9d4f0 0%, #f3d4cf 50%, #f8bfa6 100%); }
+
+.sky-layer.day { background: linear-gradient(180deg, #6fb2ec 0%, #9fcff3 45%, #e3f2fb 100%); }
+
+.sky-layer.dusk { background: linear-gradient(180deg, #2b285a 0%, #6a4a8c 45%, #d9846a 85%, #f2a865 100%); }
+
+.sky-layer.night { background: linear-gradient(180deg, #070b22 0%, #121a44 55%, #26306a 100%); }
+
+[data-sky="dawn"] .sky-layer.dawn,
+[data-sky="day"] .sky-layer.day,
+[data-sky="dusk"] .sky-layer.dusk,
+[data-sky="night"] .sky-layer.night {
+  opacity: 1;
+}
+
+/* Sun by day, moon by night. */
+.orb {
+  position: absolute;
+  left: var(--orb-x);
+  top: var(--orb-y);
+  width: var(--orb-size);
+  height: var(--orb-size);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--orb);
+  transition: left 2.5s ease, top 2.5s ease, width 2.5s ease, height 2.5s ease;
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 2.5s ease;
+}
+
+[data-sky="dusk"] .stars { opacity: 0.35; }
+
+[data-sky="night"] .stars { opacity: 1; }
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #ffffff;
+  opacity: 0.55;
+}
+
+/* One bright star for every day you've spent with your dragon. */
+.star.bond {
+  width: 4px;
+  height: 4px;
+  opacity: 1;
+  background: #fffbe8;
+  box-shadow: 0 0 8px 2px rgba(255, 245, 210, 0.7);
+  animation: twinkle 3.6s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  50% { opacity: 0.45; transform: scale(0.75); }
+}
+
+.cloud {
+  position: absolute;
+  left: 0;
+  top: var(--top);
+  width: 220px;
+  height: 58px;
+  border-radius: 60px;
+  background: var(--cloud);
+  filter: blur(1.5px);
+  transform: translateX(-60vw) scale(var(--scale));
+  animation: drift var(--duration) linear infinite;
+  animation-delay: var(--delay);
+  transition: background 2.5s ease;
+}
+
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: inherit;
+}
+
+.cloud::before { width: 92px; height: 92px; left: 34px; top: -44px; }
+
+.cloud::after { width: 120px; height: 120px; left: 92px; top: -60px; }
+
+@keyframes drift {
+  from { transform: translateX(-60vw) scale(var(--scale)); }
+  to { transform: translateX(130vw) scale(var(--scale)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cloud,
+  .star.bond {
+    animation: none;
+  }
+
+  .cloud {
+    transform: translateX(var(--rest)) scale(var(--scale));
+  }
+}

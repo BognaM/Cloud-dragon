@@ -1,0 +1,48 @@
+/* The small strip above the message box, on the left where the dragon's
+   replies appear: the flying dragon, then a "thinking" label. It never blocks clicks. */
+
+.composer-area {
+  position: relative;
+}
+
+.thinking-sky {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 100%;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.thinking-stage {
+  flex: none;
+  width: 110px;
+  height: 100%;
+}
+
+.thinking-stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.thinking-text {
+  font-size: 13px;
+  color: var(--muted);
+  text-shadow: var(--halo);
+  white-space: nowrap;
+  animation: thinking-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes thinking-pulse {
+  50% { opacity: 0.45; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thinking-text {
+    animation: none;
+  }
+}

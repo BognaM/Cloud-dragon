@@ -1,0 +1,110 @@
+/* Bond ring in the header and the panel it opens. */
+
+/* Bond ring: the arc fills as the bond grows, and the pearl glows brighter. */
+.bond-ring {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  padding: 0;
+  border-radius: 50%;
+  background: none;
+}
+
+.bond-ring svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.ring-track {
+  fill: none;
+  stroke: color-mix(in srgb, var(--text) 16%, transparent);
+  stroke-width: 2.5;
+}
+
+.ring-arc {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 0 100;
+  transform: rotate(-90deg);
+  transform-origin: 18px 18px;
+  transition: stroke-dasharray 1s ease;
+}
+
+.ring-pearl {
+  fill: url(#pearl-shade);
+  stroke: color-mix(in srgb, var(--text) 18%, transparent);
+  stroke-width: 0.8;
+  transition: filter 1s ease;
+}
+
+.pearl-edge { stop-color: var(--pearl-edge); }
+
+.bond-ring:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.bond-panel {
+  position: absolute;
+  top: calc(66px + env(safe-area-inset-top));
+  right: 12px;
+  z-index: 20;
+  width: min(300px, calc(100% - 24px));
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--assistant);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
+}
+
+.bond-panel h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+}
+
+.bond-panel p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.levels {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.level {
+  text-align: center;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.level::before {
+  content: "";
+  display: block;
+  width: 14px;
+  height: 14px;
+  margin: 0 auto 4px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.level.reached::before {
+  background: radial-gradient(circle at 38% 35%, #ffffff, var(--pearl-edge));
+  box-shadow: 0 0 8px rgba(255, 250, 235, 0.7);
+}
+
+.level.current {
+  color: var(--text);
+  font-weight: 700;
+}

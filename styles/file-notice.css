@@ -1,0 +1,41 @@
+/* Shown instead of the app when index.html is opened as a file (see the
+   small script in index.html). Double-clicking start.command avoids this. */
+
+.file-notice {
+  display: none;
+}
+
+.opened-as-file .app {
+  display: none;
+}
+
+.opened-as-file .file-notice {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: min(100% - 32px, 460px);
+  margin: 18vh auto 0;
+  padding: 24px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--assistant);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.file-notice h2 {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+
+.file-notice p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.file-notice code {
+  font-size: 0.95em;
+  color: var(--text);
+}

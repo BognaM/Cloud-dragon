@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en" data-sky="day" data-bond="0">
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+  <meta name="theme-color" content="#6fb2ec" />
+  <title>Cloud Dragon</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+
+  <!-- Styles, one file per part of the page. themes.css holds the colors for each time of day. -->
+  <link rel="stylesheet" href="styles/themes.css" />
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="styles/sky.css" />
+  <link rel="stylesheet" href="styles/layout.css" />
+  <link rel="stylesheet" href="styles/header.css" />
+  <link rel="stylesheet" href="styles/icon.css" />
+  <link rel="stylesheet" href="styles/bond.css" />
+  <link rel="stylesheet" href="styles/hero.css" />
+  <link rel="stylesheet" href="styles/chat.css" />
+  <link rel="stylesheet" href="styles/thinking.css" />
+  <link rel="stylesheet" href="styles/composer.css" />
+  <link rel="stylesheet" href="styles/toast.css" />
+  <link rel="stylesheet" href="styles/file-notice.css" />
+
+  <!-- Opened by double-clicking index.html? Browsers won't run the page's
+       scripts from a file, so show how to open it instead (see file-notice.css). -->
+  <script>
+    if (location.protocol === "file:") document.documentElement.classList.add("opened-as-file");
+  </script>
+</head>
+
+<body>
+  <!-- Cloud-dragon icon, drawn once and reused with <use href="#cloud-dragon">.
+       Colors follow the sky (see the --icon-* variables). -->
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+    <defs>
+      <radialGradient id="pearl-shade" cx="0.38" cy="0.34" r="0.72">
+        <stop offset="0" stop-color="#ffffff" />
+        <stop offset="1" class="pearl-edge" />
+      </radialGradient>
+      <symbol id="cloud-dragon" viewBox="0 0 48 48">
+        <g transform="translate(24 24) scale(0.882) translate(-23.5 -20.4)">
+          <path class="cd-horn" d="M33.5 10.2 Q30 5.5 25.5 5.6 M37 9.4 Q35.6 4.6 31.6 2.6" />
+          <g class="cd-outline">
+            <g fill="none" stroke-linecap="round"><path d="M33 18.5 C30.5 27 27.5 32 23 32" stroke-width="9.6" /><path d="M23 32 C18 32 17.5 22.5 13 23" stroke-width="8.2" /><path d="M13 23 C9 23.5 9 30.5 5 30.6" stroke-width="6.8" /></g>
+            <g stroke-width="3" stroke-linejoin="round"><circle cx="30.6" cy="23.5" r="3.4"/><circle cx="24.5" cy="34.6" r="3.2"/><circle cx="19" cy="33.4" r="2.4"/><circle cx="13.6" cy="20.6" r="2.8"/><circle cx="4.6" cy="30.8" r="2.1"/><circle cx="2.4" cy="27.4" r="1.2"/><ellipse cx="36.5" cy="14" rx="6.2" ry="4.6" transform="rotate(-12 36.5 14)"/><ellipse cx="41.6" cy="15.6" rx="4.2" ry="2.9" transform="rotate(-6 41.6 15.6)"/></g>
+          </g>
+          <g class="cd-fill">
+            <g fill="none" stroke-linecap="round"><path d="M33 18.5 C30.5 27 27.5 32 23 32" stroke-width="6.6" /><path d="M23 32 C18 32 17.5 22.5 13 23" stroke-width="5.2" /><path d="M13 23 C9 23.5 9 30.5 5 30.6" stroke-width="3.8" /></g>
+            <g stroke="none"><circle cx="30.6" cy="23.5" r="3.4"/><circle cx="24.5" cy="34.6" r="3.2"/><circle cx="19" cy="33.4" r="2.4"/><circle cx="13.6" cy="20.6" r="2.8"/><circle cx="4.6" cy="30.8" r="2.1"/><circle cx="2.4" cy="27.4" r="1.2"/><ellipse cx="36.5" cy="14" rx="6.2" ry="4.6" transform="rotate(-12 36.5 14)"/><ellipse cx="41.6" cy="15.6" rx="4.2" ry="2.9" transform="rotate(-6 41.6 15.6)"/></g>
+          </g>
+          <path class="cd-whisker" d="M44.6 17.2 Q44.4 23.4 37.6 24.6" />
+          <path class="cd-mouth" d="M39.2 17.9 Q41.6 18.9 44.3 17.6" />
+          <circle class="cd-ink" cx="37.6" cy="12.6" r="1.6" />
+          <circle fill="#fff" cx="38.2" cy="12" r="0.5" />
+          <circle class="cd-ink" cx="44.3" cy="14.4" r="0.6" />
+          <circle class="cd-pearl" cx="44" cy="6.5" r="2.6" />
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <div class="sky" aria-hidden="true">
+    <div class="sky-layer dawn"></div>
+    <div class="sky-layer day"></div>
+    <div class="sky-layer dusk"></div>
+    <div class="sky-layer night"></div>
+    <div class="orb"></div>
+    <div id="stars" class="stars"></div>
+    <div class="clouds">
+      <div class="cloud" style="--top: 12%; --scale: 0.9; --duration: 95s; --delay: -20s; --rest: 8vw"></div>
+      <div class="cloud" style="--top: 30%; --scale: 0.6; --duration: 130s; --delay: -75s; --rest: 62vw"></div>
+      <div class="cloud" style="--top: 52%; --scale: 1.1; --duration: 115s; --delay: -50s; --rest: 30vw"></div>
+      <div class="cloud" style="--top: 74%; --scale: 0.75; --duration: 150s; --delay: -110s; --rest: 75vw"></div>
+      <div class="cloud" style="--top: 88%; --scale: 1.3; --duration: 170s; --delay: -10s; --rest: -6vw"></div>
+    </div>
+  </div>
+
+  <div class="file-notice" role="alert">
+    <h2>Open Cloud Dragon with <code>start.command</code></h2>
+    <p>
+      This page can't run when <code>index.html</code> is opened directly.
+      In the <strong>Chat llm</strong> folder, double-click <strong>start.command</strong>:
+      it opens the app in your browser.
+    </p>
+  </div>
+
+  <main id="app" class="app">
+    <header class="topbar">
+      <div class="avatar" aria-hidden="true"><svg><use href="#cloud-dragon" /></svg></div>
+
+      <div class="identity">
+        <h1 id="dragonTitle">Cloud dragon</h1>
+        <p id="subtitle">waiting to bond</p>
+      </div>
+
+      <button
+        id="bondButton"
+        class="bond-ring"
+        type="button"
+        aria-expanded="false"
+        aria-controls="bondPanel"
+        hidden
+      >
+        <svg viewBox="0 0 36 36" aria-hidden="true">
+          <circle class="ring-track" cx="18" cy="18" r="15.5" />
+          <circle id="bondArc" class="ring-arc" cx="18" cy="18" r="15.5" pathLength="100" />
+          <circle id="bondPearl" class="ring-pearl" cx="18" cy="18" r="7" />
+        </svg>
+      </button>
+
+      <button id="newChatButton" class="new-chat" type="button" title="Start a new chat">
+        ＋<span class="label"> New chat</span>
+      </button>
+    </header>
+
+    <div id="bondPanel" class="bond-panel" hidden>
+      <h3 id="bondPanelTitle"></h3>
+      <p id="bondPanelText"></p>
+      <div id="bondLevels" class="levels"></div>
+      <button id="releaseButton" class="link-button danger" type="button">
+        Release bond…
+      </button>
+    </div>
+
+    <section id="messages" class="messages" aria-live="polite">
+      <div id="hero" class="hero">
+        <div class="big-dragon" role="img" aria-label="A cloud dragon"><svg><use href="#cloud-dragon" /></svg></div>
+
+        <!-- First visit: the bonding moment. -->
+        <form id="bonding" class="bonding" hidden>
+          <h2>A cloud dragon drifts down to meet you.</h2>
+          <p>Give it a name, and tell it yours.</p>
+
+          <div class="bonding-card">
+            <label>
+              Name your dragon
+              <input id="dragonNameInput" maxlength="24" placeholder="Nimbus" autocomplete="off" />
+            </label>
+            <label>
+              Your name (optional)
+              <input id="userNameInput" maxlength="24" placeholder="What should it call you?" autocomplete="given-name" />
+            </label>
+            <div class="bond-actions">
+              <button id="skipButton" class="link-button" type="button">Skip for now</button>
+              <button class="primary-button" type="submit">Bond ☁️</button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Every visit after that. -->
+        <div id="welcome" hidden>
+          <h2 id="welcomeTitle"></h2>
+          <p id="welcomeText"></p>
+
+          <div class="suggestions">
+            <button class="suggestion" data-prompt="I need a little pep talk for today.">
+              I need a little pep talk for today.
+            </button>
+            <button class="suggestion" data-prompt="Help me plan a calm evening.">
+              Help me plan a calm evening.
+            </button>
+            <button class="suggestion" data-prompt="Why do clouds float?">
+              Why do clouds float?
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="composer-area">
+      <!-- The thinking dragon flies through here while a reply is on its way. -->
+      <div id="thinkingSky" class="thinking-sky" role="status" hidden>
+        <div id="thinkingStage" class="thinking-stage" aria-hidden="true"></div>
+        <span id="thinkingText" class="thinking-text"></span>
+      </div>
+      <div id="status" class="status"></div>
+
+      <footer class="composer-shell">
+        <div class="composer">
+          <textarea
+            id="input"
+            rows="1"
+            maxlength="2000"
+            placeholder="Message your dragon..."
+            aria-label="Message"
+          ></textarea>
+
+          <button
+            id="sendButton"
+            class="icon-button"
+            type="button"
+            aria-label="Send message"
+            title="Send"
+          >
+            ➤
+          </button>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <!-- OPTIONAL: remove this tag to keep the flat icon instead of the 3D dragon. -->
+  <script type="module" src="dragon/main.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

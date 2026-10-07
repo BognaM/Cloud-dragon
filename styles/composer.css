@@ -1,0 +1,58 @@
+/* Message box and send button. */
+
+.composer-shell {
+  border-top: 1px solid var(--border);
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  padding:
+    10px
+    12px
+    calc(10px + env(safe-area-inset-bottom));
+}
+
+/* The composer waits until you've bonded (or skipped). */
+.app.bonding .composer-area {
+  display: none;
+}
+
+.composer {
+  display: grid;
+  grid-template-columns: 1fr 46px;
+  gap: 8px;
+  align-items: end;
+}
+
+.icon-button {
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
+  display: grid;
+  place-items: center;
+  font-size: 19px;
+  color: var(--on-accent);
+  background: var(--accent);
+}
+
+textarea {
+  width: 100%;
+  min-height: 46px;
+  max-height: 130px;
+  resize: none;
+  border: 1px solid var(--border);
+  outline: 0;
+  border-radius: 15px;
+  padding: 12px 13px;
+  background: var(--assistant);
+  color: var(--text);
+
+  /* 16px prevents iOS Safari from zooming the page on focus. */
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+textarea::placeholder,
+input::placeholder {
+  color: var(--muted);
+  opacity: 0.8;
+}

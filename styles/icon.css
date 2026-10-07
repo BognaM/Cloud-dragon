@@ -1,0 +1,14 @@
+/* Colors for the cloud-dragon icon (the SVG sprite at the top of <body>). */
+
+.cd-outline { fill: var(--icon-ink); stroke: var(--icon-ink); }
+.cd-fill { fill: var(--icon-fill); stroke: var(--icon-fill); }
+.cd-ink { fill: var(--icon-ink); }
+.cd-pearl { fill: var(--icon-pearl); stroke: var(--icon-ink); stroke-width: 0.8; }
+
+.cd-horn,
+.cd-whisker,
+.cd-mouth { fill: none; stroke-linecap: round; }
+
+.cd-horn { stroke: var(--icon-horn); stroke-width: 2.1; }
+.cd-whisker { stroke: var(--icon-horn); stroke-width: 1.3; }
+.cd-mouth { stroke: var(--icon-ink); stroke-width: 1; }
