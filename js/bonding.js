@@ -1,9 +1,10 @@
 // Making the bond on the first visit, and growing it day by day.
+// The bond changes only how the page looks, never how the dragon talks.
 
-import { DEFAULT_DRAGON_NAME, LEVELS } from "./config.js";
+import { DEFAULT_DRAGON_NAME } from "./config.js";
 import { el } from "./dom.js";
 import { state, saveBond } from "./state.js";
-import { bondDays, levelForDays, today } from "./bond.js";
+import { today } from "./bond.js";
 import { renderBond } from "./header.js";
 import { renderStars } from "./stars.js";
 import { renderWelcome } from "./welcome.js";
@@ -34,19 +35,14 @@ export function completeBonding(dragon, user) {
   if (window.matchMedia("(pointer: fine)").matches) el.input.focus({ preventScroll: true });
 }
 
-// A day counts once you've chatted on it.
+// A day counts once you've chatted on it. The new level shows quietly in the
+// header and sky, with no announcement: nothing should reward coming back.
 export function recordBondDay() {
   const bond = state.bond;
   if (!bond || bond.days.includes(today())) return;
 
-  const before = levelForDays(bondDays());
   bond.days.push(today());
   saveBond();
-  const after = levelForDays(bondDays());
-
   renderBond();
   renderStars();
-  if (after > before && state.previewBond === null) {
-    showToast(`Your bond deepened · ${LEVELS[after].name} ☁️`);
-  }
 }

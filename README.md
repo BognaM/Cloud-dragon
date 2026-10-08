@@ -10,8 +10,10 @@ A chatbot web app with a cloud dragon you bond with, built from
   Both disappear as soon as the answer starts.
 - **Bonding:** on your first visit you name your dragon (and tell it your name).
   The bond grows with every day you chat and never shrinks:
-  Mist → Drift (3 days) → Cumulus (7) → Skybound (14). Each level changes how the
-  dragon talks to you, fills the pearl in the header, and makes the dragon glow more.
+  Mist → Drift (3 days) → Cumulus (7) → Skybound (14). Each level fills the pearl in
+  the header and makes the dragon glow more. It doesn't change how the dragon talks:
+  the tone stays friendly but not intimate at every level, with no pet names and no
+  "your bond deepened" pop-ups, to avoid encouraging dependence (APA health advisory, Nov 2025).
 - **The sky follows your clock:** dawn (5–8), day (8–17), dusk (17–20), night.
   At night every day you've bonded shows as a bright star.
 - The 3D cloud-serpent on the welcome screen is drawn with **Three.js**. Its colors follow the sky.
@@ -26,10 +28,9 @@ app.py               Modal entry point: image, GPU, `modal deploy app.py`
 serve.py             local web server used by start.command (always serves fresh files)
 server/              the chat API (runs on Modal)
   config.py          model and generation settings
-  persona.py         who the dragon is (START HERE)
-  bond_levels.py     how the dragon talks at each bond level
+  persona.py         who the dragon is and how it talks (START HERE)
   safety.py          safety rules for conversations about suicide and self-harm
-  prompt.py          builds the system prompt from persona + bond + user
+  prompt.py          builds the system prompt from persona + user + safety
   request.py         reads and checks what the page sends
   model.py           loads Qwen
   generation.py      runs the model, yields the reply piece by piece
@@ -135,7 +136,7 @@ Or type a test command in the message box (it's never sent to the dragon):
 | --- | --- |
 | `/dawn`, `/day`, `/evening` (or `/dusk`), `/night` | switch the sky |
 | `/now` | sky follows your clock again |
-| `/mist`, `/drift`, `/cumulus`, `/skybound` or `/bond 0`–`/bond 3` | preview a bond level (the dragon talks at that level too) |
+| `/mist`, `/drift`, `/cumulus`, `/skybound` or `/bond 0`–`/bond 3` | preview a bond level (the look only) |
 | `/bond auto` | back to your real bond level |
 | `/help` | list the commands |
 
@@ -148,14 +149,13 @@ To start over completely, tap the pearl → **Release bond…**.
 | Route | Input | Output |
 | --- | --- | --- |
 | `GET /health` | None | `{"ok": true, "model": "..."}` |
-| `POST /chat` | `{"messages": [...], "bond": 0-3, "user_name": "...", "dragon_name": "...", "time_of_day": "dawn"/"day"/"dusk"/"night"}` (all but `messages` optional) | `text/event-stream`: `data: {"text": "..."}` events, then `data: [DONE]` |
+| `POST /chat` | `{"messages": [...], "user_name": "...", "dragon_name": "...", "time_of_day": "dawn"/"day"/"dusk"/"night"}` (all but `messages` optional) | `text/event-stream`: `data: {"text": "..."}` events, then `data: [DONE]` |
 
 ## Things to change
 
 | What | Where |
 | --- | --- |
 | Personality | `server/persona.py` |
-| How each bond level talks | `server/bond_levels.py` |
 | Days needed per bond level | `LEVELS` in `js/config.js` |
 | Sky colors | `styles/themes.css` |
 | Sky times | `skyPhase()` in `js/sky.js` |

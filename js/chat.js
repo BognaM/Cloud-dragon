@@ -1,7 +1,7 @@
 // Sending a message and streaming the dragon's reply into a bubble.
 
 import { state, saveConversation } from "./state.js";
-import { currentLevel, dragonName } from "./bond.js";
+import { dragonName } from "./bond.js";
 import { skyPhase } from "./sky.js";
 import { streamChat } from "./api.js";
 import { addMessage, removeMessage, scrollToBottom } from "./messages.js";
@@ -21,7 +21,6 @@ function forModel(message) {
 function chatPayload() {
   return {
     messages: state.conversation.map(forModel),
-    bond: currentLevel(),
     user_name: state.bond?.userName || "",
     dragon_name: dragonName(),
     time_of_day: skyPhase(),

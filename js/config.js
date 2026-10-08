@@ -10,7 +10,7 @@ export const BOND_KEY = "cloudDragon.bond";
 export const DEFAULT_DRAGON_NAME = "Nimbus";
 
 // Days you've chatted with your dragon that each bond level needs.
-// Names match BOND_LEVELS in server/bond_levels.py.
+// Levels change only the look (pearl, glow, stars), not how the dragon talks.
 export const LEVELS = [
   { name: "Mist", days: 0 },
   { name: "Drift", days: 3 },

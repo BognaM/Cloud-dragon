@@ -5,7 +5,6 @@ import time
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import StreamingResponse
 
-from .bond_levels import BOND_LEVELS
 from .config import MODEL_ID
 from .events import HEADERS, MEDIA_TYPE, to_events
 from .generation import stream_reply
@@ -48,7 +47,6 @@ def create_api(tokenizer, model):
         system_prompt = build_system_prompt(
             chat_request.dragon_name,
             chat_request.user_name,
-            chat_request.bond,
             first_reply=len(chat_request.messages) == 1,
             time_of_day=chat_request.time_of_day,
             crisis=chat_request.crisis,
@@ -58,7 +56,6 @@ def create_api(tokenizer, model):
             "chat.prompt",
             request_id=request_id,
             messages=len(chat_request.messages),
-            bond=BOND_LEVELS[chat_request.bond]["name"],
             crisis=chat_request.crisis,
             text=preview(chat_request.messages[-1]["content"]),
         )
