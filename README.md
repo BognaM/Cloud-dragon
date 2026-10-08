@@ -188,3 +188,65 @@ this. Later messages in that chat reach the model with an extra safety rule
 node tests/crisis-detect.test.mjs
 ```
 
+
+## APA health advisory
+
+How Cloud Dragon follows the eight recommendations of the
+[APA Health Advisory on the Use of Generative AI Chatbots and Wellness Applications for Mental Health](https://www.infocop.es/wp-content/uploads/2025/11/health-advisory-ai-chatbots-wellness-apps-mental-health.pdf)
+(November 2025). Each one says what's done and what's still missing.
+
+1. **Do not rely on chatbots for psychotherapy or treatment.** *Followed.*
+   - "An AI, not a therapist" note under the message box.
+   - **About talking to an AI dragon** (welcome screen, and Help & info during the chat)
+     says it can't replace a doctor, therapist or counselor, diagnosis, medication
+     advice or crisis support.
+   - The dragon never claims to be a therapist or other professional (`server/persona.py`).
+2. **Prevent unhealthy relationships and dependencies.** *Partly followed.*
+   - The page says it's an AI next to where you type.
+   - The bond changes only the look (sky glow, stars, pearl), never how the dragon
+     talks. The tone is friendly but not intimate, with no pet names, flattery or
+     "I missed you", and no pop-ups announcing a deeper bond.
+   - The dragon says it's an AI when asked, and encourages contact with real people,
+     especially when someone says it's their only friend.
+   - It remembers only the last 10 messages of the current chat, nothing across chats.
+   - Messages about suicide or self-harm are interrupted with a crisis card (see **Crisis safety**).
+   - Missing:
+     - no AI disclosure on the first (bonding) screen
+     - no nudges to take a break
+     - the bond still grows with days you come back
+     - disordered eating isn't detected by the page (the dragon only declines to
+       help with harmful diet plans)
+3. **Prioritize privacy and protect user data.** *Partly followed.*
+   - No accounts. The chat and bond are saved only in your browser.
+   - The server keeps no chat history and nothing is used to train the model.
+   - Help & info explains this.
+   - Missing:
+     - message previews still appear in the Modal logs (`LOG_TEXT_PREVIEWS` in
+       `server/config.py`)
+     - there's no clear "delete my data" button, only **Release bond…** in the bond panel
+4. **Protect users from misrepresentation, misinformation, bias and illusory effectiveness.** *Partly followed.*
+   - The dragon never claims to be a human or a licensed professional.
+   - It gently questions harsh self-judgment and distorted beliefs instead of simply agreeing.
+   - Help & info warns that it can misunderstand, make things up or give advice
+     that doesn't fit.
+   - Missing:
+     - honest opinions still lean toward praise, a limit of the small model
+     - no bias testing or independent audit
+5. **Create safeguards for children, teenagers and vulnerable people.** *Partly followed.*
+   - Crisis detection in English, German, French and Italian.
+   - Tap-to-call 143, 147 and 144, and a list of psychiatric emergency services per canton.
+   - A pre-written reply with steps for the next few minutes.
+   - The dragon never gives methods, means or doses.
+   - 147 (Pro Juventute) is listed for young people.
+   - Missing:
+     - no age-specific design or note for under-18s
+     - detection is phrase matching and can miss things
+6. **Implement AI and digital literacy education.** *Followed.*
+   - **About talking to an AI dragon** covers what it is, what it can and can't
+     help with, and privacy.
+   - **Learn more about AI in mental health** opens a summary of the research, with sources.
+7. **Fund rigorous research on chatbots and wellness apps.** *Not for an app to do*
+   (it's aimed at funders and researchers). The research summary links the studies.
+8. **Don't prioritize AI over fixing access to mental health care.** *Followed in spirit*
+   (it's aimed at policymakers). The app presents itself as a supplement and points
+   to people: 143, 147, cantonal services, someone you trust or a professional.
