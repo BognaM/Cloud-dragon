@@ -45,6 +45,7 @@ export const el = {
   helpDialog: byId("helpDialog"),
   crisisCardTemplate: byId("crisisCardTemplate"),
   eatingCardTemplate: byId("eatingCardTemplate"),
+  selfHarmCardTemplate: byId("selfHarmCardTemplate"),
   researchDialog: byId("researchDialog"),
   researchBody: byId("researchBody"),
 };

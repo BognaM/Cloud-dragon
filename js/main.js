@@ -17,7 +17,7 @@ import { initHelp } from "./help.js";
 import { initResearch } from "./research.js";
 import { addCrisisCard } from "./crisis-card.js";
 import { addEatingCardIfNeeded } from "./eating-card.js";
-import { mayBeCrisis } from "./crisis-detect.js";
+import { crisisKind } from "./crisis-detect.js";
 
 const SKY_CHECK_MS = 60 * 1000;
 
@@ -49,7 +49,8 @@ function start() {
       if (message.role !== "user") return;
       // The same card, with the same numbers, as when the message was sent.
       const texts = userTexts(state.conversation.slice(0, index + 1));
-      if (mayBeCrisis(message.content)) addCrisisCard(message.content, texts);
+      const crisis = crisisKind(message.content);
+      if (crisis) addCrisisCard(crisis.kind, message.content, texts);
       else addEatingCardIfNeeded(message.content, texts);
     });
   } else {

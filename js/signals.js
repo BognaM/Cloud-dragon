@@ -70,6 +70,27 @@ const UNWELL = [
   /\bnon mangio da giorni\b/,
 ];
 
+// A self-harm wound that needs medical help: 144 goes first.
+const BADLY_HURT = [
+  /\b(won'?t|doesn'?t|can'?t get it to) stop bleeding\b/,
+  /\b(bleeding|bleeds) (a lot|so much|heavily)\b/,
+  /\b(deep|deeper) (cut|cuts|wound)\b/,
+  /\b(too )?deep this time\b/,
+  /\bneed(s)? stitches\b/,
+  /\b(bad|badly|serious) burns?\b/,
+  /\bhort nicht auf zu bluten\b/, // hört
+  /\bblutet (stark|so stark|sehr)\b/,
+  /\b(zu )?tief (geschnitten|geritzt)\b/,
+  /\bmuss genaht werden\b/, // genäht
+  /\bsaigne (beaucoup|encore|trop)\b/,
+  /\b(coupure|plaie|blessure) (tres )?profonde\b/, // très
+  /\bpoints de suture\b/,
+  /\bsanguina (tanto|troppo|ancora)\b/,
+  /\bnon smette di sanguinare\b/,
+  /\bferita (molto )?profonda\b/,
+  /\bpunti di sutura\b/,
+];
+
 // `texts`: everything the person has written in this chat so far.
 export function soundsYoung(texts) {
   return texts.some((text) => matches(YOUNG, text));
@@ -81,4 +102,8 @@ export function inDangerNow(text) {
 
 export function feelsUnwell(text) {
   return matches(UNWELL, text);
+}
+
+export function badlyHurt(text) {
+  return matches(BADLY_HURT, text);
 }

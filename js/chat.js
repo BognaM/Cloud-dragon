@@ -10,7 +10,7 @@ import { clearInput, setBusy } from "./composer.js";
 import { setStatus } from "./status.js";
 import { recordBondDay } from "./bonding.js";
 import { addCrisisCard, recentCrisis } from "./crisis-card.js";
-import { crisisLanguage } from "./crisis-detect.js";
+import { crisisKind } from "./crisis-detect.js";
 import { addEatingCardIfNeeded } from "./eating-card.js";
 import { careReply, careSummary } from "./care-replies.js";
 
@@ -21,7 +21,10 @@ export function userTexts(messages) {
 
 // Pre-written crisis replies reach the model in their short version.
 function forModel(message) {
-  return message.care ? { role: "assistant", content: careSummary(message.care) } : message;
+  // Chats saved before self-harm had its own reply have no careKind: suicide.
+  return message.care
+    ? { role: "assistant", content: careSummary(message.careKind || "suicide", message.care) }
+    : message;
 }
 
 function chatPayload() {
@@ -35,13 +38,15 @@ function chatPayload() {
   };
 }
 
-// A message that may be about suicide or self-harm gets the crisis card and a
+// A message that may be about suicide or self-harm gets a crisis card and a
 // pre-written, careful reply right away, instead of a reply from the model.
-function replyWithCare(language, text) {
-  addCrisisCard(text, userTexts(state.conversation));
-  const reply = careReply(language);
-  // `care` remembers the language, so the model gets the short version later.
-  state.conversation.push({ role: "assistant", content: reply, care: language });
+// `{ kind, language }` comes from crisisKind() in js/crisis-detect.js.
+function replyWithCare({ kind, language }, text) {
+  addCrisisCard(kind, text, userTexts(state.conversation));
+  const reply = careReply(kind, language);
+  // `care` and `careKind` remember which reply it was, so the model gets the
+  // short version later.
+  state.conversation.push({ role: "assistant", content: reply, care: language, careKind: kind });
   saveConversation();
   addMessage("assistant", reply);
 }
@@ -53,9 +58,9 @@ export async function sendMessage(text) {
   clearInput();
   setStatus("");
 
-  const language = crisisLanguage(text);
-  if (language) {
-    replyWithCare(language, text);
+  const crisis = crisisKind(text);
+  if (crisis) {
+    replyWithCare(crisis, text);
     return;
   }
   // Eating-disorder services appear above the dragon's reply.

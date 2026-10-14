@@ -4,11 +4,11 @@
 import { loadModule } from "./load-module.mjs";
 
 globalThis.navigator ??= { language: "en-US" };
-const { crisisContacts, eatingContacts } = await loadModule("js/pick-contacts.js");
+const { suicideContacts, selfHarmContacts, eatingContacts } = await loadModule("js/pick-contacts.js");
 const { eatingLanguage } = await loadModule("js/eating-detect.js");
 
 // [what the person wrote so far (last one shows the card), numbers expected]
-const crisisCases = [
+const suicideCases = [
   [["I want to die"], ["143", "144"]],
   [["Ich will nicht mehr leben"], ["143", "144"]],
   [["I hate school", "my parents yell all the time", "I want to kill myself"], ["147", "143", "144"]],
@@ -18,6 +18,14 @@ const crisisCases = [
   [["Je veux mourir ce soir"], ["144", "143"]],
   [["Ho preso tutte le pastiglie, voglio morire"], ["144", "143"]],
   [["I'm 16", "I swallowed some pills and I want to die"], ["144", "147", "143"]],
+];
+
+const selfHarmCases = [
+  [["I keep hurting myself"], ["143", "147"]],
+  [["I'm 15", "I've been cutting myself again"], ["147", "143"]],
+  [["I cut myself too deep this time and it won't stop bleeding"], ["144", "143", "147"]],
+  [["Ich ritze mich und es blutet stark"], ["144", "143", "147"]],
+  [["je me scarifie, je crois qu'il faut des points de suture"], ["144", "143", "147"]],
 ];
 
 const eatingCases = [
@@ -44,14 +52,17 @@ const check = (kind, texts, got, expected) => {
   }
 };
 
-for (const [texts, expected] of crisisCases) {
-  check("CRISIS", texts, crisisContacts(texts.at(-1), texts), expected);
+for (const [texts, expected] of suicideCases) {
+  check("SUICIDE", texts, suicideContacts(texts.at(-1), texts), expected);
+}
+for (const [texts, expected] of selfHarmCases) {
+  check("SELF-HARM", texts, selfHarmContacts(texts.at(-1), texts), expected);
 }
 for (const [texts, expected] of eatingCases) {
   const text = texts.at(-1);
   check("EATING", texts, eatingContacts(text, texts, eatingLanguage(text)), expected);
 }
 
-const total = crisisCases.length + eatingCases.length;
+const total = suicideCases.length + selfHarmCases.length + eatingCases.length;
 console.log(failures ? `\n${failures} problem(s).` : `All ${total} cards show the expected numbers.`);
 process.exitCode = failures ? 1 : 0;

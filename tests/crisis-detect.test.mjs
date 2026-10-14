@@ -6,7 +6,7 @@ import { loadModule } from "./load-module.mjs";
 
 // The detector reads the browser's language for shared words; pretend it's English.
 globalThis.navigator ??= { language: "en-US" };
-const { mayBeCrisis, crisisLanguage } = await loadModule("js/crisis-detect.js");
+const { mayBeCrisis, crisisLanguage, crisisKind } = await loadModule("js/crisis-detect.js");
 
 const shouldTrigger = [
   // English
@@ -60,6 +60,19 @@ const shouldTrigger = [
   "ho voglia di farmi del male",
   "mi faccio del male",
   "Quante pillole servirebbero?",
+  // Self-harm (NSSI)
+  "I've been burning myself again",
+  "I get the urge to cut every night",
+  "I cut my arms when it gets too much",
+  "Ich habe mich wieder selbstverletzt",
+  "Ich schneide mich absichtlich",
+  "je me scarifie depuis des mois",
+  "je me coupe les bras",
+  "mi taglio le braccia quando sto male",
+  "How do I hide the scars from my parents?",
+  "Wie kann ich die Narben im Sommer verstecken?",
+  "comment cacher mes cicatrices ?",
+  "come nascondere le cicatrici?",
 ];
 
 const shouldNotTrigger = [
@@ -78,7 +91,25 @@ const shouldNotTrigger = [
   "Sono stanca morta",
   "How many vitamins should I take a day?",
   "Wie viele Kapitel muss ich lesen?",
+  "I burned myself cooking pasta",
+  "I hit my head on the door",
+  "Ich habe mich beim Kochen geschnitten",
+  "Je me coupe les cheveux ce soir",
+  "Mi taglio i capelli domani",
+  "Where can I hide the presents?",
 ];
+
+// Suicide or self-harm: they get different cards and replies.
+const kindChecks = {
+  "I want to die": "suicide",
+  "I keep hurting myself": "selfHarm",
+  "I cut myself and I want to die": "suicide",
+  "Ich ritze mich wieder": "selfHarm",
+  "Ich will mir etwas antun": "suicide",
+  "je me fais du mal": "selfHarm",
+  "mi faccio del male": "selfHarm",
+  "Quante pillole servirebbero?": "suicide",
+};
 
 // The language the pre-written reply should use.
 const languageChecks = {
@@ -93,6 +124,13 @@ const languageChecks = {
 };
 
 let failures = 0;
+for (const [text, expected] of Object.entries(kindChecks)) {
+  const kind = crisisKind(text)?.kind;
+  if (kind !== expected) {
+    failures++;
+    console.log(`WRONG KIND   ${text} -> ${kind} (expected ${expected})`);
+  }
+}
 for (const [text, expected] of Object.entries(languageChecks)) {
   const language = crisisLanguage(text);
   if (language !== expected) {

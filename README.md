@@ -67,13 +67,13 @@ js/                  page logic, one small module per job
   thinking.js        shows the thinking dragon and its label, and hides them
   commands.js        test commands like /evening
   help.js            copies the help text into the Help & info window and opens/closes it
-  crisis-detect.js   spots possible suicide/self-harm messages (EN, DE, FR, IT)
-  crisis-card.js     shows the crisis card with 143/147/144 in the chat
+  crisis-detect.js   spots possible suicide or self-harm messages, and which (EN, DE, FR, IT)
+  crisis-card.js     shows the suicide or self-harm card in the chat
   eating-detect.js   spots possible eating-disorder messages (EN, DE, FR, IT)
   eating-card.js     shows eating-disorder services in the chat
   contacts.js        the help numbers the cards can show
   pick-contacts.js   picks 2–3 of them for each message
-  signals.js         clues for that: sounds young, in danger now, feels unwell
+  signals.js         clues for that: sounds young, in danger now, badly hurt, feels unwell
   normalize.js · language.js   shared by the detectors
   care-replies.js    pre-written replies used instead of the model for those messages
   research.js        opens the research summary in a pop-up (loads research.html)
@@ -184,11 +184,22 @@ The endpoint is public with open CORS and has no auth or rate limiting. Stop the
 ## Crisis safety
 
 When a message may be about suicide or self-harm (phrases in English, German,
-French and Italian, in `js/crisis-detect.js`), the page shows a crisis card with
-143 / 147 / 144 and answers with a pre-written, careful reply in that language
+French and Italian, in `js/crisis-detect.js`), the page shows a card with phone
+numbers and answers with a pre-written, careful reply in that language
 (`js/care-replies.js`) instead of asking the model, which can't be trusted with
 this. Later messages in that chat reach the model with an extra safety rule
-(`server/safety.py`). After changing the phrases, run:
+(`server/safety.py`).
+
+The detector tells two kinds apart, because they need different words and help:
+
+- **Thoughts of suicide** ("I want to die", "Ich will nicht mehr leben"): the crisis
+  card and a reply with 143 / 144 and steps for the next few minutes.
+- **Self-harm without wanting to die** (NSSI: cutting, burning, hitting yourself,
+  hiding scars): a card that says "You deserve support, not judgment" and a reply
+  with 143 / 147, how to look after a wound (144 if it's serious), and ways to let
+  an urge pass.
+
+If a message has both, it's treated as suicide. After changing the phrases, run:
 
 ```bash
 node tests/crisis-detect.test.mjs
@@ -208,12 +219,13 @@ node tests/eating-detect.test.mjs
 Each card shows only 2–3 numbers, chosen from what the person wrote
 (`js/pick-contacts.js`), so it doesn't overwhelm them:
 
-| The person… | Crisis card | Eating card |
-| --- | --- | --- |
-| (no other clues) | 143, 144 | service in their language, 143 |
-| sounds young (school, parents, "I'm 15") | 147, 143, 144 | service, 147 |
-| may be in danger now (took pills, "tonight") | 144 first | |
-| feels physically unwell (fainted, dizzy) | | 144 first |
+| The person… | Suicide card | Self-harm card | Eating card |
+| --- | --- | --- | --- |
+| (no other clues) | 143, 144 | 143, 147 | service in their language, 143 |
+| sounds young (school, parents, "I'm 15") | 147, 143, 144 | 147, 143 | service, 147 |
+| may be in danger now (took pills, "tonight") | 144 first | | |
+| is badly hurt (deep cut, won't stop bleeding) | | 144 first | |
+| feels physically unwell (fainted, dizzy) | | | 144 first |
 
 The services are AES (German, or English by email) and ABA (French). There's no
 free Italian-language one in Switzerland, so Italian messages get 143 (Telefono
@@ -244,8 +256,9 @@ How Cloud Dragon follows the eight recommendations of the
    - The dragon says it's an AI when asked, and encourages contact with real people,
      especially when someone says it's their only friend.
    - It remembers only the last 10 messages of the current chat, nothing across chats.
-   - Messages about suicide or self-harm are interrupted with a crisis card, and messages
-     about disordered eating get a card with eating-disorder services (see **Crisis safety**).
+   - Messages about suicide or self-harm are interrupted with their own card and a
+     pre-written reply, and messages about disordered eating get a card with
+     eating-disorder services (see **Crisis safety**).
    - Missing:
      - no nudges to take a break
      - the bond still grows with days you come back

@@ -335,6 +335,20 @@
     </aside>
   </template>
 
+  <!-- Shown after a message about hurting yourself without wanting to die
+       (js/crisis-card.js); a message about suicide gets the crisis card below. -->
+  <template id="selfHarmCardTemplate">
+    <aside class="crisis-card" role="alert">
+      <h3>You deserve support, not judgment</h3>
+      <p>
+        If you're hurting yourself to cope, you don't have to handle it alone. You can talk
+        to someone for free and anonymously:
+      </p>
+      <!-- 2–3 numbers chosen for each message: js/pick-contacts.js -->
+      <ul></ul>
+    </aside>
+  </template>
+
   <template id="crisisCardTemplate">
     <aside class="crisis-card" role="alert">
       <h3>You don't have to go through this alone</h3>

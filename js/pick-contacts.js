@@ -3,13 +3,20 @@
 // `text` is the message that showed the card; `texts` is everything the person
 // has written in this chat so far (including `text`).
 
-import { soundsYoung, inDangerNow, feelsUnwell } from "./signals.js";
+import { soundsYoung, inDangerNow, feelsUnwell, badlyHurt } from "./signals.js";
 
-// Suicide or self-harm. The pre-written reply names 143 and 144, so both stay.
-export function crisisContacts(text, texts) {
+// Thoughts of suicide. The pre-written reply names 143 and 144, so both stay.
+export function suicideContacts(text, texts) {
   const young = soundsYoung(texts);
   if (inDangerNow(text)) return young ? ["144", "147", "143"] : ["144", "143"];
   return young ? ["147", "143", "144"] : ["143", "144"];
+}
+
+// Self-harm without wanting to die. The pre-written reply names 143 and 147
+// (147 helps young people, and self-harm is most common among them).
+export function selfHarmContacts(text, texts) {
+  const keys = soundsYoung(texts) ? ["147", "143"] : ["143", "147"];
+  return badlyHurt(text) ? ["144", ...keys] : keys;
 }
 
 // Eating-disorder services that answer in each language. There is no free
