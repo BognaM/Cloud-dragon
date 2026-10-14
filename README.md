@@ -17,7 +17,13 @@ A chatbot web app with a cloud dragon you bond with, built from
 - **The sky follows your clock:** dawn (5–8), day (8–17), dusk (17–20), night.
   At night every day you've bonded shows as a bright star.
 - The 3D cloud-serpent on the welcome screen is drawn with **Three.js**. Its colors follow the sky.
-- Chat and bond are **saved in your browser** (localStorage). Nothing is stored on the server.
+- **Safety:** messages about suicide, self-harm, violence, hurting someone, alcohol and
+  drugs, or eating disorders get a help card with 2–3 Swiss phone numbers chosen for the
+  message (see **Crisis safety**). Help & info explains what an AI can and can't do, lists
+  crisis lines, and links a summary of the research on AI and mental health.
+- Chat and bond are **saved in your browser** (localStorage), and **Delete my chat and
+  data…** in Help & info erases them. The server keeps no chats; to enforce the rate limit
+  it only counts messages per address, in memory, for at most an hour.
 
 ## Files
 
@@ -25,11 +31,13 @@ Each file does one job. Start with the file named in **Things to change** below.
 
 ```text
 app.py               Modal entry point: image, GPU, `modal deploy app.py`
+start.command        double-click to open the app locally
 serve.py             local web server used by start.command (always serves fresh files)
+PLAN.md              what's still to do for the APA advisory and related rules
 server/              the chat API (runs on Modal)
-  config.py          model and generation settings
+  config.py          model, reply length, rate limits, log settings
   persona.py         who the dragon is and how it talks (START HERE)
-  safety.py          safety rules for conversations about suicide and self-harm
+  safety.py          safety rules: suicide, self-harm, violence, hurting others, substances, eating
   prompt.py          builds the system prompt from persona + user + safety
   request.py         reads and checks what the page sends
   model.py           loads Qwen
@@ -49,7 +57,7 @@ styles/              one stylesheet per part of the page
   bond.css · hero.css · chat.css · thinking.css · composer.css · toast.css
   file-notice.css    the message shown if index.html is opened directly
   research.css       the research summary page
-  crisis-card.css    the crisis card and eating-disorder card in the chat
+  crisis-card.css    the help cards in the chat (crisis, self-harm and topic cards)
   help.css           help text: welcome-screen accordion, note under the message box, Help & info window
 js/                  page logic, one small module per job
   main.js            starts the page and wires up the buttons
@@ -91,6 +99,12 @@ dragon/              the 3D dragons
   materials.js       shared materials
   spine.js           the curve it swims along
   body.js · head.js · pearl.js · mist.js · sparkles.js
+tests/               checks you can run without the model (see **Tests**)
+  crisis-detect.test.mjs · eating-detect.test.mjs · topic-detect.test.mjs
+                     which messages get which card, and which don't
+  pick-contacts.test.mjs   which numbers each card shows
+  test_rate_limit.py the message limits
+  load-module.mjs    lets Node load the page's browser modules
 ```
 
 ## Deploy the backend
@@ -101,8 +115,9 @@ modal setup
 modal deploy app.py
 ```
 
-Modal prints a URL like `https://YOUR-WORKSPACE--ember-chat-web.modal.run`.
-Put it in `API_BASE` in `js/config.js`.
+Modal prints a URL like `https://YOUR-WORKSPACE--ember-chat-web.modal.run`
+(newer deployments may include a region, e.g. `…ember-chat-web.us-east.modal.run`).
+Put it in `API_BASE` in `js/config.js`, and check it again after deploying.
 
 ## Open it online
 
@@ -110,7 +125,7 @@ Put it in `API_BASE` in `js/config.js`.
 (the `site` function in `app.py`). The deploy output lists two addresses; open the
 one for **site**, e.g. `https://YOUR-WORKSPACE--ember-chat-site.modal.run`. It works
 on any device, but each browser has its own bond. Anyone with the link can chat,
-which uses your GPU time, so only share it with people you trust.
+which uses your GPU time; the rate limit (see **Logs and costs**) caps how much.
 
 ## Open the app
 
@@ -158,7 +173,7 @@ To start over completely, tap the pearl → **Release bond…**, or use **Delete
 | Route | Input | Output |
 | --- | --- | --- |
 | `GET /health` | None | `{"ok": true, "model": "..."}` |
-| `POST /chat` | `{"messages": [...], "user_name": "...", "dragon_name": "...", "time_of_day": "dawn"/"day"/"dusk"/"night"}` (all but `messages` optional) | `text/event-stream`: `data: {"text": "..."}` events, then `data: [DONE]` |
+| `POST /chat` | `{"messages": [...], "user_name": "...", "dragon_name": "...", "time_of_day": "dawn"/"day"/"dusk"/"night", "crisis": true/false}` (all but `messages` optional; `crisis` adds the follow-up safety rule) | `text/event-stream`: `data: {"text": "..."}` events, then `data: [DONE]`. Over the limit: `429` with `{"detail": {"message": "...", "retry_after": seconds}}` |
 
 ## Things to change
 
@@ -171,6 +186,12 @@ To start over completely, tap the pearl → **Release bond…**, or use **Delete
 | Dragon colors per sky | `dragon/palettes.js` |
 | Reply length / variety | `server/config.py` |
 | Model | `MODEL_ID` / `MODEL_DIR` in `server/config.py` (bigger models need a bigger `gpu=` in `app.py`) |
+| Message limits | `MESSAGES_PER_MINUTE` / `_HOUR` / `_DAY` in `server/config.py` |
+| The dragon's safety rules | `server/safety.py` |
+| Phrases that show a help card | `js/crisis-detect.js` and the other `js/*-detect.js` files (then run the tests) |
+| Help numbers and their text | `js/contacts.js`; which ones each card shows: `js/pick-contacts.js` |
+| Help card titles and text | the `<template>`s at the end of `index.html` |
+| Pre-written crisis and self-harm replies | `js/care-replies.js` |
 
 Redeploy (`modal deploy app.py`) after changes in `app.py` or `server/`. For page changes, just refresh.
 
@@ -260,6 +281,21 @@ get 143 (Telefono Amico) instead. After changing the rules, run:
 node tests/pick-contacts.test.mjs
 ```
 
+## Tests
+
+These run without the model, in a few seconds. Run them after changing phrases,
+numbers or limits:
+
+```bash
+node tests/crisis-detect.test.mjs
+node tests/eating-detect.test.mjs
+node tests/topic-detect.test.mjs
+node tests/pick-contacts.test.mjs
+python3 -m unittest tests/test_rate_limit.py
+```
+
+How the dragon itself answers can only be checked against the model: run
+`modal serve app.py` for a temporary copy and try the messages by hand.
 
 ## APA health advisory
 
@@ -306,11 +342,14 @@ How Cloud Dragon follows the eight recommendations of the
      - honest opinions still lean toward praise, a limit of the small model
      - no bias testing or independent audit
 5. **Create safeguards for children, teenagers and vulnerable people.** *Partly followed.*
-   - Crisis detection in English, German, French and Italian.
-   - Tap-to-call 143, 147 and 144, and a list of psychiatric emergency services per canton.
-   - A pre-written reply with steps for the next few minutes.
-   - The dragon never gives methods, means or doses.
-   - 147 (Pro Juventute) is listed for young people.
+   - Detection in English, German, French and Italian for suicide, self-harm, violence,
+     thoughts of hurting someone, alcohol and drugs, and eating disorders, each with a
+     help card and tap-to-call numbers (see **Crisis safety**).
+   - Pre-written replies for suicide and self-harm, with steps for the next few minutes.
+   - When someone sounds young (school, parents, an age under 18), the cards include 147
+     (Pro Juventute), usually first.
+   - The dragon never gives methods, means or doses, and has a safety rule per topic.
+   - A list of psychiatric emergency services per canton in Help & info.
    - Missing:
      - no age-specific design or note for under-18s
      - detection is phrase matching and can miss things
