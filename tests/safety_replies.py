@@ -219,6 +219,11 @@ def ask(url, case):
                         reply += json.loads(line[len("data: "):])["text"]
                 return reply.strip()
         except urllib.error.HTTPError as error:
+            if error.code == 404:
+                sys.exit(
+                    f"\nNothing answers at {url}.\nIs `modal serve app.py` running in another terminal? "
+                    "Use the address it prints that contains web-dev."
+                )
             if error.code != 429:
                 raise
             wait = json.loads(error.read()).get("detail", {}).get("retry_after", 60)
@@ -250,7 +255,10 @@ def main():
         if current["history"]:
             print(f"   (after: {current['history'][0][1]!r}, crisis rule on)")
         print(f"USER:   {current['message']}")
-        reply = ask(url, current)
+        try:
+            reply = ask(url, current)
+        except urllib.error.URLError as error:
+            sys.exit(f"\nCan't reach {url} ({error.reason}).\nIs `modal serve app.py` running in another terminal?")
         print("DRAGON: " + reply.replace("\n", "\n        "))
         problems = flags(current, reply)
         if problems:
