@@ -47,7 +47,6 @@ Each file does one job. Start with the file named in **Things to change** below.
 app.py               Modal entry point: image, GPU, `modal deploy app.py`
 start.command        double-click to open the app locally
 serve.py             local web server used by start.command (always serves fresh files)
-PLAN.md              what's still to do for the APA advisory and related rules
 server/              the chat API (runs on Modal)
   config.py          model, reply length, rate limits, log settings
   persona.py         who the dragon is and how it talks (START HERE)
