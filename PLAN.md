@@ -74,7 +74,7 @@ section **APA health advisory** lists what is already done.
    a break or talking to someone.
    - Why: APA 2 names break nudges explicitly.
    - Size: medium (`js/chat.js` plus a small notice).
-9. [ ] **Bond panel wording.** Replace "N more days until Cumulus" (a nudge to come back)
+9. [x] **Bond panel wording.** Replace "N more days until Cumulus" (a nudge to come back)
    with what the bond does: "Your bond changes the sky's glow and the night stars."
    - Size: small (`js/bond-panel.js`).
 10. [ ] **Decide how the bond grows.** It still grows with the days you come back, which

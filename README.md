@@ -348,7 +348,8 @@ How Cloud Dragon follows the eight recommendations of the
    - The page says it's an AI on the first (bonding) screen and next to where you type.
    - The bond changes only the look (sky glow, stars, pearl), never how the dragon
      talks. The tone is friendly but not intimate, with no pet names, flattery or
-     "I missed you", and no pop-ups announcing a deeper bond.
+     "I missed you", and no pop-ups announcing a deeper bond. The bond panel says what the
+     bond does instead of counting down the days to the next level.
    - The dragon says it's an AI when asked, and encourages contact with real people,
      especially when someone says it's their only friend.
    - It remembers only the last 10 messages of the current chat, nothing across chats.

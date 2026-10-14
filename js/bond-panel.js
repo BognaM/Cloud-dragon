@@ -1,25 +1,22 @@
-// The panel that opens from the bond ring: level, days and progress.
+// The panel that opens from the bond ring: level, days, and what the bond does.
+// It doesn't count down to the next level, so it doesn't nudge people to come back.
 
 import { LEVELS } from "./config.js";
 import { el } from "./dom.js";
-import { state } from "./state.js";
 import { bondDays, dragonName } from "./bond.js";
 
 const plural = (count, word) => `${count} ${word}${count === 1 ? "" : "s"}`;
 
-function progressText(level) {
-  const days = bondDays();
-  const next = LEVELS[level + 1];
-  const talked = `You've talked on ${plural(days, "day")}. `;
-
-  if (!next) return talked + "Your bond can't grow any deeper.";
-  if (state.previewBond !== null) return talked;
-  return talked + `${plural(next.days - days, "more day")} until ${next.name}.`;
+function bondText() {
+  return (
+    `You've talked on ${plural(bondDays(), "day")}. ` +
+    `Your bond changes the sky's glow and the night stars, not how ${dragonName()} talks to you.`
+  );
 }
 
 export function renderBondPanel(level) {
   el.bondPanelTitle.textContent = `${dragonName()} · ${LEVELS[level].name} bond`;
-  el.bondPanelText.textContent = progressText(level);
+  el.bondPanelText.textContent = bondText();
 
   el.bondLevels.replaceChildren(
     ...LEVELS.map((entry, index) => {
