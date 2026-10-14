@@ -280,6 +280,10 @@ The numbers: 142 victim support (Opferhilfe), 117 police, 143 Die Dargebotene Ha
 144 emergency, 145 Tox Info Suisse (poisoning), 147 Pro Juventute, SafeZone.ch
 (online addiction advice from the Federal Office of Public Health).
 
+To see the cards without writing a real message, type `/card` in the message box
+(all six), or for example `/card violence now` or `/card eating fr young` (see
+**Preview other skies and bond levels** for all options).
+
 The eating-disorder services are AES (German, or English by email) and ABA
 (French). There's no free Italian-language one in Switzerland, so Italian messages
 get 143 (Telefono Amico) instead. After changing the rules, run:
