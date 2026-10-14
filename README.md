@@ -28,6 +28,13 @@ A chatbot web app with a cloud dragon you bond with, built from
 - **Break reminders:** after 30 minutes of continuous chatting or 40 messages in a day,
   a calm note under the reply suggests a break and talking to someone (at most once per
   session and per day, never right after a crisis message).
+- **Stop and Try again:** while a reply streams, the send button becomes **Stop** (it also
+  stops the model on the server, so it doesn't use GPU time for nothing). **Try again**
+  under the latest reply asks for a new one.
+- **Private chat:** **Don't save this chat** (welcome screen or Help & info) keeps a chat
+  on screen without saving it, for shared devices. Reloading or closing ends it.
+- **What the dragon knows:** the bond panel lists your name, its name, when you bonded,
+  and that it only sees the last 10 messages of the current chat. **Edit names** changes them.
 - Chat and bond are **saved in your browser** (localStorage), and **Delete my chat and
   data…** in Help & info erases them. The server keeps no chats; to enforce the rate limit
   it only counts messages per address, in memory, for at most an hour.
@@ -78,12 +85,16 @@ js/                  page logic, one small module per job
   bond-time.js       the date math for that
   bonding.js         making the bond
   header.js · bond-ring.js · bond-panel.js   the bond in the header
+  bond-knows.js      "What Cloudy knows" in the bond panel
+  edit-names.js · names.js   editing and cleaning the names
   welcome.js         bonding form and greeting
   suggestion-pool.js the six ideas for the welcome screen, and how three are picked
   suggestions.js     shows them
   messages.js · icon.js · composer.js · status.js · toast.js
   api.js             talks to the backend and reads the stream
-  chat.js            sends a message, streams the reply
+  chat.js            sends a message, streams the reply, Stop and Try again
+  retry-button.js    the "Try again" button
+  private-chat.js    "Don't save this chat"
   thinking.js        shows the thinking dragon and its label, and hides them
   commands.js        test commands like /evening
   card-commands.js   /card: shows the help cards to check their text and numbers
@@ -201,7 +212,8 @@ To start over completely, tap the pearl → **Release bond…**, or use **Delete
 | Route | Input | Output |
 | --- | --- | --- |
 | `GET /health` | None | `{"ok": true, "model": "..."}` |
-| `POST /chat` | `{"messages": [...], "user_name": "...", "dragon_name": "...", "time_of_day": "dawn"/"day"/"dusk"/"night", "crisis": true/false}` (all but `messages` optional; `crisis` adds the follow-up safety rule) | `text/event-stream`: `data: {"text": "..."}` events, then `data: [DONE]`. Over the limit: `429` with `{"detail": {"message": "...", "retry_after": seconds}}` |
+| `POST /stop` | `{"reply_id": "..."}` (the ID the page sent with `/chat`) | `{"stopped": true/false}`: ends that reply's generation (the Stop button) |
+| `POST /chat` | `{"messages": [...], "user_name": "...", "dragon_name": "...", "time_of_day": "dawn"/"day"/"dusk"/"night", "crisis": true/false, "reply_id": "..."}` (all but `messages` optional; `crisis` adds the follow-up safety rule; `reply_id` lets `/stop` end the reply) | `text/event-stream`: `data: {"text": "..."}` events, then `data: [DONE]`. Over the limit: `429` with `{"detail": {"message": "...", "retry_after": seconds}}` |
 
 ## Things to change
 

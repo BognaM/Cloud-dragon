@@ -106,9 +106,9 @@ section **APA health advisory** lists what is already done.
 
 ## Step 3: Nice to have
 
-15. [ ] **Stop and regenerate buttons** while a reply streams (shapeof: *Controls*).
-16. [ ] **A "Don't save this chat" option** for shared devices (shapeof: *Incognito*).
-17. [ ] **Show what the dragon knows** (your name, its name, bond level) and let people edit it
+15. [x] **Stop and regenerate buttons** while a reply streams (shapeof: *Controls*).
+16. [x] **A "Don't save this chat" option** for shared devices (shapeof: *Incognito*).
+17. [x] **Show what the dragon knows** (your name, its name, bond level) and let people edit it
     (shapeof: *Memory*).
 18. [ ] **Try Qwen3-8B** if step 7 isn't enough. It fits the A10, but each reply takes about
     twice as long. Change `MODEL_ID` / `MODEL_DIR` in `server/config.py`.
