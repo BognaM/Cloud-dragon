@@ -33,7 +33,7 @@ section **APA health advisory** lists what is already done.
    - Remove "short previews of messages can appear in its logs" from **Your privacy** in `index.html`.
    - Why: APA 3, and Swiss data protection, because messages can contain health information.
    - Size: 2 lines.
-2. [ ] **AI disclosure on the bonding screen.** Add one line to the bonding card, such as
+2. [x] **AI disclosure on the bonding screen.** Add one line to the bonding card, such as
    "Your dragon is an AI, not a person or a therapist."
    - Why: the very first screen has no disclosure, because the message box with its note is
      hidden while bonding (APA 1 and 2, EU AI Act Art. 50).

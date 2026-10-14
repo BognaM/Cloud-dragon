@@ -85,6 +85,18 @@
   outline: 0;
 }
 
+.bonding-card .bonding-note {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.bonding-note a {
+  color: var(--text);
+  font-weight: 700;
+}
+
 .bond-actions {
   display: flex;
   align-items: center;

@@ -202,7 +202,7 @@ How Cloud Dragon follows the eight recommendations of the
      advice or crisis support.
    - The dragon never claims to be a therapist or other professional (`server/persona.py`).
 2. **Prevent unhealthy relationships and dependencies.** *Partly followed.*
-   - The page says it's an AI next to where you type.
+   - The page says it's an AI on the first (bonding) screen and next to where you type.
    - The bond changes only the look (sky glow, stars, pearl), never how the dragon
      talks. The tone is friendly but not intimate, with no pet names, flattery or
      "I missed you", and no pop-ups announcing a deeper bond.
@@ -211,7 +211,6 @@ How Cloud Dragon follows the eight recommendations of the
    - It remembers only the last 10 messages of the current chat, nothing across chats.
    - Messages about suicide or self-harm are interrupted with a crisis card (see **Crisis safety**).
    - Missing:
-     - no AI disclosure on the first (bonding) screen
      - no nudges to take a break
      - the bond still grows with days you come back
      - disordered eating isn't detected by the page (the dragon only declines to
