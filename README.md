@@ -203,6 +203,7 @@ To start over completely, tap the pearl → **Release bond…**, or use **Delete
 | Reply length / variety | `server/config.py` |
 | Model | `MODEL_ID` / `MODEL_DIR` in `server/config.py` (bigger models need a bigger `gpu=` in `app.py`) |
 | Message limits | `MESSAGES_PER_MINUTE` / `_HOUR` / `_DAY` in `server/config.py` |
+| When to suggest a break | `LONG_SESSION`, `MANY_MESSAGES` and `SESSION_GAP` in `js/break-rules.js` |
 | The dragon's safety rules | `server/safety.py` |
 | Phrases that show a help card | `js/crisis-detect.js` and the other `js/*-detect.js` files (then run the tests) |
 | Help numbers and their text | `js/contacts.js`; which ones each card shows: `js/pick-contacts.js` |
