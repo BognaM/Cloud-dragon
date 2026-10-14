@@ -14,6 +14,11 @@ import { crisisLanguage } from "./crisis-detect.js";
 import { addEatingCardIfNeeded } from "./eating-card.js";
 import { careReply, careSummary } from "./care-replies.js";
 
+// Everything the person has written, so a help card can pick fitting numbers.
+export function userTexts(messages) {
+  return messages.filter((message) => message.role === "user").map((message) => message.content);
+}
+
 // Pre-written crisis replies reach the model in their short version.
 function forModel(message) {
   return message.care ? { role: "assistant", content: careSummary(message.care) } : message;
@@ -32,8 +37,8 @@ function chatPayload() {
 
 // A message that may be about suicide or self-harm gets the crisis card and a
 // pre-written, careful reply right away, instead of a reply from the model.
-function replyWithCare(language) {
-  addCrisisCard();
+function replyWithCare(language, text) {
+  addCrisisCard(text, userTexts(state.conversation));
   const reply = careReply(language);
   // `care` remembers the language, so the model gets the short version later.
   state.conversation.push({ role: "assistant", content: reply, care: language });
@@ -50,11 +55,11 @@ export async function sendMessage(text) {
 
   const language = crisisLanguage(text);
   if (language) {
-    replyWithCare(language);
+    replyWithCare(language, text);
     return;
   }
   // Eating-disorder services appear above the dragon's reply.
-  addEatingCardIfNeeded(text);
+  addEatingCardIfNeeded(text, userTexts(state.conversation));
 
   setBusy(true);
 

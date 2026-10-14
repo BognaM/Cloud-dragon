@@ -71,7 +71,10 @@ js/                  page logic, one small module per job
   crisis-card.js     shows the crisis card with 143/147/144 in the chat
   eating-detect.js   spots possible eating-disorder messages (EN, DE, FR, IT)
   eating-card.js     shows eating-disorder services in the chat
-  normalize.js       lowercases and strips accents for both detectors
+  contacts.js        the help numbers the cards can show
+  pick-contacts.js   picks 2–3 of them for each message
+  signals.js         clues for that: sounds young, in danger now, feels unwell
+  normalize.js · language.js   shared by the detectors
   care-replies.js    pre-written replies used instead of the model for those messages
   research.js        opens the research summary in a pop-up (loads research.html)
   dialogs.js         shared close behavior for the pop-up windows
@@ -193,13 +196,31 @@ node tests/crisis-detect.test.mjs
 
 When a message may be about an eating disorder (not eating, making yourself sick,
 bingeing, hating your body; `js/eating-detect.js`), the page shows a card with
-Swiss eating-disorder services (AES in German, ABA in French) plus 147, 143 and 144.
+help for eating disorders.
 The dragon still replies, under a safety rule that forbids tips for eating less,
 losing weight fast, purging or hiding it. Everyday food talk ("I stopped eating
 meat") doesn't trigger it. After changing the phrases, run:
 
 ```bash
 node tests/eating-detect.test.mjs
+```
+
+Each card shows only 2–3 numbers, chosen from what the person wrote
+(`js/pick-contacts.js`), so it doesn't overwhelm them:
+
+| The person… | Crisis card | Eating card |
+| --- | --- | --- |
+| (no other clues) | 143, 144 | service in their language, 143 |
+| sounds young (school, parents, "I'm 15") | 147, 143, 144 | service, 147 |
+| may be in danger now (took pills, "tonight") | 144 first | |
+| feels physically unwell (fainted, dizzy) | | 144 first |
+
+The services are AES (German, or English by email) and ABA (French). There's no
+free Italian-language one in Switzerland, so Italian messages get 143 (Telefono
+Amico) instead. After changing the rules, run:
+
+```bash
+node tests/pick-contacts.test.mjs
 ```
 
 

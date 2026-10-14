@@ -11,7 +11,7 @@ import { completeBonding } from "./bonding.js";
 import { isWelcomeShown, renderWelcome, showBondingForm } from "./welcome.js";
 import { addMessage } from "./messages.js";
 import { autoResize, clearInput } from "./composer.js";
-import { sendMessage } from "./chat.js";
+import { sendMessage, userTexts } from "./chat.js";
 import { isCommand, runCommand } from "./commands.js";
 import { initHelp } from "./help.js";
 import { initResearch } from "./research.js";
@@ -44,12 +44,13 @@ function start() {
     showBondingForm();
   } else if (state.conversation.length) {
     // Restore a saved chat. The welcome screen (and the dragon) only appear for new chats.
-    state.conversation.forEach((message) => {
+    state.conversation.forEach((message, index) => {
       addMessage(message.role, message.content);
       if (message.role !== "user") return;
-      // The same card as when the message was sent; the crisis card comes first.
-      if (mayBeCrisis(message.content)) addCrisisCard();
-      else addEatingCardIfNeeded(message.content);
+      // The same card, with the same numbers, as when the message was sent.
+      const texts = userTexts(state.conversation.slice(0, index + 1));
+      if (mayBeCrisis(message.content)) addCrisisCard(message.content, texts);
+      else addEatingCardIfNeeded(message.content, texts);
     });
   } else {
     renderWelcome();

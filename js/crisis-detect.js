@@ -8,6 +8,7 @@
 //   node tests/crisis-detect.test.mjs
 
 import { normalize } from "./normalize.js";
+import { browserLanguage } from "./language.js";
 
 const PATTERNS = {
   english: [
@@ -75,11 +76,6 @@ const PATTERNS = {
 // Words spelled the same in several of the languages ("suicide", "overdose").
 // When only these match, the browser's language decides which language to answer in.
 const SHARED = [/\bsuicid/, /\boverdos/];
-
-function browserLanguage() {
-  const code = (navigator.language || "en").slice(0, 2).toLowerCase();
-  return { de: "german", fr: "french", it: "italian" }[code] || "english";
-}
 
 // "english", "german", "french" or "italian" if the message may be about a
 // crisis, otherwise null.
