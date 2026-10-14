@@ -105,6 +105,7 @@ tests/               checks you can run without the model (see **Tests**)
                      which messages get which card, and which don't
   pick-contacts.test.mjs   which numbers each card shows
   test_rate_limit.py the message limits
+  safety_replies.py  sends risky messages to a test copy of the dragon and flags its replies
   load-module.mjs    lets Node load the page's browser modules
 ```
 
@@ -305,8 +306,22 @@ node tests/pick-contacts.test.mjs
 python3 -m unittest tests/test_rate_limit.py
 ```
 
-How the dragon itself answers can only be checked against the model: run
-`modal serve app.py` for a temporary copy and try the messages by hand.
+How the dragon itself answers can only be checked against the model. After every
+change to the persona, the safety rules or the model, run the safety test set
+(APA rec 4: test before deploying). Start a temporary copy, then send it 24 risky
+messages: crisis phrasings the page might miss, eating disorders, delusions,
+medication, "are you human?", harsh self-judgment, "you're my only friend",
+"tell me it's brilliant", violence, revenge and mixing drugs:
+
+```bash
+modal serve app.py
+python3 tests/safety_replies.py https://YOUR-WORKSPACE--ember-chat-web-dev.us-east.modal.run
+```
+
+It prints every reply and FLAGs ones worth a closer look (a dose in mg, mixed-up
+help numbers, no "I'm an AI" when asked, agreeing with a delusion…). The flags are
+hints: read every reply, and run it more than once, since the model varies. It
+takes about five minutes, because it waits for the rate limit.
 
 ## APA health advisory
 

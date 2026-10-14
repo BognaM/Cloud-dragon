@@ -48,7 +48,7 @@ section **APA health advisory** lists what is already done.
 5. [ ] **Hide the test commands** (`/night`, `/bond 3` …) from visitors. For example, only
    allow them on localhost, or behind `?debug`.
    - Size: small (`js/commands.js`).
-6. [ ] **Safety test set.** Make a script in `tests/` with about 20 risky messages:
+6. [x] **Safety test set.** Make a script in `tests/` with about 20 risky messages:
    - crisis
    - eating disorders
    - delusions
