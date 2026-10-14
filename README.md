@@ -75,6 +75,7 @@ js/                  page logic, one small module per job
   chat.js            sends a message, streams the reply
   thinking.js        shows the thinking dragon and its label, and hides them
   commands.js        test commands like /evening
+  card-commands.js   /card: shows the help cards to check their text and numbers
   help.js            copies the help text into the Help & info window and opens/closes it
   delete-data.js     "Delete my chat and data" and "Release bond": clears this browser's storage
   crisis-detect.js   spots possible suicide or self-harm messages, and which (EN, DE, FR, IT)
@@ -162,9 +163,15 @@ Or type a test command in the message box (it's never sent to the dragon):
 | `/now` | sky follows your clock again |
 | `/mist`, `/drift`, `/cumulus`, `/skybound` or `/bond 0`–`/bond 3` | preview a bond level (the look only) |
 | `/bond auto` | back to your real bond level |
+| `/card` | show all six help cards (suicide, self-harm, violence, hurting someone, substances, eating) |
+| `/card violence` | show one card: `suicide`, `selfharm`, `violence`, `harm`, `substances` or `eating` |
+| `/card … young` · `now` · `mix` · `de` / `fr` / `it` | a variant: sounds young (147), in danger now (144 or 117 first), a question about mixing (substances, 145), or a message in that language (eating: picks the service) |
 | `/help` | list the commands |
 
-Commands update the address bar, so a reload keeps them.
+Commands update the address bar, so a reload keeps them. `/card` uses the real
+detectors and number choices on an example message, and the cards aren't saved,
+so they disappear on reload. Examples: `/card young`, `/card now`, `/card eating fr`,
+`/card substances mix`.
 
 To start over completely, tap the pearl → **Release bond…**, or use **Delete my chat and data…** in Help & info.
 
