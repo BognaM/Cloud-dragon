@@ -52,7 +52,8 @@
 
 .bonding-card {
   margin: 18px auto 0;
-  max-width: 360px;
+  /* Same width as the About box below it and the suggestions. */
+  max-width: 440px;
   padding: 16px;
   border-radius: 20px;
   border: 1px solid var(--border);
