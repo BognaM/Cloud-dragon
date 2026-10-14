@@ -184,6 +184,12 @@
 }
 
 /* Link to the research summary page. */
+.help-body .delete-data {
+  display: block;
+  margin-top: 8px;
+  font-size: 13px;
+}
+
 .help-body .research-link {
   display: block;
   margin-top: 16px;

@@ -67,6 +67,7 @@ js/                  page logic, one small module per job
   thinking.js        shows the thinking dragon and its label, and hides them
   commands.js        test commands like /evening
   help.js            copies the help text into the Help & info window and opens/closes it
+  delete-data.js     "Delete my chat and data" and "Release bond": clears this browser's storage
   crisis-detect.js   spots possible suicide or self-harm messages, and which (EN, DE, FR, IT)
   crisis-card.js     shows the suicide or self-harm card in the chat
   violence-detect.js · harm-others-detect.js · substance-detect.js · eating-detect.js
@@ -149,7 +150,7 @@ Or type a test command in the message box (it's never sent to the dragon):
 
 Commands update the address bar, so a reload keeps them.
 
-To start over completely, tap the pearl → **Release bond…**.
+To start over completely, tap the pearl → **Release bond…**, or use **Delete my chat and data…** in Help & info.
 
 ## API
 
@@ -274,7 +275,7 @@ How Cloud Dragon follows the eight recommendations of the
    - Missing:
      - no nudges to take a break
      - the bond still grows with days you come back
-3. **Prioritize privacy and protect user data.** *Partly followed.*
+3. **Prioritize privacy and protect user data.** *Followed.*
    - No accounts. The chat and bond are saved only in your browser.
    - The server keeps no chat history, nothing is used to train the model, and messages
      aren't written to the logs (`LOG_TEXT_PREVIEWS = False` in `server/config.py`).
@@ -282,7 +283,8 @@ How Cloud Dragon follows the eight recommendations of the
    - The advisory asks for a clear response when someone discloses a risk of harm or
      maltreatment: messages about violence or abuse get a card with 142 (victim support)
      and 117, and the dragon is told to believe them and never blame them.
-   - Missing: there's no clear "delete my data" button, only **Release bond…** in the bond panel.
+   - **Delete my chat and data…** in Help & info deletes the chat, the bond and the names
+     from this browser (`js/delete-data.js`), the same as **Release bond…** in the bond panel.
 4. **Protect users from misrepresentation, misinformation, bias and illusory effectiveness.** *Partly followed.*
    - The dragon never claims to be a human or a licensed professional.
    - It gently questions harsh self-judgment and distorted beliefs instead of simply agreeing.

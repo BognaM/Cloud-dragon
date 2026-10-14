@@ -1,7 +1,7 @@
 // Starts the page and connects buttons to what they do.
 
 import { el } from "./dom.js";
-import { state, forgetBond, forgetConversation } from "./state.js";
+import { state, forgetConversation } from "./state.js";
 import { dragonName } from "./bond.js";
 import { applySky } from "./sky.js";
 import { renderStars } from "./stars.js";
@@ -15,6 +15,7 @@ import { sendMessage, userTexts } from "./chat.js";
 import { isCommand, runCommand } from "./commands.js";
 import { initHelp } from "./help.js";
 import { initResearch } from "./research.js";
+import { deleteAllData, initDeleteData } from "./delete-data.js";
 import { addCrisisCard } from "./crisis-card.js";
 import { addTopicCardIfNeeded } from "./topic-card.js";
 import { crisisKind } from "./crisis-detect.js";
@@ -35,6 +36,7 @@ function submit(text) {
 function start() {
   initHelp();
   initResearch();
+  initDeleteData();
   applySky();
   setInterval(applySky, SKY_CHECK_MS);
   renderStars();
@@ -81,11 +83,7 @@ function connectBondPanel() {
   });
 
   el.releaseButton.addEventListener("click", () => {
-    const message = `Release your bond with ${dragonName()}? Your bond level and this chat will be forgotten.`;
-    if (!confirm(message)) return;
-    forgetBond();
-    forgetConversation();
-    location.reload();
+    deleteAllData(`Release your bond with ${dragonName()}? Your bond level and this chat will be forgotten.`);
   });
 }
 

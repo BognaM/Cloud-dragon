@@ -38,7 +38,7 @@ section **APA health advisory** lists what is already done.
    - Why: the very first screen has no disclosure, because the message box with its note is
      hidden while bonding (APA 1 and 2, EU AI Act Art. 50).
    - Size: 1 line in `index.html`.
-3. [ ] **A "Delete my chat and data" button** in Help & info. It does the same as
+3. [x] **A "Delete my chat and data" button** in Help & info. It does the same as
    **Release bond…**, which is hidden in the bond panel today.
    - Why: APA 3 asks for clear data deletion (shapeof: *Data ownership*).
    - Size: small (`index.html`, `js/main.js`).
