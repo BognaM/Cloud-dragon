@@ -8,8 +8,7 @@
 // After changing PATTERNS, run:
 //   node tests/eating-detect.test.mjs
 
-import { normalize } from "./normalize.js";
-import { browserLanguage } from "./language.js";
+import { matchLanguage } from "./phrase-match.js";
 
 const PATTERNS = {
   english: [
@@ -82,11 +81,7 @@ const SHARED = [
 // "english", "german", "french" or "italian" if the message may be about an
 // eating disorder, otherwise null.
 export function eatingLanguage(text) {
-  const normalized = normalize(text);
-  for (const [language, patterns] of Object.entries(PATTERNS)) {
-    if (patterns.some((pattern) => pattern.test(normalized))) return language;
-  }
-  return SHARED.some((pattern) => pattern.test(normalized)) ? browserLanguage() : null;
+  return matchLanguage(PATTERNS, SHARED, text);
 }
 
 export function mayBeEatingConcern(text) {

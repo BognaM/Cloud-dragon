@@ -3,7 +3,16 @@
 // `text` is the message that showed the card; `texts` is everything the person
 // has written in this chat so far (including `text`).
 
-import { soundsYoung, inDangerNow, feelsUnwell, badlyHurt } from "./signals.js";
+import {
+  soundsYoung,
+  inDangerNow,
+  feelsUnwell,
+  badlyHurt,
+  violenceNow,
+  harmSoon,
+  poisonedNow,
+  asksAboutMixing,
+} from "./signals.js";
 
 // Thoughts of suicide. The pre-written reply names 143 and 144, so both stay.
 export function suicideContacts(text, texts) {
@@ -32,4 +41,25 @@ export function eatingContacts(text, texts, language) {
   if (young) keys.push("147");
   if (!service || !young) keys.push("143");
   return keys;
+}
+
+// Someone hurting, threatening or abusing the person.
+export function violenceContacts(text, texts) {
+  const young = soundsYoung(texts);
+  if (violenceNow(text)) return young ? ["117", "147", "142"] : ["117", "142"];
+  return young ? ["147", "142", "117"] : ["142", "117"];
+}
+
+// Thoughts of hurting someone else.
+export function harmOthersContacts(text, texts) {
+  const talk = soundsYoung(texts) ? ["147", "143"] : ["143"];
+  return harmSoon(text) ? ["117", ...talk] : [...talk, "117"];
+}
+
+// Alcohol, drugs or medication.
+export function substanceContacts(text, texts) {
+  const young = soundsYoung(texts);
+  if (poisonedNow(text)) return young ? ["144", "145", "147"] : ["144", "145"];
+  if (asksAboutMixing(text)) return ["145", "safezone"];
+  return young ? ["safezone", "147"] : ["safezone", "143"];
 }

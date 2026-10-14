@@ -20,6 +20,27 @@ export const CONTACTS = {
     tel: "144",
     text: "Emergency, if you're in danger or feel physically unwell right now.",
   },
+  142: {
+    number: "142",
+    tel: "142",
+    text: "Victim support (Opferhilfe · aide aux victimes · aiuto alle vittime) after violence. Free, confidential, day and night.",
+    link: { href: "https://www.opferhilfe-schweiz.ch", label: "opferhilfe-schweiz.ch" },
+  },
+  117: {
+    number: "117",
+    tel: "117",
+    text: "Police, if you or someone else is in danger right now.",
+  },
+  145: {
+    number: "145",
+    tel: "145",
+    text: "Tox Info Suisse, for poisoning, overdoses and questions about mixing alcohol, drugs or medication. Day and night.",
+  },
+  safezone: {
+    number: "Online",
+    href: "https://www.safezone.ch",
+    text: "SafeZone.ch, free and anonymous online advice about alcohol, drugs, medication and gambling, in German, French and Italian.",
+  },
   aes: {
     number: "043 488 63 73",
     tel: "+41434886373",
@@ -43,8 +64,15 @@ export function renderContacts(list, keys) {
 
       const call = document.createElement("a");
       call.className = "crisis-call";
-      call.href = `tel:${contact.tel}`;
       call.textContent = contact.number;
+      if (contact.href) {
+        // An online service instead of a phone line.
+        call.href = contact.href;
+        call.target = "_blank";
+        call.rel = "noopener";
+      } else {
+        call.href = `tel:${contact.tel}`;
+      }
 
       const text = document.createElement("span");
       text.textContent = `${contact.text} `;

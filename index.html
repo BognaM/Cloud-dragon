@@ -224,6 +224,17 @@
               </ul>
 
               <p>
+                Someone hurting or threatening you? <a href="tel:142">142</a> victim support,
+                free and day and night, or <a href="tel:117">117</a> police if you're in danger now.
+              </p>
+
+              <p>
+                Alcohol, drugs or medication? <a href="tel:145">145</a> for poisoning and
+                questions about mixing, day and night. Anonymous online advice at
+                <a href="https://www.safezone.ch" target="_blank" rel="noopener">safezone.ch</a>.
+              </p>
+
+              <p>
                 Worried about eating or your body? Free advice from
                 <a href="tel:+41434886373">043 488 63 73</a> (AES, in German) or
                 <a href="tel:+41213290439">021 329 04 39</a> (ABA, in French).
@@ -317,8 +328,42 @@
 
   <!-- Shown in the chat right after a message that may be about suicide or
        self-harm, whatever the dragon replies (see js/crisis-detect.js). -->
-  <!-- Shown in the chat after a message that may be about an eating disorder
-       (js/eating-card.js). The numbers are in js/contacts.js. -->
+  <!-- Help cards shown in the chat above the dragon's reply (js/topic-card.js).
+       The numbers are in js/contacts.js; 2–3 are chosen for each message. -->
+  <template id="violenceCardTemplate">
+    <aside class="crisis-card" role="alert">
+      <h3>No one has the right to hurt you</h3>
+      <p>
+        What's happening is not your fault. You can get confidential help and advice, also if
+        you're not sure whether it counts as violence:
+      </p>
+      <ul></ul>
+    </aside>
+  </template>
+
+  <template id="harmOthersCardTemplate">
+    <aside class="crisis-card" role="alert">
+      <h3>Thoughts about hurting someone?</h3>
+      <p>
+        Thoughts like these can be frightening, and talking about them is a strong first step.
+        If you can, put some distance between you and the person, and anything you could use
+        to hurt them. You can talk to someone anonymously:
+      </p>
+      <ul></ul>
+    </aside>
+  </template>
+
+  <template id="substanceCardTemplate">
+    <aside class="crisis-card" role="note">
+      <h3>Worried about alcohol, drugs or medication?</h3>
+      <p>
+        You can get advice for free and in confidence, also if you're worried about someone else:
+      </p>
+      <ul></ul>
+    </aside>
+  </template>
+
+  <!-- The eating-disorder card. -->
   <template id="eatingCardTemplate">
     <aside class="crisis-card" role="note">
       <h3>Worried about eating or your body?</h3>

@@ -11,7 +11,7 @@ import { setStatus } from "./status.js";
 import { recordBondDay } from "./bonding.js";
 import { addCrisisCard, recentCrisis } from "./crisis-card.js";
 import { crisisKind } from "./crisis-detect.js";
-import { addEatingCardIfNeeded } from "./eating-card.js";
+import { addTopicCardIfNeeded } from "./topic-card.js";
 import { careReply, careSummary } from "./care-replies.js";
 
 // Everything the person has written, so a help card can pick fitting numbers.
@@ -63,8 +63,8 @@ export async function sendMessage(text) {
     replyWithCare(crisis, text);
     return;
   }
-  // Eating-disorder services appear above the dragon's reply.
-  addEatingCardIfNeeded(text, userTexts(state.conversation));
+  // Help for violence, harming others, substances or eating appears above the reply.
+  addTopicCardIfNeeded(text, userTexts(state.conversation));
 
   setBusy(true);
 

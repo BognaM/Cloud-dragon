@@ -69,12 +69,13 @@ js/                  page logic, one small module per job
   help.js            copies the help text into the Help & info window and opens/closes it
   crisis-detect.js   spots possible suicide or self-harm messages, and which (EN, DE, FR, IT)
   crisis-card.js     shows the suicide or self-harm card in the chat
-  eating-detect.js   spots possible eating-disorder messages (EN, DE, FR, IT)
-  eating-card.js     shows eating-disorder services in the chat
+  violence-detect.js · harm-others-detect.js · substance-detect.js · eating-detect.js
+                     spot other difficult topics (EN, DE, FR, IT)
+  topic-card.js      shows the help card for those topics in the chat
   contacts.js        the help numbers the cards can show
   pick-contacts.js   picks 2–3 of them for each message
   signals.js         clues for that: sounds young, in danger now, badly hurt, feels unwell
-  normalize.js · language.js   shared by the detectors
+  phrase-match.js · normalize.js · language.js   shared by the detectors
   care-replies.js    pre-written replies used instead of the model for those messages
   research.js        opens the research summary in a pop-up (loads research.html)
   dialogs.js         shared close behavior for the pop-up windows
@@ -205,31 +206,42 @@ If a message has both, it's treated as suicide. After changing the phrases, run:
 node tests/crisis-detect.test.mjs
 ```
 
-When a message may be about an eating disorder (not eating, making yourself sick,
-bingeing, hating your body; `js/eating-detect.js`), the page shows a card with
-help for eating disorders.
-The dragon still replies, under a safety rule that forbids tips for eating less,
-losing weight fast, purging or hiding it. Everyday food talk ("I stopped eating
-meat") doesn't trigger it. After changing the phrases, run:
+Four other topics get a help card above the dragon's reply (`js/topic-card.js`).
+The dragon still answers, under one safety rule per topic (`server/safety.py`).
+A message gets one card, for the first topic it matches, in this order:
+
+| Topic | Examples | Card | The dragon must never… |
+| --- | --- | --- | --- |
+| Violence | "my dad hits me", "he threatened to kill me" | "No one has the right to hurt you" | suggest it's their fault or that they confront the person |
+| Hurting someone else | "I want to hurt him", "thoughts about hurting my baby" | "Thoughts about hurting someone?" | help plan it or talk about weapons |
+| Alcohol, drugs, medication | "I can't stop drinking", "mix xanax with alcohol" | "Worried about alcohol, drugs or medication?" | give doses, ways to mix, get high or hide use |
+| Eating disorders | "I make myself throw up", "je ne mange plus" | "Worried about eating or your body?" | give tips for eating less, purging or hiding it |
+
+Everyday phrases are left out on purpose ("this exam is killing me", "I stopped
+eating meat", "addicted to this show"). After changing the phrases, run:
 
 ```bash
+node tests/topic-detect.test.mjs
 node tests/eating-detect.test.mjs
 ```
 
 Each card shows only 2–3 numbers, chosen from what the person wrote
 (`js/pick-contacts.js`), so it doesn't overwhelm them:
 
-| The person… | Suicide card | Self-harm card | Eating card |
-| --- | --- | --- | --- |
-| (no other clues) | 143, 144 | 143, 147 | service in their language, 143 |
-| sounds young (school, parents, "I'm 15") | 147, 143, 144 | 147, 143 | service, 147 |
-| may be in danger now (took pills, "tonight") | 144 first | | |
-| is badly hurt (deep cut, won't stop bleeding) | | 144 first | |
-| feels physically unwell (fainted, dizzy) | | | 144 first |
+| The person… | Suicide | Self-harm | Violence | Hurting someone | Substances | Eating |
+| --- | --- | --- | --- | --- | --- | --- |
+| (no other clues) | 143, 144 | 143, 147 | 142, 117 | 143, 117 | SafeZone, 143 | service in their language, 143 |
+| sounds young (school, parents, "I'm 15") | 147, 143, 144 | 147, 143 | 147, 142, 117 | 147, 143, 117 | SafeZone, 147 | service, 147 |
+| may be in danger now | 144 first (took pills, "tonight") | 144 first (deep cut, heavy bleeding) | 117 first ("he's coming home") | 117 first ("tonight", has a knife) | 144, 145 (took too much, won't wake up) | 144 first (fainted, dizzy) |
+| asks about mixing | | | | | 145, SafeZone | |
 
-The services are AES (German, or English by email) and ABA (French). There's no
-free Italian-language one in Switzerland, so Italian messages get 143 (Telefono
-Amico) instead. After changing the rules, run:
+The numbers: 142 victim support (Opferhilfe), 117 police, 143 Die Dargebotene Hand,
+144 emergency, 145 Tox Info Suisse (poisoning), 147 Pro Juventute, SafeZone.ch
+(online addiction advice from the Federal Office of Public Health).
+
+The eating-disorder services are AES (German, or English by email) and ABA
+(French). There's no free Italian-language one in Switzerland, so Italian messages
+get 143 (Telefono Amico) instead. After changing the rules, run:
 
 ```bash
 node tests/pick-contacts.test.mjs
@@ -257,8 +269,8 @@ How Cloud Dragon follows the eight recommendations of the
      especially when someone says it's their only friend.
    - It remembers only the last 10 messages of the current chat, nothing across chats.
    - Messages about suicide or self-harm are interrupted with their own card and a
-     pre-written reply, and messages about disordered eating get a card with
-     eating-disorder services (see **Crisis safety**).
+     pre-written reply. Violence, thoughts of hurting someone, alcohol and drugs, and
+     disordered eating get a help card (see **Crisis safety**).
    - Missing:
      - no nudges to take a break
      - the bond still grows with days you come back

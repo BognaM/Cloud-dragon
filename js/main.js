@@ -16,7 +16,7 @@ import { isCommand, runCommand } from "./commands.js";
 import { initHelp } from "./help.js";
 import { initResearch } from "./research.js";
 import { addCrisisCard } from "./crisis-card.js";
-import { addEatingCardIfNeeded } from "./eating-card.js";
+import { addTopicCardIfNeeded } from "./topic-card.js";
 import { crisisKind } from "./crisis-detect.js";
 
 const SKY_CHECK_MS = 60 * 1000;
@@ -51,7 +51,7 @@ function start() {
       const texts = userTexts(state.conversation.slice(0, index + 1));
       const crisis = crisisKind(message.content);
       if (crisis) addCrisisCard(crisis.kind, message.content, texts);
-      else addEatingCardIfNeeded(message.content, texts);
+      else addTopicCardIfNeeded(message.content, texts);
     });
   } else {
     renderWelcome();

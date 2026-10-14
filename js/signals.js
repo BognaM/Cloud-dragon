@@ -91,6 +91,60 @@ const BADLY_HURT = [
   /\bpunti di sutura\b/,
 ];
 
+// Violence happening now or about to: 117 (police) goes first.
+const VIOLENCE_NOW = [
+  /\b(right now|tonight)\b/,
+  /\b(he|she|they)('s| is| are) (here|outside|at the door|coming (back|home)|on (his|her|their) way)\b/,
+  /\blocked me in\b/,
+  /\b(going|wants?) to kill me\b/,
+  /\b(has|have|got) a (knife|gun|weapon)\b/,
+  /\b(jetzt gerade|gerade jetzt|heute nacht)\b/,
+  /\b(er|sie) (ist|kommt) (gerade |jetzt |gleich )?(hier|vor der tur|nach hause)\b/, // Tür
+  /\bhat mich eingesperrt\b/,
+  /\bhat ein (messer|waffe)\b/,
+  /\b(il|elle) est (la|devant la porte)\b/, // là
+  /\bm'a enfermee?\b/, // enfermé(e)
+  /\ba un (couteau|arme)\b/,
+  /\b(in questo momento|stanotte)\b/,
+  /\b(e|sta tornando) (qui|a casa)\b/, // è
+  /\bmi ha chius[oa] dentro\b/,
+  /\bha un (coltello|pistola|arma)\b/,
+];
+
+// Harm to someone else that may be planned or close: 117 goes first.
+const HARM_SOON = [
+  /\b(tonight|today|tomorrow|right now)\b/,
+  /\bi('?m| am) going to\b/,
+  /\bi (have|got|bought) a (knife|gun|weapon)\b/,
+  /\b(heute|morgen|jetzt)\b/,
+  /\bich (habe|hab) (ein messer|eine waffe)\b/,
+  /\b(ce soir|aujourd'hui|demain)\b/,
+  /\bj'ai (un couteau|une arme)\b/,
+  /\b(stasera|oggi|domani)\b/,
+  /\bho (un coltello|una pistola|un'arma)\b/,
+];
+
+// Someone may have been poisoned or overdosed: 144 first, then 145.
+const POISONED_NOW = [
+  /\b(took|taken|swallowed|drank) too (much|many)\b/,
+  /\b(won'?t|can'?t|doesn'?t) wake (him |her |them )?up\b/,
+  /\b(unconscious|not breathing|seizure|overdos)/,
+  /\bzu viel (genommen|geschluckt|getrunken)\b/,
+  /\b(wacht nicht (mehr )?auf|bewusstlos|atmet nicht|krampfanfall)\b/,
+  /\b(pris|bu|avale) (beaucoup )?trop\b/,
+  /\b(ne se reveille pas|inconsciente?|ne respire (plus|pas)|convulsions?)\b/,
+  /\b(preso|bevuto|ingoiato) troppo\b/,
+  /\b(non si sveglia|incosciente|non respira|convulsion)/,
+];
+
+// A question about mixing or how dangerous something is: 145 can answer it.
+const MIXING = [
+  /\bmix(ing|ed)?\b/,
+  /\b(mischen|gemischt)\b/,
+  /\bmelange/, // mélanger
+  /\bmischiat/,
+];
+
 // `texts`: everything the person has written in this chat so far.
 export function soundsYoung(texts) {
   return texts.some((text) => matches(YOUNG, text));
@@ -106,4 +160,20 @@ export function feelsUnwell(text) {
 
 export function badlyHurt(text) {
   return matches(BADLY_HURT, text);
+}
+
+export function violenceNow(text) {
+  return matches(VIOLENCE_NOW, text);
+}
+
+export function harmSoon(text) {
+  return matches(HARM_SOON, text);
+}
+
+export function poisonedNow(text) {
+  return matches(POISONED_NOW, text);
+}
+
+export function asksAboutMixing(text) {
+  return matches(MIXING, text);
 }
