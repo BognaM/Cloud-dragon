@@ -119,19 +119,26 @@ section **APA health advisory** lists what is already done.
 
 This is not legal advice. Check these yourself before publishing beyond friends.
 
-- **EU AI Act, Art. 50** (in force from Aug 2026): a chatbot must tell people they are talking
-  to an AI. The note under the message box does this; step 2 covers the first screen.
-- **Swiss data protection law (nDSG/revDSG):** messages can contain health data, which the law
-  treats as especially sensitive. For a public app, add a short privacy notice:
+- [x] **EU AI Act, Art. 50** (in force from Aug 2026): a chatbot must tell people they are
+  talking to an AI. Done: the bonding screen, the note under the message box, and the dragon
+  says so when asked.
+- [ ] **Swiss data protection law (nDSG/revDSG):** messages can contain health data, which the
+  law treats as especially sensitive. For a public app, add a short privacy notice. On hold
+  until you decide what name and contact to publish. It needs:
   - who runs the app and how to contact you
-  - what is sent to the server
-  - that it is processed by Modal in the US (us-east) and not stored
-  - how to delete it (step 3)
+  - what is sent to the server: the last 10 messages, both names, the time of day, and the
+    internet address (kept in memory for at most an hour for the rate limit, never logged)
+  - that it's processed by Modal, a US company, on servers in the US (us-east), not stored
+    and not used for training. Modal's own policy (modal.com/legal/privacy-policy) doesn't say
+    how it handles its customers' visitors, so link to it rather than promise more.
+  - what stays in the browser and how to delete it: Delete my chat and data, Don't save this chat
+  - remember to add the new page to `site_image` in `app.py`, like `research.html`
 
-  Step 1 (no previews in the logs) is the most important part.
-- **Medical device rules (Swiss MedDO / EU MDR):** software that claims to diagnose or treat
-  counts as a medical device. Keep presenting the app as a wellness companion, not therapy,
-  as it does now ("An AI, not a therapist").
+  Already done: no message text in the logs, delete button, private chat.
+- [x] **Medical device rules (Swiss MedDO / EU MDR):** software that claims to diagnose or
+  treat counts as a medical device. Checked Oct 2026: every mention of therapy, treatment or
+  diagnosis is a disclaimer ("An AI, not a therapist") or the research summary describing
+  other studies. Keep it that way when adding text.
 
 ## Housekeeping
 
