@@ -279,6 +279,9 @@ How Cloud Dragon follows the eight recommendations of the
    - The server keeps no chat history, nothing is used to train the model, and messages
      aren't written to the logs (`LOG_TEXT_PREVIEWS = False` in `server/config.py`).
    - Help & info explains this.
+   - The advisory asks for a clear response when someone discloses a risk of harm or
+     maltreatment: messages about violence or abuse get a card with 142 (victim support)
+     and 117, and the dragon is told to believe them and never blame them.
    - Missing: there's no clear "delete my data" button, only **Release bond…** in the bond panel.
 4. **Protect users from misrepresentation, misinformation, bias and illusory effectiveness.** *Partly followed.*
    - The dragon never claims to be a human or a licensed professional.
