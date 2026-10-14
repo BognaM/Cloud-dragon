@@ -142,6 +142,5 @@ This is not legal advice. Check these yourself before publishing beyond friends.
 
 ## Housekeeping
 
-- [ ] Delete the merged branches: `git branch -d self-help-info crisis-detection`, and later `steady-tone`.
-- [ ] Remove the old work-account remote with its saved token from the home folder's git
-  (`git -C /Users/bmm remote remove origin`), so nothing can ever be pushed there by mistake.
+- [x] Deleted the merged branches (all 17 feature branches, Oct 2026). Only `main` is left.
+- [x] Removed the old work-account remote with its saved token from the home folder's git.
