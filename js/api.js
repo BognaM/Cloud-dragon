@@ -28,6 +28,17 @@ async function readEvents(body, onData) {
   }
 }
 
+// Tells the server to stop generating a reply (the Stop button). Fire and forget:
+// the page has already stopped reading it.
+export function stopOnServer(replyId) {
+  fetch(endpoint("/stop"), {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ reply_id: replyId }),
+    keepalive: true,
+  }).catch(() => {});
+}
+
 // Thrown when the server's message limit is reached (server/rate_limit.py).
 export class TooManyMessages extends Error {
   constructor(retryAfter) {
@@ -38,8 +49,9 @@ export class TooManyMessages extends Error {
 
 // Sends the chat and calls onText with the reply so far each time more of it
 // streams in. Resolves with the full reply.
-export async function streamChat(payload, { onText }) {
+export async function streamChat(payload, { onText, signal }) {
   const response = await fetch(endpoint("/chat"), {
+    signal, // aborting it is the Stop button
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),

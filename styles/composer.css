@@ -56,3 +56,8 @@ input::placeholder {
   color: var(--muted);
   opacity: 0.8;
 }
+
+/* While a reply streams, the send button is a Stop button (js/composer.js). */
+.icon-button.stop {
+  font-size: 14px;
+}

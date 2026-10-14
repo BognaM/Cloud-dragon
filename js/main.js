@@ -11,7 +11,8 @@ import { completeBonding } from "./bonding.js";
 import { isWelcomeShown, renderWelcome, showBondingForm } from "./welcome.js";
 import { addMessage } from "./messages.js";
 import { autoResize, clearInput } from "./composer.js";
-import { sendMessage, userTexts } from "./chat.js";
+import { retryReply, sendMessage, stopReply, userTexts } from "./chat.js";
+import { showRetry } from "./retry-button.js";
 import { isCommand, runCommand } from "./commands.js";
 import { initHelp } from "./help.js";
 import { initResearch } from "./research.js";
@@ -56,6 +57,9 @@ function start() {
       if (crisis) addCrisisCard(crisis.kind, crisis.language, message.content, texts);
       else addTopicCardIfNeeded(message.content, texts);
     });
+    // "Try again" under the last reply, unless it's a pre-written crisis reply.
+    const last = state.conversation.at(-1);
+    if (last && !last.care) showRetry([...document.querySelectorAll(".bubble")].at(-1), retryReply);
   } else {
     renderWelcome();
   }
@@ -95,7 +99,8 @@ function connectChat() {
     location.reload(); // Brings back the welcome screen and the dragon. The bond stays.
   });
 
-  el.sendButton.addEventListener("click", () => submit(el.input.value));
+  // While a reply streams, the same button stops it.
+  el.sendButton.addEventListener("click", () => (state.busy ? stopReply() : submit(el.input.value)));
   el.input.addEventListener("input", autoResize);
   el.input.addEventListener("keydown", (event) => {
     // Enter sends on desktop. On phones, Enter adds a new line.

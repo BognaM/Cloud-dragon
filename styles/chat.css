@@ -81,3 +81,25 @@
 .status.error {
   color: var(--danger);
 }
+
+/* "Try again" under the latest reply (js/retry-button.js). */
+.retry-button {
+  display: block;
+  margin-top: 4px;
+  padding: 2px 4px;
+  background: none;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.retry-button:hover {
+  color: var(--text);
+  text-decoration: underline;
+}
+
+/* A reply cut short with the Stop button. */
+.bubble.stopped::after {
+  content: " … (stopped)";
+  color: var(--muted);
+  font-size: 12px;
+}

@@ -3,7 +3,8 @@
 Input: {"messages": [{"role": "user", "content": "Hello"}],
         "user_name": "...", "dragon_name": "...",
         "time_of_day": "dawn" | "day" | "dusk" | "night",
-        "crisis": true | false}  (true when the page spotted possible crisis language)
+        "crisis": true | false,  (true when the page spotted possible crisis language)
+        "reply_id": "..."}  (a random ID the page can send to POST /stop to end the reply)
 
 These demo checks are not complete input validation or prompt-injection protection.
 """
@@ -23,6 +24,7 @@ class ChatRequest:
     dragon_name: str
     time_of_day: str | None
     crisis: bool
+    reply_id: str | None
 
 
 def clean_name(value):
@@ -47,6 +49,12 @@ def clean_messages(incoming):
     return messages
 
 
+def clean_reply_id(value):
+    """A random ID from the page (crypto.randomUUID), or None."""
+    value = str(value or "")
+    return value if re.fullmatch(r"[0-9a-f-]{8,64}", value) else None
+
+
 def parse_chat_request(data):
     """Raises ValueError when there's no user message to answer."""
     messages = clean_messages(data.get("messages", []))
@@ -59,4 +67,5 @@ def parse_chat_request(data):
         dragon_name=clean_name(data.get("dragon_name")) or DEFAULT_DRAGON_NAME,
         time_of_day=clean_time_of_day(data.get("time_of_day")),
         crisis=data.get("crisis") is True,
+        reply_id=clean_reply_id(data.get("reply_id")),
     )
