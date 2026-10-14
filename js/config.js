@@ -6,6 +6,7 @@ export const API_BASE = "https://bognam--ember-chat-web.modal.run";
 // localStorage keys. Everything is saved in this browser only.
 export const CHAT_KEY = "cloudDragon.conversation";
 export const BOND_KEY = "cloudDragon.bond";
+export const USAGE_KEY = "cloudDragon.usage"; // message counts and times for break reminders, never text
 
 export const DEFAULT_DRAGON_NAME = "Nimbus";
 

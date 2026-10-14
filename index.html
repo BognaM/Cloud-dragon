@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="styles/chat.css" />
   <link rel="stylesheet" href="styles/thinking.css" />
   <link rel="stylesheet" href="styles/crisis-card.css" />
+  <link rel="stylesheet" href="styles/break-nudge.css" />
   <link rel="stylesheet" href="styles/composer.css" />
   <link rel="stylesheet" href="styles/toast.css" />
   <link rel="stylesheet" href="styles/file-notice.css" />
@@ -333,6 +334,24 @@
 
   <!-- Shown in the chat right after a message that may be about suicide or
        self-harm, whatever the dragon replies (see js/crisis-detect.js). -->
+  <!-- Suggests a break after a long chat (js/break-nudge.js). -->
+  <template id="breakNudgeTemplate">
+    <aside class="break-nudge" role="status">
+      <h3>Even dragons rest between flights</h3>
+      <p class="break-reason"></p>
+      <ul>
+        <li>Stand up, stretch and drink some water.</li>
+        <li>Step outside, or look out of a window for a few minutes.</li>
+        <li>Send a message to a friend, or someone you trust.</li>
+      </ul>
+      <p class="break-help">
+        If it's hard to stop because things are difficult right now, talking to a person can
+        help: <a href="tel:143">143</a>, day and night.
+      </p>
+      <button class="break-ok" type="button">Okay</button>
+    </aside>
+  </template>
+
   <!-- Help cards shown in the chat above the dragon's reply (js/topic-card.js).
        The numbers are in js/contacts.js; 2–3 are chosen for each message. -->
   <template id="violenceCardTemplate">

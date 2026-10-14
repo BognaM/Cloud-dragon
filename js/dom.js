@@ -45,6 +45,7 @@ export const el = {
   helpDialog: byId("helpDialog"),
   crisisCardTemplate: byId("crisisCardTemplate"),
   eatingCardTemplate: byId("eatingCardTemplate"),
+  breakNudgeTemplate: byId("breakNudgeTemplate"),
   violenceCardTemplate: byId("violenceCardTemplate"),
   harmOthersCardTemplate: byId("harmOthersCardTemplate"),
   substanceCardTemplate: byId("substanceCardTemplate"),

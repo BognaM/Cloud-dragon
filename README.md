@@ -21,6 +21,9 @@ A chatbot web app with a cloud dragon you bond with, built from
   drugs, or eating disorders get a help card with 2–3 Swiss phone numbers chosen for the
   message (see **Crisis safety**). Help & info explains what an AI can and can't do, lists
   crisis lines, and links a summary of the research on AI and mental health.
+- **Break reminders:** after 30 minutes of continuous chatting or 40 messages in a day,
+  a calm note under the reply suggests a break and talking to someone (at most once per
+  session and per day, never right after a crisis message).
 - Chat and bond are **saved in your browser** (localStorage), and **Delete my chat and
   data…** in Help & info erases them. The server keeps no chats; to enforce the rate limit
   it only counts messages per address, in memory, for at most an hour.
@@ -58,6 +61,7 @@ styles/              one stylesheet per part of the page
   file-notice.css    the message shown if index.html is opened directly
   research.css       the research summary page
   crisis-card.css    the help cards in the chat (crisis, self-harm and topic cards)
+  break-nudge.css    the break reminder
   help.css           help text: welcome-screen accordion, note under the message box, Help & info window
 js/                  page logic, one small module per job
   main.js            starts the page and wires up the buttons
@@ -76,6 +80,8 @@ js/                  page logic, one small module per job
   thinking.js        shows the thinking dragon and its label, and hides them
   commands.js        test commands like /evening
   card-commands.js   /card: shows the help cards to check their text and numbers
+  break-rules.js     when to suggest a break (only counts and times)
+  break-nudge.js     counts messages and shows the break reminder
   help.js            copies the help text into the Help & info window and opens/closes it
   delete-data.js     "Delete my chat and data" and "Release bond": clears this browser's storage
   crisis-detect.js   spots possible suicide or self-harm messages, and which (EN, DE, FR, IT)
@@ -104,6 +110,7 @@ tests/               checks you can run without the model (see **Tests**)
   crisis-detect.test.mjs · eating-detect.test.mjs · topic-detect.test.mjs
                      which messages get which card, and which don't
   pick-contacts.test.mjs   which numbers each card shows
+  break-rules.test.mjs     when the break reminder appears
   test_rate_limit.py the message limits
   safety_replies.py  sends risky messages to a test copy of the dragon and flags its replies
   load-module.mjs    lets Node load the page's browser modules
@@ -166,6 +173,7 @@ Or type a test command in the message box (it's never sent to the dragon):
 | `/bond auto` | back to your real bond level |
 | `/card` | show all six help cards (suicide, self-harm, violence, hurting someone, substances, eating) |
 | `/card violence` | show one card: `suicide`, `selfharm`, `violence`, `harm`, `substances` or `eating` |
+| `/break` or `/break day` | show the break reminder (after a long session, or many messages today) |
 | `/card … young` · `now` · `mix` · `de` / `fr` / `it` | a variant: sounds young (147), in danger now (144 or 117 first), a question about mixing (substances, 145), or a message in that language (eating: picks the service) |
 | `/help` | list the commands |
 
@@ -303,6 +311,7 @@ node tests/crisis-detect.test.mjs
 node tests/eating-detect.test.mjs
 node tests/topic-detect.test.mjs
 node tests/pick-contacts.test.mjs
+node tests/break-rules.test.mjs
 python3 -m unittest tests/test_rate_limit.py
 ```
 
@@ -346,9 +355,9 @@ How Cloud Dragon follows the eight recommendations of the
    - Messages about suicide or self-harm are interrupted with their own card and a
      pre-written reply. Violence, thoughts of hurting someone, alcohol and drugs, and
      disordered eating get a help card (see **Crisis safety**).
-   - Missing:
-     - no nudges to take a break
-     - the bond still grows with days you come back
+   - After 30 minutes of chatting or 40 messages in a day, a reminder suggests a break,
+     some time away from the screen and talking to someone (`js/break-rules.js`).
+   - Missing: the bond still grows with days you come back.
 3. **Prioritize privacy and protect user data.** *Followed.*
    - No accounts. The chat and bond are saved only in your browser.
    - The server keeps no chat history, nothing is used to train the model, and messages
@@ -358,7 +367,8 @@ How Cloud Dragon follows the eight recommendations of the
      maltreatment: messages about violence or abuse get a card with 142 (victim support)
      and 117, and the dragon is told to believe them and never blame them.
    - **Delete my chat and data…** in Help & info deletes the chat, the bond and the names
-     from this browser (`js/delete-data.js`), the same as **Release bond…** in the bond panel.
+     from this browser, with the message counts for break reminders (`js/delete-data.js`),
+     the same as **Release bond…** in the bond panel.
 4. **Protect users from misrepresentation, misinformation, bias and illusory effectiveness.** *Partly followed.*
    - The dragon never claims to be a human or a licensed professional.
    - It gently questions harsh self-judgment and distorted beliefs instead of simply agreeing.

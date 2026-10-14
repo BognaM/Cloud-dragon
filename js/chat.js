@@ -12,6 +12,7 @@ import { recordBondDay } from "./bonding.js";
 import { addCrisisCard, recentCrisis } from "./crisis-card.js";
 import { crisisKind } from "./crisis-detect.js";
 import { addTopicCardIfNeeded } from "./topic-card.js";
+import { countSentMessage, suggestBreakIfDue } from "./break-nudge.js";
 import { careReply, careSummary } from "./care-replies.js";
 
 // "in about 40 seconds", "in about 5 minutes", "in about 3 hours".
@@ -65,6 +66,7 @@ export async function sendMessage(text) {
   addMessage("user", text);
   clearInput();
   setStatus("");
+  countSentMessage();
 
   const crisis = crisisKind(text);
   if (crisis) {
@@ -100,6 +102,8 @@ export async function sendMessage(text) {
     state.conversation.push({ role: "assistant", content: answer });
     saveConversation();
     recordBondDay();
+    // Not right after a crisis message, where it would sound dismissive.
+    if (!recentCrisis(state.conversation)) suggestBreakIfDue();
   } catch (error) {
     console.error(error);
     stopThinking();

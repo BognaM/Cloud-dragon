@@ -70,7 +70,7 @@ section **APA health advisory** lists what is already done.
    concern, then ask a question."
    - Why: the café idea still got only praise (APA 4, sycophancy).
    - Check it with the test set from step 6.
-8. [ ] **Break nudges.** After a long session, or many messages in a day, the page suggests
+8. [x] **Break nudges.** After a long session, or many messages in a day, the page suggests
    a break or talking to someone.
    - Why: APA 2 names break nudges explicitly.
    - Size: medium (`js/chat.js` plus a small notice).

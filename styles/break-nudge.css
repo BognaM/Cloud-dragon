@@ -1,0 +1,48 @@
+/* The break reminder in the chat: gentler than the help cards, no big numbers. */
+
+.break-nudge {
+  max-width: min(92%, 460px);
+  margin: 0 auto 16px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px dashed var(--border);
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.break-nudge h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+}
+
+.break-nudge p {
+  margin: 0 0 8px;
+}
+
+.break-nudge ul {
+  margin: 0 0 8px;
+  padding-left: 20px;
+}
+
+.break-nudge .break-help {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.break-nudge .break-help a {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.break-nudge .break-ok {
+  min-height: 36px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+}

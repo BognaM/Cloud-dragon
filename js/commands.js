@@ -9,6 +9,8 @@ import { renderBond } from "./header.js";
 import { setStatus } from "./status.js";
 import { showToast } from "./toast.js";
 import { runCardCommand } from "./card-commands.js";
+import { showBreakNudge } from "./break-nudge.js";
+import { removeWelcome } from "./welcome.js";
 
 const SKY_COMMANDS = {
   dawn: "dawn", morning: "dawn",
@@ -19,7 +21,7 @@ const SKY_COMMANDS = {
 
 const HELP =
   "Test commands: /dawn /day /evening /night /now · /mist /drift /cumulus /skybound · /bond 0-3 · /bond auto · " +
-  "/card [suicide|selfharm|violence|harm|substances|eating] [young] [now|mix|de|fr|it]";
+  "/card [suicide|selfharm|violence|harm|substances|eating] [young] [now|mix|de|fr|it] · /break [day]";
 
 export function isCommand(text) {
   return text.startsWith("/");
@@ -51,6 +53,11 @@ export function runCommand(text) {
   const [command, ...args] = text.slice(1).trim().toLowerCase().split(/\s+/);
   const arg = args[0];
   setStatus("");
+
+  if (command === "break") {
+    removeWelcome();
+    return showBreakNudge(arg === "day" ? "day" : "session");
+  }
 
   if (command === "card" || command === "cards") {
     const error = runCardCommand(args);
