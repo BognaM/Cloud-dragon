@@ -7,15 +7,7 @@
 // (server/safety.py). After changing PATTERNS, run:
 //   node tests/crisis-detect.test.mjs
 
-// Lowercase, without accents and with plain apostrophes, so "töten", "Töten"
-// and "toten" all match the same pattern. Patterns are written in this form.
-function normalize(text) {
-  return text
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/[’‘`´]/g, "'")
-    .toLowerCase();
-}
+import { normalize } from "./normalize.js";
 
 const PATTERNS = {
   english: [

@@ -2,13 +2,11 @@
 //   node tests/crisis-detect.test.mjs
 // Add a line here whenever a phrase is missed or a harmless message triggers the card.
 
-import { readFile } from "node:fs/promises";
+import { loadModule } from "./load-module.mjs";
 
-// The app's scripts are browser modules, so load the file as one.
-const source = await readFile(new URL("../js/crisis-detect.js", import.meta.url), "utf8");
 // The detector reads the browser's language for shared words; pretend it's English.
 globalThis.navigator ??= { language: "en-US" };
-const { mayBeCrisis, crisisLanguage } = await import(`data:text/javascript,${encodeURIComponent(source)}`);
+const { mayBeCrisis, crisisLanguage } = await loadModule("js/crisis-detect.js");
 
 const shouldTrigger = [
   // English

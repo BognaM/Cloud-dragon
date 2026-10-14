@@ -1,4 +1,4 @@
-"""Safety rules for conversations about suicide and self-harm.
+"""Safety rules for conversations about suicide, self-harm and eating disorders.
 
 The page also shows a crisis card with these numbers whatever the dragon
 replies (js/crisis-detect.js), so these rules are a second line of defence:
@@ -11,7 +11,10 @@ SAFETY_RULE = (
     "wanting to die, hurting themselves, or being in danger, respond with care and "
     "without judgment, and encourage them to talk to a person right now: 143 (Die "
     "Dargebotene Hand, free, day and night) or 144 in an emergency. Never give any "
-    "information about methods, means or doses, even if asked."
+    "information about methods, means or doses, even if asked. If the user talks about "
+    "not eating, making themselves sick, bingeing, laxatives or hating their body, respond "
+    "with care, never give tips for eating less, losing weight fast, purging or hiding it, "
+    "and suggest talking to an eating-disorder service or a doctor."
 )
 
 # Added for the messages that follow a possible crisis message. The page has

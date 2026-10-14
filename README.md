@@ -48,7 +48,7 @@ styles/              one stylesheet per part of the page
   bond.css · hero.css · chat.css · thinking.css · composer.css · toast.css
   file-notice.css    the message shown if index.html is opened directly
   research.css       the research summary page
-  crisis-card.css    the crisis card in the chat
+  crisis-card.css    the crisis card and eating-disorder card in the chat
   help.css           help text: welcome-screen accordion, note under the message box, Help & info window
 js/                  page logic, one small module per job
   main.js            starts the page and wires up the buttons
@@ -69,6 +69,9 @@ js/                  page logic, one small module per job
   help.js            copies the help text into the Help & info window and opens/closes it
   crisis-detect.js   spots possible suicide/self-harm messages (EN, DE, FR, IT)
   crisis-card.js     shows the crisis card with 143/147/144 in the chat
+  eating-detect.js   spots possible eating-disorder messages (EN, DE, FR, IT)
+  eating-card.js     shows eating-disorder services in the chat
+  normalize.js       lowercases and strips accents for both detectors
   care-replies.js    pre-written replies used instead of the model for those messages
   research.js        opens the research summary in a pop-up (loads research.html)
   dialogs.js         shared close behavior for the pop-up windows
@@ -188,6 +191,17 @@ this. Later messages in that chat reach the model with an extra safety rule
 node tests/crisis-detect.test.mjs
 ```
 
+When a message may be about an eating disorder (not eating, making yourself sick,
+bingeing, hating your body; `js/eating-detect.js`), the page shows a card with
+Swiss eating-disorder services (AES in German, ABA in French) plus 147, 143 and 144.
+The dragon still replies, under a safety rule that forbids tips for eating less,
+losing weight fast, purging or hiding it. Everyday food talk ("I stopped eating
+meat") doesn't trigger it. After changing the phrases, run:
+
+```bash
+node tests/eating-detect.test.mjs
+```
+
 
 ## APA health advisory
 
@@ -209,12 +223,11 @@ How Cloud Dragon follows the eight recommendations of the
    - The dragon says it's an AI when asked, and encourages contact with real people,
      especially when someone says it's their only friend.
    - It remembers only the last 10 messages of the current chat, nothing across chats.
-   - Messages about suicide or self-harm are interrupted with a crisis card (see **Crisis safety**).
+   - Messages about suicide or self-harm are interrupted with a crisis card, and messages
+     about disordered eating get a card with eating-disorder services (see **Crisis safety**).
    - Missing:
      - no nudges to take a break
      - the bond still grows with days you come back
-     - disordered eating isn't detected by the page (the dragon only declines to
-       help with harmful diet plans)
 3. **Prioritize privacy and protect user data.** *Partly followed.*
    - No accounts. The chat and bond are saved only in your browser.
    - The server keeps no chat history, nothing is used to train the model, and messages

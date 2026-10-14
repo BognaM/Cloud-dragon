@@ -98,9 +98,9 @@ section **APA health advisory** lists what is already done.
 13. [ ] **Translate the crisis card.** It's in English only, but the pre-written reply already
     comes in DE/FR/IT. Show the card in the same language.
     - Size: small (`index.html` template, `js/crisis-card.js`).
-14. [ ] **Detect disordered eating.** Add phrases like "stop eating", "make myself throw up"
+14. [x] **Detect disordered eating.** Add phrases like "stop eating", "make myself throw up"
     or "nicht mehr essen" in four languages, plus a gentle card with contacts: 143, 147,
-    and a Swiss eating-disorder service (still to research and verify).
+    AES (043 488 63 73, German) and ABA (021 329 04 39, French), checked Oct 2026.
     - Why: APA 2 names disordered eating next to self-harm.
     - Size: medium (like `js/crisis-detect.js`, with its own tests).
 

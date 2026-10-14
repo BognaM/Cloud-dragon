@@ -12,11 +12,6 @@ export function addCrisisCard() {
   scrollToBottom();
 }
 
-// Adds the card after the user's message if that message may be about a crisis.
-export function addCrisisCardIfNeeded(text) {
-  if (mayBeCrisis(text)) addCrisisCard();
-}
-
 // True if any recent user message may be about a crisis. The dragon then gets
 // an extra safety rule for its reply (see server/safety.py).
 export function recentCrisis(conversation, recent = 10) {

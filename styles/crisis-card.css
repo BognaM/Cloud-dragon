@@ -1,5 +1,6 @@
 /* The crisis card shown in the chat after a message that may be about suicide
-   or self-harm: calm, but clearly different from the dragon's replies. */
+   or self-harm: calm, but clearly different from the dragon's replies.
+   The eating-disorder card uses the same look. */
 
 .crisis-card {
   max-width: min(92%, 560px);
@@ -25,18 +26,21 @@
   margin: 0 0 10px;
 }
 
+/* Two columns: all numbers as wide as the longest one, then their text. */
 .crisis-card ul {
   display: grid;
-  gap: 8px;
+  grid-template-columns: max-content 1fr;
+  gap: 8px 10px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .crisis-card li {
-  display: flex;
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
   align-items: center;
-  gap: 10px;
 }
 
 /* Big, easy-to-tap numbers. */
@@ -55,4 +59,30 @@
 
 .crisis-card li span a {
   color: var(--accent);
+}
+
+.crisis-card .card-more {
+  margin: 10px 0 0;
+  font-size: 13px;
+}
+
+.crisis-card .card-more a {
+  color: var(--accent);
+}
+
+/* Phones: long numbers (043 488 63 73) go above their text, short ones stay beside it. */
+@media (max-width: 520px) {
+  .crisis-card ul {
+    grid-template-columns: 1fr;
+  }
+
+  .crisis-card li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+  }
+
+  .crisis-card li span {
+    flex: 1 1 160px;
+  }
 }

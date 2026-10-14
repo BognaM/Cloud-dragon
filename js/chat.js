@@ -11,6 +11,7 @@ import { setStatus } from "./status.js";
 import { recordBondDay } from "./bonding.js";
 import { addCrisisCard, recentCrisis } from "./crisis-card.js";
 import { crisisLanguage } from "./crisis-detect.js";
+import { addEatingCardIfNeeded } from "./eating-card.js";
 import { careReply, careSummary } from "./care-replies.js";
 
 // Pre-written crisis replies reach the model in their short version.
@@ -52,6 +53,8 @@ export async function sendMessage(text) {
     replyWithCare(language);
     return;
   }
+  // Eating-disorder services appear above the dragon's reply.
+  addEatingCardIfNeeded(text);
 
   setBusy(true);
 

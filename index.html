@@ -224,6 +224,12 @@
               </ul>
 
               <p>
+                Worried about eating or your body? Free advice from
+                <a href="tel:+41434886373">043 488 63 73</a> (AES, in German) or
+                <a href="tel:+41213290439">021 329 04 39</a> (ABA, in French).
+              </p>
+
+              <p>
                 Psychiatric emergency services in each canton:
                 <a href="https://mintra.psy.unibe.ch/assets/Psychiatrische_Notfaelle_Schweiz.pdf" target="_blank" rel="noopener">list by canton (PDF, UPD Bern)</a>.
               </p>
@@ -311,6 +317,47 @@
 
   <!-- Shown in the chat right after a message that may be about suicide or
        self-harm, whatever the dragon replies (see js/crisis-detect.js). -->
+  <!-- Shown in the chat after a message that may be about an eating disorder
+       (js/eating-card.js). Contacts checked on the services' own sites, Oct 2026. -->
+  <template id="eatingCardTemplate">
+    <aside class="crisis-card" role="note">
+      <h3>Worried about eating or your body?</h3>
+      <p>
+        You don't have to sort this out alone. These services know eating disorders well and
+        give free, confidential advice, also to family and friends:
+      </p>
+      <ul>
+        <li>
+          <a class="crisis-call" href="tel:+41434886373">043 488 63 73</a>
+          <span>AES, Arbeitsgemeinschaft Ess-Störungen, in German (English by email).
+          Tue and Thu 10–12 and 14–17.
+          <a href="https://www.aes.ch/angebot/beratungen" target="_blank" rel="noopener">aes.ch</a></span>
+        </li>
+        <li>
+          <a class="crisis-call" href="tel:+41213290439">021 329 04 39</a>
+          <span>ABA, Association Boulimie Anorexie, in French.
+          <a href="https://www.boulimie-anorexie.ch" target="_blank" rel="noopener">boulimie-anorexie.ch</a></span>
+        </li>
+        <li>
+          <a class="crisis-call" href="tel:147">147</a>
+          <span>Pro Juventute, for children and young people, day and night</span>
+        </li>
+        <li>
+          <a class="crisis-call" href="tel:143">143</a>
+          <span>Die Dargebotene Hand · La Main Tendue · Telefono Amico, day and night</span>
+        </li>
+        <li>
+          <a class="crisis-call" href="tel:144">144</a>
+          <span>Emergency, if you feel faint or unwell or are in danger</span>
+        </li>
+      </ul>
+      <p class="card-more">
+        More services across Switzerland:
+        <a href="https://www.aes.ch/adressen-a-links/adressen" target="_blank" rel="noopener">list at aes.ch</a>
+      </p>
+    </aside>
+  </template>
+
   <template id="crisisCardTemplate">
     <aside class="crisis-card" role="alert">
       <h3>You don't have to go through this alone</h3>
