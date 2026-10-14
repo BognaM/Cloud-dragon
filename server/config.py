@@ -14,5 +14,7 @@ TOP_P = 0.9  # sample from the tokens covering 90% of the probability
 MAX_MESSAGES = 10
 MAX_MESSAGE_CHARS = 2000
 
-# Text previews appear in Modal logs. Disable for private conversations.
-LOG_TEXT_PREVIEWS = True
+# Off: messages can contain health information, so the logs record only that a
+# chat happened (lengths and timings), never what was said. Turn on only briefly
+# to debug, and remember that anything typed then ends up in the Modal logs.
+LOG_TEXT_PREVIEWS = False

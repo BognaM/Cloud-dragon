@@ -28,7 +28,7 @@ section **APA health advisory** lists what is already done.
 
 ## Step 1: Before sharing the link with anyone
 
-1. [ ] **Stop logging message previews.**
+1. [x] **Stop logging message previews.**
    - Set `LOG_TEXT_PREVIEWS = False` in `server/config.py`.
    - Remove "short previews of messages can appear in its logs" from **Your privacy** in `index.html`.
    - Why: APA 3, and Swiss data protection, because messages can contain health information.

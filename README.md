@@ -218,12 +218,10 @@ How Cloud Dragon follows the eight recommendations of the
        help with harmful diet plans)
 3. **Prioritize privacy and protect user data.** *Partly followed.*
    - No accounts. The chat and bond are saved only in your browser.
-   - The server keeps no chat history and nothing is used to train the model.
+   - The server keeps no chat history, nothing is used to train the model, and messages
+     aren't written to the logs (`LOG_TEXT_PREVIEWS = False` in `server/config.py`).
    - Help & info explains this.
-   - Missing:
-     - message previews still appear in the Modal logs (`LOG_TEXT_PREVIEWS` in
-       `server/config.py`)
-     - there's no clear "delete my data" button, only **Release bond…** in the bond panel
+   - Missing: there's no clear "delete my data" button, only **Release bond…** in the bond panel.
 4. **Protect users from misrepresentation, misinformation, bias and illusory effectiveness.** *Partly followed.*
    - The dragon never claims to be a human or a licensed professional.
    - It gently questions harsh self-judgment and distorted beliefs instead of simply agreeing.
