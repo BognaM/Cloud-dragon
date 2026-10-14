@@ -77,7 +77,7 @@ section **APA health advisory** lists what is already done.
 9. [x] **Bond panel wording.** Replace "N more days until Cumulus" (a nudge to come back)
    with what the bond does: "Your bond changes the sky's glow and the night stars."
    - Size: small (`js/bond-panel.js`).
-10. [ ] **Decide how the bond grows.** It still grows with the days you come back, which
+10. [x] **Decide how the bond grows.** Decided: with the time since bonding, not visits. It still grows with the days you come back, which
     rewards returning (APA 2). Options:
     - keep it, since it's now visual only
     - grow it more slowly

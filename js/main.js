@@ -112,6 +112,9 @@ function connectChat() {
   // The greeting mentions the time of day, so refresh it when the sky changes.
   document.addEventListener("sky:change", () => {
     if (state.bond && isWelcomeShown()) renderWelcome();
+    // The bond grows with time, so a page left open shows the new day's level.
+    renderBond();
+    renderStars();
   });
 }
 

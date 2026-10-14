@@ -3,13 +3,14 @@
 
 import { LEVELS } from "./config.js";
 import { el } from "./dom.js";
-import { bondDays, dragonName } from "./bond.js";
+import { daysSinceBonding, dragonName } from "./bond.js";
 
 const plural = (count, word) => `${count} ${word}${count === 1 ? "" : "s"}`;
+const bonded = (days) => (days === 0 ? "today" : days === 1 ? "yesterday" : `${plural(days, "day")} ago`);
 
 function bondText() {
   return (
-    `You've talked on ${plural(bondDays(), "day")}. ` +
+    `You bonded with ${dragonName()} ${bonded(daysSinceBonding())}. ` +
     `Your bond changes the sky's glow and the night stars, not how ${dragonName()} talks to you.`
   );
 }

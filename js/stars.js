@@ -1,7 +1,7 @@
-// Night-sky stars, plus one bright star for every day you've bonded.
+// Night-sky stars, plus one bright star for every day since you bonded.
 
 import { el } from "./dom.js";
-import { bondDays } from "./bond.js";
+import { daysSinceBonding } from "./bond.js";
 
 const PLAIN_STARS = 70;
 const MAX_BOND_STARS = 40;
@@ -18,7 +18,7 @@ function seededRandom(seed) {
 
 export function renderStars() {
   const random = seededRandom(7);
-  const total = PLAIN_STARS + Math.min(bondDays(), MAX_BOND_STARS);
+  const total = PLAIN_STARS + Math.min(daysSinceBonding(), MAX_BOND_STARS);
 
   const stars = Array.from({ length: total }, (_, index) => {
     const star = document.createElement("span");

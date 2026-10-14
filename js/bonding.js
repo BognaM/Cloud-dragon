@@ -1,4 +1,4 @@
-// Making the bond on the first visit, and growing it day by day.
+// Making the bond on the first visit. It then grows by itself with time (js/bond.js).
 // The bond changes only how the page looks, never how the dragon talks.
 
 import { DEFAULT_DRAGON_NAME } from "./config.js";
@@ -20,7 +20,7 @@ export function completeBonding(dragon, user) {
   state.bond = {
     dragonName: cleanName(dragon) || DEFAULT_DRAGON_NAME,
     userName: cleanName(user),
-    days: [today()],
+    bondedOn: today(),
   };
   saveBond();
 
@@ -33,16 +33,4 @@ export function completeBonding(dragon, user) {
   // Bring the dragon back into view. Phones would open the keyboard on focus.
   el.messages.scrollTop = 0;
   if (window.matchMedia("(pointer: fine)").matches) el.input.focus({ preventScroll: true });
-}
-
-// A day counts once you've chatted on it. The new level shows quietly in the
-// header and sky, with no announcement: nothing should reward coming back.
-export function recordBondDay() {
-  const bond = state.bond;
-  if (!bond || bond.days.includes(today())) return;
-
-  bond.days.push(today());
-  saveBond();
-  renderBond();
-  renderStars();
 }

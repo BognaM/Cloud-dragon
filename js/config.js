@@ -10,7 +10,7 @@ export const USAGE_KEY = "cloudDragon.usage"; // message counts and times for br
 
 export const DEFAULT_DRAGON_NAME = "Nimbus";
 
-// Days you've chatted with your dragon that each bond level needs.
+// Days since bonding that each bond level needs. Visits don't count.
 // Levels change only the look (pearl, glow, stars), not how the dragon talks.
 export const LEVELS = [
   { name: "Mist", days: 0 },

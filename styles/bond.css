@@ -1,6 +1,6 @@
 /* Bond ring in the header and the panel it opens. */
 
-/* Bond ring: the arc fills as the bond grows, and the pearl glows brighter. */
+/* Bond ring: the pearl grows and glows brighter with each level. */
 .bond-ring {
   width: 38px;
   height: 38px;
@@ -21,17 +21,6 @@
   fill: none;
   stroke: color-mix(in srgb, var(--text) 16%, transparent);
   stroke-width: 2.5;
-}
-
-.ring-arc {
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-dasharray: 0 100;
-  transform: rotate(-90deg);
-  transform-origin: 18px 18px;
-  transition: stroke-dasharray 1s ease;
 }
 
 .ring-pearl {

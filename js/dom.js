@@ -11,7 +11,6 @@ export const el = {
   dragonTitle: byId("dragonTitle"),
   subtitle: byId("subtitle"),
   bondButton: byId("bondButton"),
-  bondArc: byId("bondArc"),
   bondPearl: byId("bondPearl"),
   newChatButton: byId("newChatButton"),
 

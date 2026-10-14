@@ -9,13 +9,14 @@ A chatbot web app with a cloud dragon you bond with, built from
   flies out, just above the message box, next to a "Nimbus is thinking…" label.
   Both disappear as soon as the answer starts.
 - **Bonding:** on your first visit you name your dragon (and tell it your name).
-  The bond grows with every day you chat and never shrinks:
-  Mist → Drift (3 days) → Cumulus (7) → Skybound (14). Each level fills the pearl in
-  the header and makes the dragon glow more. It doesn't change how the dragon talks:
+  The bond grows with the time since you bonded, whether or not you come back, and
+  never shrinks: Mist → Drift (3 days) → Cumulus (7) → Skybound (14). Coming back earns
+  nothing and staying away costs nothing. Each level makes the pearl in the header and
+  the dragon glow more. It doesn't change how the dragon talks:
   the tone stays friendly but not intimate at every level, with no pet names and no
   "your bond deepened" pop-ups, to avoid encouraging dependence (APA health advisory, Nov 2025).
 - **The sky follows your clock:** dawn (5–8), day (8–17), dusk (17–20), night.
-  At night every day you've bonded shows as a bright star.
+  At night every day since you bonded shows as a bright star.
 - The 3D cloud-serpent on the welcome screen is drawn with **Three.js**. Its colors follow the sky.
 - **Safety:** messages about suicide, self-harm, violence, hurting someone, alcohol and
   drugs, or eating disorders get a help card with 2–3 Swiss phone numbers chosen for the
@@ -70,8 +71,9 @@ js/                  page logic, one small module per job
   storage.js         localStorage that never throws
   dom.js             the elements the scripts use
   sky.js · stars.js  time of day and the night sky
-  bond.js            bond level math
-  bonding.js         making the bond, adding days
+  bond.js            bond level from the days since bonding
+  bond-time.js       the date math for that
+  bonding.js         making the bond
   header.js · bond-ring.js · bond-panel.js   the bond in the header
   welcome.js         bonding form and greeting
   messages.js · icon.js · composer.js · status.js · toast.js
@@ -110,6 +112,7 @@ tests/               checks you can run without the model (see **Tests**)
   crisis-detect.test.mjs · eating-detect.test.mjs · topic-detect.test.mjs
                      which messages get which card, and which don't
   pick-contacts.test.mjs   which numbers each card shows
+  bond-time.test.mjs       days since bonding and the level they give
   break-rules.test.mjs     when the break reminder appears
   test_rate_limit.py the message limits
   safety_replies.py  sends risky messages to a test copy of the dragon and flags its replies
@@ -196,7 +199,7 @@ To start over completely, tap the pearl → **Release bond…**, or use **Delete
 | What | Where |
 | --- | --- |
 | Personality | `server/persona.py` |
-| Days needed per bond level | `LEVELS` in `js/config.js` |
+| Days since bonding for each bond level | `LEVELS` in `js/config.js` |
 | Sky colors | `styles/themes.css` |
 | Sky times | `skyPhase()` in `js/sky.js` |
 | Dragon colors per sky | `dragon/palettes.js` |
@@ -313,6 +316,7 @@ node tests/eating-detect.test.mjs
 node tests/topic-detect.test.mjs
 node tests/pick-contacts.test.mjs
 node tests/break-rules.test.mjs
+node tests/bond-time.test.mjs
 python3 -m unittest tests/test_rate_limit.py
 ```
 
@@ -345,7 +349,7 @@ How Cloud Dragon follows the eight recommendations of the
      says it can't replace a doctor, therapist or counselor, diagnosis, medication
      advice or crisis support.
    - The dragon never claims to be a therapist or other professional (`server/persona.py`).
-2. **Prevent unhealthy relationships and dependencies.** *Partly followed.*
+2. **Prevent unhealthy relationships and dependencies.** *Followed.*
    - The page says it's an AI on the first (bonding) screen and next to where you type.
    - The bond changes only the look (sky glow, stars, pearl), never how the dragon
      talks. The tone is friendly but not intimate, with no pet names, flattery or
@@ -359,7 +363,9 @@ How Cloud Dragon follows the eight recommendations of the
      disordered eating get a help card (see **Crisis safety**).
    - After 30 minutes of chatting or 40 messages in a day, a reminder suggests a break,
      some time away from the screen and talking to someone (`js/break-rules.js`).
-   - Missing: the bond still grows with days you come back.
+   - The bond grows with the time since bonding, not with visits, and nothing shows how
+     close the next level is, so there's no reward for coming back. The page saves only
+     the bonding date, not which days you chatted.
 3. **Prioritize privacy and protect user data.** *Followed.*
    - No accounts. The chat and bond are saved only in your browser.
    - The server keeps no chat history, nothing is used to train the model, and messages

@@ -8,10 +8,14 @@ function loadConversation() {
   return Array.isArray(saved) ? saved : [];
 }
 
-// { dragonName, userName, days: ["2026-10-05", ...] } once you've bonded.
+// { dragonName, userName, bondedOn: "2026-10-05" } once you've bonded.
+// Bonds saved before the bond grew with time had a list of the days you
+// chatted; the first is the bonding date, and the rest is dropped.
 function loadBond() {
   const saved = readJSON(BOND_KEY, null);
-  return saved && Array.isArray(saved.days) ? saved : null;
+  const bondedOn = saved?.bondedOn ?? (Array.isArray(saved?.days) ? saved.days[0] : null);
+  if (!bondedOn) return null;
+  return { dragonName: saved.dragonName, userName: saved.userName, bondedOn };
 }
 
 // Preview overrides: ?sky=night shows another time of day, ?bond=3 another
@@ -35,6 +39,9 @@ export function saveConversation() {
 export function saveBond() {
   writeJSON(BOND_KEY, state.bond);
 }
+
+// Rewrites an older saved bond without its list of visit days.
+if (state.bond) saveBond();
 
 export function forgetConversation() {
   removeKey(CHAT_KEY);

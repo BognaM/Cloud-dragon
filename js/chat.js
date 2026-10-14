@@ -8,7 +8,6 @@ import { addMessage, removeMessage, scrollToBottom } from "./messages.js";
 import { showThinking } from "./thinking.js";
 import { clearInput, setBusy } from "./composer.js";
 import { setStatus } from "./status.js";
-import { recordBondDay } from "./bonding.js";
 import { addCrisisCard, recentCrisis } from "./crisis-card.js";
 import { crisisKind } from "./crisis-detect.js";
 import { addTopicCardIfNeeded } from "./topic-card.js";
@@ -101,7 +100,6 @@ export async function sendMessage(text) {
     bubble.textContent = answer;
     state.conversation.push({ role: "assistant", content: answer });
     saveConversation();
-    recordBondDay();
     // Not right after a crisis message, where it would sound dismissive.
     if (!recentCrisis(state.conversation)) suggestBreakIfDue();
   } catch (error) {
