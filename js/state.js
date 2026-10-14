@@ -30,9 +30,11 @@ export const state = {
   previewSky: SKY_COLORS[skyParam] ? skyParam : null,
   previewBond: /^\d$/.test(bondParam) && LEVELS[Number(bondParam)] ? Number(bondParam) : null,
   busy: false,
+  privateChat: false, // js/private-chat.js: nothing of this chat is saved
 };
 
 export function saveConversation() {
+  if (state.privateChat) return;
   writeJSON(CHAT_KEY, state.conversation);
 }
 

@@ -44,6 +44,7 @@ export const el = {
   helpDialog: byId("helpDialog"),
   breakNudgeTemplate: byId("breakNudgeTemplate"),
   helpCardTemplate: byId("helpCardTemplate"),
+  privateNote: byId("privateNote"),
   researchDialog: byId("researchDialog"),
   researchBody: byId("researchBody"),
 };

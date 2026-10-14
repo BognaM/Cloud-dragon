@@ -166,6 +166,8 @@
 
           <!-- Three ideas, a new mix for each chat (js/suggestions.js). -->
           <div class="suggestions"></div>
+          <!-- js/private-chat.js -->
+          <button class="link-button private-start" type="button" data-private-chat>Don't save this chat</button>
         </div>
 
         <!-- Opens in place. This is the only copy of the help text: js/help.js copies it
@@ -258,6 +260,11 @@
               messages per internet address, kept in memory for at most an hour and never saved.
               Your conversation and bond are saved only in this browser. Avoid sharing details you'd want to keep fully private.
             </p>
+            <p>
+              On a shared device? Choose <strong>Don't save this chat</strong>: it stays on screen
+              but isn't saved, and disappears when you reload or close the page.
+            </p>
+            <button class="link-button private-start" type="button" data-private-chat>Don't save this chat</button>
             <!-- Same as "Release bond…" in the bond panel (js/delete-data.js). -->
             <button class="link-button danger delete-data" type="button" data-delete-data>
               Delete my chat and data…
@@ -300,6 +307,9 @@
             ➤
           </button>
         </div>
+        <p id="privateNote" class="private-note" hidden>
+          🔒 Private chat: nothing is saved. It disappears when you reload or close the page.
+        </p>
         <p class="composer-note">
           An AI, not a therapist. In a crisis, call <a href="tel:143">143</a> or
           <a href="tel:144">144</a>.

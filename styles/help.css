@@ -218,3 +218,28 @@
 .help-body .research-link:hover {
   border-color: var(--accent);
 }
+
+/* "Don't save this chat" (js/private-chat.js). */
+.private-start {
+  display: block;
+  margin: 12px auto 0;
+  font-size: 13px;
+}
+
+.help-body .private-start {
+  margin: 0 0 8px;
+}
+
+.private-start:disabled {
+  text-decoration: none;
+  cursor: default;
+}
+
+/* Shown above the message box while a chat isn't being saved. */
+.private-note {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--text);
+  text-align: center;
+}

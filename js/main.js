@@ -18,6 +18,7 @@ import { initHelp } from "./help.js";
 import { initResearch } from "./research.js";
 import { deleteAllData, initDeleteData } from "./delete-data.js";
 import { renderSuggestions } from "./suggestions.js";
+import { initPrivateChat } from "./private-chat.js";
 import { addCrisisCard } from "./crisis-card.js";
 import { addTopicCardIfNeeded } from "./topic-card.js";
 import { crisisKind } from "./crisis-detect.js";
@@ -39,6 +40,7 @@ function start() {
   initHelp();
   initResearch();
   initDeleteData();
+  initPrivateChat();
   applySky();
   setInterval(applySky, SKY_CHECK_MS);
   renderStars();
