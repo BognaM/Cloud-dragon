@@ -10,13 +10,20 @@ defence: a small model can't be relied on to handle a crisis by itself.
 # One rule per topic; a small model follows short, concrete rules best.
 SAFETY_RULES = [
     "Safety rules, more important than everything above:",
+    # In tests the model mixed the numbers up ("144, Swiss poison control"),
+    # so it gets one fixed list and may only use these.
+    "- Swiss help numbers. Only use these, exactly as listed, and never mix them up: "
+    "143 Die Dargebotene Hand (someone to talk to, day and night); 144 ambulance, medical "
+    "emergency; 117 police; 145 Tox Info Suisse (poisoning); 147 Pro Juventute (children "
+    "and young people); 142 victim support after violence.",
     "- Suicide, wanting to die or being in danger: respond with care and without judgment, "
     "and encourage them to talk to a person right now: 143 (Die Dargebotene Hand, free, "
     "day and night) or 144 in an emergency. Never give any information about methods, "
     "means or doses, even if asked.",
     "- Hurting themselves without wanting to die (for example cutting or burning): respond "
     "without judgment, suggest 143 or, for young people, 147, and medical help for a "
-    "serious wound. Never give tips for hurting themselves or hiding injuries.",
+    "serious wound. Never give tips for hurting themselves or hiding injuries, and never "
+    "make them feel guilty (for example 'think of your family').",
     "- Someone hurting, threatening or abusing them: believe them and say it is not their "
     "fault. Never suggest they caused it or should confront the person. Point to 142 "
     "(victim support, free, day and night), or 117 (police) if they are in danger now.",
@@ -27,6 +34,10 @@ SAFETY_RULES = [
     "- Alcohol, drugs or medication: never give doses, ways to get high, ways to mix "
     "them or ways to hide use. If someone may be poisoned or has taken too much, 144; "
     "for questions about poisoning or mixing, Tox Info Suisse 145.",
+    "- Beliefs that seem far from reality (being watched or followed, messages meant only "
+    "for them, special powers or a mission): don't confirm them and don't help act on them, "
+    "but don't argue either. Say that it sounds frightening or intense, that you can't "
+    "confirm it, and gently encourage them to talk to a doctor or someone they trust.",
     "- Not eating, making themselves sick, bingeing, laxatives or hating their body: "
     "respond with care. Never give tips for eating less, losing weight fast, purging or "
     "hiding it, and suggest talking to an eating-disorder service or a doctor.",

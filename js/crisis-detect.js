@@ -23,6 +23,12 @@ const SUICIDE = {
     /\b(don'?t|do not) want to (live|be alive|exist|wake up)( anymore)?\b/,
     /\bno (reason|point) (to live|in living|living)\b/,
     /\bend it all\b/,
+    // Indirect: feeling like a burden, or seeing no point in going on.
+    /\b(everyone|everybody|they|people|my family|the world) (would|will|'d) be (fine|better|better off|happier) without me\b/,
+    /\b(don'?t|do not|can'?t|cannot) see (the|a|any) point (anymore|any more|in (living|life|going on|anything))\b(?! (of|in) )/,
+    /\bno (reason|point) (to keep going|in going on|anymore)\b/,
+    /\b(don'?t|do not) want to be here anymore\b(?!,? (this|at|in|with) )/, // not "…, this party is boring"
+    /\b(want|wish i could) (to )?disappear (forever|for good)\b/,
     /\bhow many (of (my|these|the) )?(\w+ )?(pills|tablets)\b/, // asking about amounts
   ],
   german: [
@@ -37,6 +43,11 @@ const SUICIDE = {
     /\b(das )?leben (hat )?keinen sinn mehr\b/,
     /\bkeinen sinn mehr zu leben\b/,
     /\bmir (selbst )?(etwas|was) antun\b/, // usually means suicide in German
+    /\b(alle|jeder|meine familie) (waren?|wurden?|ist|sind) (ohne mich )?besser dran( ohne mich)?\b/, // wären, würden
+    /\bohne mich (waren?|wurden?) alle\b/,
+    /\bsehe? keinen sinn mehr\b/,
+    /\bich (will|kann) nicht mehr\s*([.!?]|$)/, // only at the end: not "will nicht mehr Pizza"
+    /\bfur immer verschwinden\b/, // für
     /\buberdosis\b/, // Überdosis
     /\bwie viele (von )?(meinen |diesen |den )?(\w+)?tabletten\b/, // Schlaftabletten …
   ],
@@ -47,6 +58,9 @@ const SUICIDE = {
     /\b(veux|voudrais|vais|envie d') ?en finir\b/,
     /\b(envie de|veux|voudrais) mourir\b/,
     /\b(plus envie de|ne veux plus|veux plus) vivre\b/,
+    /\b(tout le monde|ma famille|ils) (serait|seraient|sera|seront) (mieux|plus heureux) sans moi\b/,
+    /\bje ne vois plus (l'interet|le sens|de raison) de (vivre|continuer)\b/, // intérêt
+    /\bdisparaitre pour toujours\b/, // disparaître
     /\bsurdose\b/,
     /\bcombien de (cachets|comprimes|pilules|somniferes)\b/, // comprimés, somnifères
   ],
@@ -57,6 +71,9 @@ const SUICIDE = {
     /\b(voglio|vorrei) farla finita\b/,
     /\b(voglio|vorrei) morire\b/,
     /\bnon voglio piu vivere\b/, // più
+    /\b(starebbero|starebbe) (tutti )?meglio senza di me\b/,
+    /\bnon vedo (piu )?(il senso|un senso|motivo) (di|per) (vivere|andare avanti)\b/,
+    /\bsparire per sempre\b/,
     /\bquante (pillole|pastiglie|compresse)\b/,
   ],
 };

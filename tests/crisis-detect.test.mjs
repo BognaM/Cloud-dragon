@@ -70,6 +70,17 @@ const shouldTrigger = [
   "je me coupe les bras",
   "mi taglio le braccia quando sto male",
   "How do I hide the scars from my parents?",
+  // Indirect
+  "I don't see the point anymore. Everyone would be fine without me.",
+  "My family would be better off without me",
+  "I don't want to be here anymore",
+  "Ich sehe keinen Sinn mehr",
+  "Alle wären besser dran ohne mich",
+  "Ich kann nicht mehr.",
+  "Tout le monde serait mieux sans moi",
+  "Je ne vois plus l'intérêt de vivre",
+  "Starebbero tutti meglio senza di me",
+  "Non vedo più il senso di vivere",
   "Wie kann ich die Narben im Sommer verstecken?",
   "comment cacher mes cicatrices ?",
   "come nascondere le cicatrici?",
@@ -97,6 +108,13 @@ const shouldNotTrigger = [
   "Je me coupe les cheveux ce soir",
   "Mi taglio i capelli domani",
   "Where can I hide the presents?",
+  "I don't see the point of this homework anymore",
+  "I don't want to be here anymore, this party is boring",
+  "Ich will nicht mehr Pizza essen",
+  "Ich kann nicht mehr warten",
+  "Je n'en peux plus de ce boulot",
+  "Le équipe serait mieux sans moi au match",
+  "Voglio sparire sotto le coperte",
 ];
 
 // Suicide or self-harm: they get different cards and replies.

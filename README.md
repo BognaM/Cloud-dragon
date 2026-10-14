@@ -364,8 +364,11 @@ How Cloud Dragon follows the eight recommendations of the
    - It gently questions harsh self-judgment and distorted beliefs instead of simply agreeing.
    - Help & info warns that it can misunderstand, make things up or give advice
      that doesn't fit.
+   - The safety test set (`tests/safety_replies.py`, see **Tests**) checks 24 risky
+     messages against the model before deploying.
    - Missing:
-     - honest opinions still lean toward praise, a limit of the small model
+     - beliefs that seem far from reality (being watched, special signs) are sometimes
+       still taken at face value, despite a safety rule
      - no bias testing or independent audit
 5. **Create safeguards for children, teenagers and vulnerable people.** *Partly followed.*
    - Detection in English, German, French and Italian for suicide, self-harm, violence,
