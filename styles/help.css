@@ -161,6 +161,18 @@
 }
 
 /* The crisis note stands out a little, so it's easy to find. */
+/* The note for young readers: noticeable, but calmer than the crisis box. */
+.help-body .young-note {
+  padding: 8px 12px;
+  border-radius: 12px;
+  border-left: 3px solid var(--accent);
+  background: var(--glass);
+}
+
+.help-body .young-note a[href^="tel:"] {
+  font-weight: 700;
+}
+
 .help-body .about-ai-urgent {
   margin-top: 14px;
   padding: 10px 12px;

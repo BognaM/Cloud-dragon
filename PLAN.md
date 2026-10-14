@@ -91,7 +91,7 @@ section **APA health advisory** lists what is already done.
 
     Why: the research shows structured techniques work best (shapeof: *Suggestions*).
     Size: small (`index.html`).
-12. [ ] **A note for young people.** In Help & info: "If you're under 18, 147 is there for you,
+12. [x] **A note for young people.** In Help & info: "If you're under 18, 147 is there for you,
     day and night."
     - Why: APA 5.
     - Size: 1 line.

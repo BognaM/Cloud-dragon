@@ -405,8 +405,10 @@ How Cloud Dragon follows the eight recommendations of the
      (Pro Juventute), usually first.
    - The dragon never gives methods, means or doses, and has a safety rule per topic.
    - A list of psychiatric emergency services per canton in Help & info.
+   - Near the top of Help & info, a note for under-18s: 147 is there for them day and
+     night, by phone, chat or WhatsApp, not only in emergencies.
    - Missing:
-     - no age-specific design or note for under-18s
+     - no age-specific design beyond the note and 147 on the cards
      - detection is phrase matching and can miss things
 6. **Implement AI and digital literacy education.** *Followed.*
    - **About talking to an AI dragon** covers what it is, what it can and can't
