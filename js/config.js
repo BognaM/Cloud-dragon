@@ -10,6 +10,9 @@ export const USAGE_KEY = "cloudDragon.usage"; // message counts and times for br
 
 export const DEFAULT_DRAGON_NAME = "Nimbus";
 
+// How many recent messages the dragon sees (MAX_MESSAGES in server/config.py).
+export const MESSAGES_THE_DRAGON_SEES = 10;
+
 // Days since bonding that each bond level needs. Visits don't count.
 // Levels change only the look (pearl, glow, stars), not how the dragon talks.
 export const LEVELS = [

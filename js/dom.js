@@ -20,6 +20,13 @@ export const el = {
   bondPanelText: byId("bondPanelText"),
   bondLevels: byId("bondLevels"),
   releaseButton: byId("releaseButton"),
+  knowsTitle: byId("knowsTitle"),
+  knowsList: byId("knowsList"),
+  editNamesButton: byId("editNamesButton"),
+  editNamesForm: byId("editNamesForm"),
+  editUserName: byId("editUserName"),
+  editDragonName: byId("editDragonName"),
+  cancelEditNames: byId("cancelEditNames"),
 
   // Welcome screen
   messages: byId("messages"),

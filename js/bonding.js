@@ -2,6 +2,7 @@
 // The bond changes only how the page looks, never how the dragon talks.
 
 import { DEFAULT_DRAGON_NAME } from "./config.js";
+import { cleanName } from "./names.js";
 import { el } from "./dom.js";
 import { state, saveBond } from "./state.js";
 import { today } from "./bond.js";
@@ -9,12 +10,6 @@ import { renderBond } from "./header.js";
 import { renderStars } from "./stars.js";
 import { renderWelcome } from "./welcome.js";
 import { showToast } from "./toast.js";
-
-// Names end up in the dragon's instructions, so keep only letters, numbers,
-// spaces, apostrophes and hyphens.
-function cleanName(value) {
-  return value.replace(/[^\p{L}\p{N} '\-]/gu, "").replace(/\s+/g, " ").trim().slice(0, 24);
-}
 
 export function completeBonding(dragon, user) {
   state.bond = {

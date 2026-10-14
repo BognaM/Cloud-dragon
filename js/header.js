@@ -6,6 +6,7 @@ import { state } from "./state.js";
 import { currentLevel, dragonName } from "./bond.js";
 import { renderBondRing } from "./bond-ring.js";
 import { renderBondPanel } from "./bond-panel.js";
+import { renderKnows } from "./bond-knows.js";
 
 export function renderBond() {
   const level = currentLevel();
@@ -32,4 +33,5 @@ export function renderBond() {
 
   renderBondRing(level);
   renderBondPanel(level);
+  renderKnows();
 }

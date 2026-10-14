@@ -124,6 +124,28 @@
       <h3 id="bondPanelTitle"></h3>
       <p id="bondPanelText"></p>
       <div id="bondLevels" class="levels"></div>
+
+      <!-- What the dragon knows, and editing the names (js/bond-knows.js, js/edit-names.js). -->
+      <div class="bond-knows">
+        <h4 id="knowsTitle"></h4>
+        <ul id="knowsList"></ul>
+        <button id="editNamesButton" class="link-button" type="button">Edit names</button>
+        <form id="editNamesForm" class="edit-names" hidden>
+          <label>
+            Your name (optional)
+            <input id="editUserName" maxlength="24" autocomplete="given-name" />
+          </label>
+          <label>
+            Your dragon's name
+            <input id="editDragonName" maxlength="24" autocomplete="off" />
+          </label>
+          <div class="edit-actions">
+            <button id="cancelEditNames" class="link-button" type="button">Cancel</button>
+            <button class="primary-button small" type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+
       <button id="releaseButton" class="link-button danger" type="button">
         Release bond…
       </button>
