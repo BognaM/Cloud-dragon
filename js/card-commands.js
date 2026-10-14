@@ -7,7 +7,7 @@
 //     young   as if the person mentioned their age (adds 147)
 //     now     as if they may be in danger right now (144 or 117 first)
 //     mix     substances: a question about mixing (145)
-//     de fr it   eating: a message in that language (picks the service)
+//     de fr it   the card in that language (eating: also picks the service)
 //
 // It uses the real detectors and number choices: each card gets an example
 // message, so a card that doesn't appear means its detector missed the example.
@@ -60,13 +60,16 @@ function exampleText(example, options) {
   return example[variant] ?? example.text;
 }
 
+const LANGUAGES = { de: "german", fr: "french", it: "italian" };
+
 function showCard(name, options) {
   const example = EXAMPLES[name];
   const text = exampleText(example, options);
   // "young" works like the person having said their age earlier in the chat.
   const texts = options.includes("young") ? ["I'm 15", text] : [text];
-  if (example.kind) addCrisisCard(example.kind, text, texts);
-  else addTopicCardIfNeeded(text, texts);
+  const language = LANGUAGES[options.find((option) => LANGUAGES[option])];
+  if (example.kind) addCrisisCard(example.kind, language ?? "english", text, texts);
+  else addTopicCardIfNeeded(text, texts, language);
 }
 
 // Returns an error message, or null if the cards were shown.

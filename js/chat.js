@@ -50,7 +50,7 @@ function chatPayload() {
 // pre-written, careful reply right away, instead of a reply from the model.
 // `{ kind, language }` comes from crisisKind() in js/crisis-detect.js.
 function replyWithCare({ kind, language }, text) {
-  addCrisisCard(kind, text, userTexts(state.conversation));
+  addCrisisCard(kind, language, text, userTexts(state.conversation));
   const reply = careReply(kind, language);
   // `care` and `careKind` remember which reply it was, so the model gets the
   // short version later.

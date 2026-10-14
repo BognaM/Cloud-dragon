@@ -351,81 +351,14 @@
     </aside>
   </template>
 
-  <!-- Help cards shown in the chat above the dragon's reply (js/topic-card.js).
-       The numbers are in js/contacts.js; 2–3 are chosen for each message. -->
-  <template id="violenceCardTemplate">
-    <aside class="crisis-card" role="alert">
-      <h3>No one has the right to hurt you</h3>
-      <p>
-        What's happening is not your fault. You can get confidential help and advice, also if
-        you're not sure whether it counts as violence:
-      </p>
+  <!-- A help card in the chat (js/help-card.js). Its words are in js/card-texts.js
+       and js/contacts.js, in four languages; 2–3 numbers are chosen for each message. -->
+  <template id="helpCardTemplate">
+    <aside class="crisis-card">
+      <h3></h3>
+      <p class="card-intro"></p>
       <ul></ul>
-    </aside>
-  </template>
-
-  <template id="harmOthersCardTemplate">
-    <aside class="crisis-card" role="alert">
-      <h3>Thoughts about hurting someone?</h3>
-      <p>
-        Thoughts like these can be frightening, and talking about them is a strong first step.
-        If you can, put some distance between you and the person, and anything you could use
-        to hurt them. You can talk to someone anonymously:
-      </p>
-      <ul></ul>
-    </aside>
-  </template>
-
-  <template id="substanceCardTemplate">
-    <aside class="crisis-card" role="note">
-      <h3>Worried about alcohol, drugs or medication?</h3>
-      <p>
-        You can get advice for free and in confidence, also if you're worried about someone else:
-      </p>
-      <ul></ul>
-    </aside>
-  </template>
-
-  <!-- The eating-disorder card. -->
-  <template id="eatingCardTemplate">
-    <aside class="crisis-card" role="note">
-      <h3>Worried about eating or your body?</h3>
-      <p>
-        You don't have to sort this out alone. You can talk to someone for free and in
-        confidence, also if you're worried about someone else:
-      </p>
-      <!-- 2–3 numbers chosen for each message: js/pick-contacts.js -->
-      <ul></ul>
-      <p class="card-more">
-        More services across Switzerland:
-        <a href="https://www.aes.ch/adressen-a-links/adressen" target="_blank" rel="noopener">list at aes.ch</a>
-      </p>
-    </aside>
-  </template>
-
-  <!-- Shown after a message about hurting yourself without wanting to die
-       (js/crisis-card.js); a message about suicide gets the crisis card below. -->
-  <template id="selfHarmCardTemplate">
-    <aside class="crisis-card" role="alert">
-      <h3>You deserve support, not judgment</h3>
-      <p>
-        If you're hurting yourself to cope, you don't have to handle it alone. You can talk
-        to someone for free and anonymously:
-      </p>
-      <!-- 2–3 numbers chosen for each message: js/pick-contacts.js -->
-      <ul></ul>
-    </aside>
-  </template>
-
-  <template id="crisisCardTemplate">
-    <aside class="crisis-card" role="alert">
-      <h3>You don't have to go through this alone</h3>
-      <p>
-        If you're thinking about ending your life or hurting yourself, please talk to a person
-        now. These lines are free and open day and night:
-      </p>
-      <!-- 2–3 numbers chosen for each message: js/pick-contacts.js -->
-      <ul></ul>
+      <p class="card-more" hidden></p>
     </aside>
   </template>
 

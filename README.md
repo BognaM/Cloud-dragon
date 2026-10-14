@@ -96,7 +96,9 @@ js/                  page logic, one small module per job
   violence-detect.js · harm-others-detect.js · substance-detect.js · eating-detect.js
                      spot other difficult topics (EN, DE, FR, IT)
   topic-card.js      shows the help card for those topics in the chat
-  contacts.js        the help numbers the cards can show
+  help-card.js       builds a help card in the message's language
+  card-texts.js      the cards' titles and texts in EN, DE, FR, IT
+  contacts.js        the help numbers the cards can show, described in EN, DE, FR, IT
   pick-contacts.js   picks 2–3 of them for each message
   signals.js         clues for that: sounds young, in danger now, badly hurt, feels unwell
   phrase-match.js · normalize.js · language.js   shared by the detectors
@@ -119,6 +121,7 @@ tests/               checks you can run without the model (see **Tests**)
   pick-contacts.test.mjs   which numbers each card shows
   bond-time.test.mjs       days since bonding and the level they give
   suggestions.test.mjs     the welcome screen always shows an exercise
+  card-texts.test.mjs      every card and number has all four languages
   break-rules.test.mjs     when the break reminder appears
   test_rate_limit.py the message limits
   safety_replies.py  sends risky messages to a test copy of the dragon and flags its replies
@@ -183,7 +186,7 @@ Or type a test command in the message box (it's never sent to the dragon):
 | `/card` | show all six help cards (suicide, self-harm, violence, hurting someone, substances, eating) |
 | `/card violence` | show one card: `suicide`, `selfharm`, `violence`, `harm`, `substances` or `eating` |
 | `/break` or `/break day` | show the break reminder (after a long session, or many messages today) |
-| `/card … young` · `now` · `mix` · `de` / `fr` / `it` | a variant: sounds young (147), in danger now (144 or 117 first), a question about mixing (substances, 145), or a message in that language (eating: picks the service) |
+| `/card … young` · `now` · `mix` · `de` / `fr` / `it` | a variant: sounds young (147), in danger now (144 or 117 first), a question about mixing (substances, 145), or the card in that language (eating: also picks the service) |
 | `/help` | list the commands |
 
 Commands update the address bar, so a reload keeps them. `/card` uses the real
@@ -216,8 +219,8 @@ To start over completely, tap the pearl → **Release bond…**, or use **Delete
 | When to suggest a break | `LONG_SESSION`, `MANY_MESSAGES` and `SESSION_GAP` in `js/break-rules.js` |
 | The dragon's safety rules | `server/safety.py` |
 | Phrases that show a help card | `js/crisis-detect.js` and the other `js/*-detect.js` files (then run the tests) |
-| Help numbers and their text | `js/contacts.js`; which ones each card shows: `js/pick-contacts.js` |
-| Help card titles and text | the `<template>`s at the end of `index.html` |
+| Help numbers and their text (in four languages) | `js/contacts.js`; which ones each card shows: `js/pick-contacts.js` |
+| Help card titles and text (in four languages) | `js/card-texts.js` |
 | Pre-written crisis and self-harm replies | `js/care-replies.js` |
 
 Redeploy (`modal deploy app.py`) after changes in `app.py` or `server/`. For page changes, just refresh.
@@ -286,6 +289,11 @@ node tests/topic-detect.test.mjs
 node tests/eating-detect.test.mjs
 ```
 
+Every card is shown in the language of the message that triggered it (English,
+German, French or Italian), like the pre-written replies. After changing a card's
+text or a number's description, run `node tests/card-texts.test.mjs`: it fails if
+a language is missing.
+
 Each card shows only 2–3 numbers, chosen from what the person wrote
 (`js/pick-contacts.js`), so it doesn't overwhelm them:
 
@@ -325,6 +333,7 @@ node tests/pick-contacts.test.mjs
 node tests/break-rules.test.mjs
 node tests/bond-time.test.mjs
 node tests/suggestions.test.mjs
+node tests/card-texts.test.mjs
 python3 -m unittest tests/test_rate_limit.py
 ```
 

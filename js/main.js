@@ -53,7 +53,7 @@ function start() {
       // The same card, with the same numbers, as when the message was sent.
       const texts = userTexts(state.conversation.slice(0, index + 1));
       const crisis = crisisKind(message.content);
-      if (crisis) addCrisisCard(crisis.kind, message.content, texts);
+      if (crisis) addCrisisCard(crisis.kind, crisis.language, message.content, texts);
       else addTopicCardIfNeeded(message.content, texts);
     });
   } else {

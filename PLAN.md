@@ -95,7 +95,7 @@ section **APA health advisory** lists what is already done.
     day and night."
     - Why: APA 5.
     - Size: 1 line.
-13. [ ] **Translate the crisis card.** It's in English only, but the pre-written reply already
+13. [x] **Translate the crisis card.** Done for all six cards and their numbers. It's in English only, but the pre-written reply already
     comes in DE/FR/IT. Show the card in the same language.
     - Size: small (`index.html` template, `js/crisis-card.js`).
 14. [x] **Detect disordered eating.** Add phrases like "stop eating", "make myself throw up"
