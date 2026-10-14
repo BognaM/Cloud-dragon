@@ -31,7 +31,7 @@ export const el = {
   welcome: byId("welcome"),
   welcomeTitle: byId("welcomeTitle"),
   welcomeText: byId("welcomeText"),
-  suggestions: document.querySelectorAll(".suggestion"),
+  suggestions: document.querySelector(".suggestions"),
 
   // Composer
   thinkingSky: byId("thinkingSky"),

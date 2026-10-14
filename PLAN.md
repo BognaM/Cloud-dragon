@@ -84,7 +84,7 @@ section **APA health advisory** lists what is already done.
     - let it fill once and stay full
 
     This is a design decision, not code.
-11. [ ] **Suggestions as specific exercises.** Swap open prompts for structured ones:
+11. [x] **Suggestions as specific exercises.** Done as a rotation: 3 of 6 ideas, at least one exercise. Swap open prompts for structured ones:
     - "Help me reframe a worrying thought"
     - "A 2-minute breathing exercise"
     - "A journaling prompt for today"

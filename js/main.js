@@ -16,6 +16,7 @@ import { isCommand, runCommand } from "./commands.js";
 import { initHelp } from "./help.js";
 import { initResearch } from "./research.js";
 import { deleteAllData, initDeleteData } from "./delete-data.js";
+import { renderSuggestions } from "./suggestions.js";
 import { addCrisisCard } from "./crisis-card.js";
 import { addTopicCardIfNeeded } from "./topic-card.js";
 import { crisisKind } from "./crisis-detect.js";
@@ -105,9 +106,7 @@ function connectChat() {
     }
   });
 
-  el.suggestions.forEach((button) => {
-    button.addEventListener("click", () => submit(button.dataset.prompt));
-  });
+  renderSuggestions(submit);
 
   // The greeting mentions the time of day, so refresh it when the sky changes.
   document.addEventListener("sky:change", () => {

@@ -18,6 +18,9 @@ A chatbot web app with a cloud dragon you bond with, built from
 - **The sky follows your clock:** dawn (5–8), day (8–17), dusk (17–20), night.
   At night every day since you bonded shows as a bright star.
 - The 3D cloud-serpent on the welcome screen is drawn with **Three.js**. Its colors follow the sky.
+- **Ideas on the welcome screen:** three, picked from six for each new chat, always with at
+  least one short exercise (reframe a worrying thought, a 2-minute breathing exercise, a
+  journaling prompt), since structured exercises help more than open chat.
 - **Safety:** messages about suicide, self-harm, violence, hurting someone, alcohol and
   drugs, or eating disorders get a help card with 2–3 Swiss phone numbers chosen for the
   message (see **Crisis safety**). Help & info explains what an AI can and can't do, lists
@@ -76,6 +79,8 @@ js/                  page logic, one small module per job
   bonding.js         making the bond
   header.js · bond-ring.js · bond-panel.js   the bond in the header
   welcome.js         bonding form and greeting
+  suggestion-pool.js the six ideas for the welcome screen, and how three are picked
+  suggestions.js     shows them
   messages.js · icon.js · composer.js · status.js · toast.js
   api.js             talks to the backend and reads the stream
   chat.js            sends a message, streams the reply
@@ -113,6 +118,7 @@ tests/               checks you can run without the model (see **Tests**)
                      which messages get which card, and which don't
   pick-contacts.test.mjs   which numbers each card shows
   bond-time.test.mjs       days since bonding and the level they give
+  suggestions.test.mjs     the welcome screen always shows an exercise
   break-rules.test.mjs     when the break reminder appears
   test_rate_limit.py the message limits
   safety_replies.py  sends risky messages to a test copy of the dragon and flags its replies
@@ -199,6 +205,7 @@ To start over completely, tap the pearl → **Release bond…**, or use **Delete
 | What | Where |
 | --- | --- |
 | Personality | `server/persona.py` |
+| Ideas on the welcome screen | `SUGGESTIONS` in `js/suggestion-pool.js` |
 | Days since bonding for each bond level | `LEVELS` in `js/config.js` |
 | Sky colors | `styles/themes.css` |
 | Sky times | `skyPhase()` in `js/sky.js` |
@@ -317,6 +324,7 @@ node tests/topic-detect.test.mjs
 node tests/pick-contacts.test.mjs
 node tests/break-rules.test.mjs
 node tests/bond-time.test.mjs
+node tests/suggestions.test.mjs
 python3 -m unittest tests/test_rate_limit.py
 ```
 
