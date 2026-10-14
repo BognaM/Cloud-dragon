@@ -42,7 +42,7 @@ section **APA health advisory** lists what is already done.
    **Release bond…**, which is hidden in the bond panel today.
    - Why: APA 3 asks for clear data deletion (shapeof: *Data ownership*).
    - Size: small (`index.html`, `js/main.js`).
-4. [ ] **Protect the public endpoint.** Add a rate limit (for example, a few messages per minute
+4. [x] **Protect the public endpoint.** Add a rate limit (for example, a few messages per minute
    per visitor) or a shared passphrase, so strangers can't use up your GPU time.
    - Size: medium (`server/middleware.py`).
 5. [ ] **Hide the test commands** (`/night`, `/bond 3` …) from visitors. For example, only

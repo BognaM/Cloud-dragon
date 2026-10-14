@@ -5,12 +5,13 @@ import time
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import StreamingResponse
 
-from .config import MODEL_ID
+from .config import MESSAGES_PER_DAY, MESSAGES_PER_HOUR, MESSAGES_PER_MINUTE, MODEL_ID
 from .events import HEADERS, MEDIA_TYPE, to_events
 from .generation import stream_reply
 from .logs import log, preview
 from .middleware import allow_any_origin, log_requests
 from .prompt import build_system_prompt
+from .rate_limit import RateLimiter
 from .request import parse_chat_request
 
 
@@ -26,6 +27,7 @@ def log_when_done(pieces, request_id, started):
 
 def create_api(tokenizer, model):
     api = FastAPI(title="Cloud Dragon Chat API")
+    limiter = RateLimiter(MESSAGES_PER_MINUTE, MESSAGES_PER_HOUR, MESSAGES_PER_DAY)
     allow_any_origin(api)
     log_requests(api)
 
@@ -43,6 +45,13 @@ def create_api(tokenizer, model):
             chat_request = parse_chat_request(data)
         except ValueError as error:
             raise HTTPException(status_code=400, detail=str(error))
+
+        # Checked here rather than in a middleware, so the answer still gets the
+        # CORS headers and the page can read how long to wait.
+        wait = limiter.retry_after(request.client.host if request.client else "unknown")
+        if wait:
+            log("chat.limited", request_id=request_id, retry_after=wait)
+            raise HTTPException(status_code=429, detail={"message": "Too many messages.", "retry_after": wait})
 
         system_prompt = build_system_prompt(
             chat_request.dragon_name,

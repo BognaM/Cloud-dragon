@@ -14,6 +14,12 @@ TOP_P = 0.9  # sample from the tokens covering 90% of the probability
 MAX_MESSAGES = 10
 MAX_MESSAGE_CHARS = 2000
 
+# How many messages reach the model (server/rate_limit.py). Per visitor, then for
+# everyone together: the daily cap bounds the GPU bill if the link spreads.
+MESSAGES_PER_MINUTE = 6
+MESSAGES_PER_HOUR = 60
+MESSAGES_PER_DAY = 500
+
 # Off: messages can contain health information, so the logs record only that a
 # chat happened (lengths and timings), never what was said. Turn on only briefly
 # to debug, and remember that anything typed then ends up in the Modal logs.

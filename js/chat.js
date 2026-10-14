@@ -3,7 +3,7 @@
 import { state, saveConversation } from "./state.js";
 import { dragonName } from "./bond.js";
 import { skyPhase } from "./sky.js";
-import { streamChat } from "./api.js";
+import { streamChat, TooManyMessages } from "./api.js";
 import { addMessage, removeMessage, scrollToBottom } from "./messages.js";
 import { showThinking } from "./thinking.js";
 import { clearInput, setBusy } from "./composer.js";
@@ -13,6 +13,14 @@ import { addCrisisCard, recentCrisis } from "./crisis-card.js";
 import { crisisKind } from "./crisis-detect.js";
 import { addTopicCardIfNeeded } from "./topic-card.js";
 import { careReply, careSummary } from "./care-replies.js";
+
+// "in about 40 seconds", "in about 5 minutes", "in about 3 hours".
+function waitText(seconds) {
+  const about = (count, unit) => `in about ${count} ${unit}${count === 1 ? "" : "s"}`;
+  if (seconds < 60) return about(seconds, "second");
+  if (seconds < 3600) return about(Math.ceil(seconds / 60), "minute");
+  return about(Math.ceil(seconds / 3600), "hour");
+}
 
 // Everything the person has written, so a help card can pick fitting numbers.
 export function userTexts(messages) {
@@ -96,7 +104,11 @@ export async function sendMessage(text) {
     console.error(error);
     stopThinking();
     removeMessage(bubble);
-    setStatus(`Could not reach ${dragonName()}. Check your Modal URL and deployment.`, true);
+    if (error instanceof TooManyMessages) {
+      setStatus(`${dragonName()} needs a short rest. You can send another message ${waitText(error.retryAfter)}.`);
+    } else {
+      setStatus(`Could not reach ${dragonName()}. Check your Modal URL and deployment.`, true);
+    }
   } finally {
     setBusy(false);
   }

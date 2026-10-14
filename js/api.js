@@ -28,6 +28,14 @@ async function readEvents(body, onData) {
   }
 }
 
+// Thrown when the server's message limit is reached (server/rate_limit.py).
+export class TooManyMessages extends Error {
+  constructor(retryAfter) {
+    super("Too many messages");
+    this.retryAfter = retryAfter; // seconds
+  }
+}
+
 // Sends the chat and calls onText with the reply so far each time more of it
 // streams in. Resolves with the full reply.
 export async function streamChat(payload, { onText }) {
@@ -37,6 +45,10 @@ export async function streamChat(payload, { onText }) {
     body: JSON.stringify(payload),
   });
 
+  if (response.status === 429) {
+    const { detail } = await response.json().catch(() => ({}));
+    throw new TooManyMessages(detail?.retry_after ?? 60);
+  }
   if (!response.ok || !response.body) {
     throw new Error(`Chat request failed (${response.status})`);
   }

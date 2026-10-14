@@ -36,6 +36,7 @@ server/              the chat API (runs on Modal)
   generation.py      runs the model, yields the reply piece by piece
   events.py          streams those pieces to the browser (Server-Sent Events)
   middleware.py      CORS and request logging
+  rate_limit.py      limits messages per visitor and per day
   api.py             the routes: GET /health, POST /chat
   logs.py            one-line log events
 
@@ -180,7 +181,18 @@ modal app logs ember-chat
 ```
 
 The first request after 5 idle minutes cold-starts the GPU container, which takes about 20 seconds.
-The endpoint is public with open CORS and has no auth or rate limiting. Stop the app
+The endpoint is public with open CORS and no password, but it has a rate limit
+(`server/rate_limit.py`, numbers in `server/config.py`): 6 messages a minute and
+60 an hour per visitor, and 500 a day for everyone together, which caps the GPU
+bill if the link spreads. Over the limit, the page says the dragon needs a short
+rest and when to try again. Crisis messages are answered by the page itself, so
+the limit never blocks them. To check the limiter:
+
+```bash
+python3 -m unittest tests/test_rate_limit.py
+```
+
+Stop the app
 (`modal app stop ember-chat`) when you're not using it, and `modal deploy app.py` to bring it back.
 
 ## Crisis safety
